@@ -38,7 +38,6 @@ public class BaseResultFactory<T extends AbstractBaseDomain> {
                 }
             }
         }
-
         BaseResultFactory.response = response;
         // 设置通用响应
         baseResultFactory.initResponse();

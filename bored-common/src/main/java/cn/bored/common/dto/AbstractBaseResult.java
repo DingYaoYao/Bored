@@ -11,7 +11,7 @@ import java.io.Serializable;
  * <p>Title: AbstractBaseResult</p>
  * <p>Description: </p>
  *
- * @author Ding
+ * @author Dingk
  * @version 1.0.0
  * @date 2019/1/23 15:10
  */
