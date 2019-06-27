@@ -16,6 +16,22 @@
 
 
     <dependencies>
+
+
+        <!--common Begin-->
+        <dependency>
+            <groupId>com.bored</groupId>
+            <artifactId>bored-common</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.bored</groupId>
+            <artifactId>bored-mapper</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <!--common End-->
+
+        <!--Environment Begin-->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid-spring-boot-starter</artifactId>
@@ -29,6 +45,7 @@
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
         </dependency>
+        <!--Environment End-->
     </dependencies>
 
 </project>

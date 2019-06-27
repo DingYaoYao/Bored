@@ -16,7 +16,13 @@
 
 
     <dependencies>
-
+        <!--common Begin-->
+        <dependency>
+            <groupId>com.bored</groupId>
+            <artifactId>bored-common</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <!--common End-->
     </dependencies>
 
 </project>
