@@ -1,4 +1,4 @@
-package cn.bored.commons.dto;
+package cn.bored.common.dto;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 

@@ -1,8 +1,8 @@
-package cn.bored.commons.web;
+package cn.bored.common.web;
 
-import cn.bored.commons.dto.AbstractBaseDomain;
-import cn.bored.commons.dto.AbstractBaseResult;
-import cn.bored.commons.dto.BaseResultFactory;
+import cn.bored.common.dto.AbstractBaseDomain;
+import cn.bored.common.dto.AbstractBaseResult;
+import cn.bored.common.dto.BaseResultFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.http.HttpStatus;

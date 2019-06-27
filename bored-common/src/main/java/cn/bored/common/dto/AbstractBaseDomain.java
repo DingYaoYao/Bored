@@ -1,4 +1,4 @@
-package cn.bored.commons.dto;
+package cn.bored.common.dto;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;

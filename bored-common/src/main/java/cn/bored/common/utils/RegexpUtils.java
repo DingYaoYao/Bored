@@ -1,4 +1,4 @@
-package cn.bored.commons.utils;
+package cn.bored.common.utils;
 
 /**
  * 正则表达式工具类
