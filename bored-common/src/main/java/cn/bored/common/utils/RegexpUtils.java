@@ -5,7 +5,7 @@ package cn.bored.common.utils;
  * <p>Title: RegexpUtils</p>
  * <p>Description: </p>
  *
- * @author Lusifer
+ * @author DingYao
  * @version 1.0.0
  * @date 2018/6/16 23:48
  */
