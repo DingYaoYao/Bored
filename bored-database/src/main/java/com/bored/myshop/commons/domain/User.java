@@ -78,6 +78,12 @@ public class User {
     private Date latelyLoginDate;
 
     /**
+     * 登陆状态
+     */
+    @Column(name = "loginStat")
+    private Integer loginstat;
+
+    /**
      * 获取账号
      *
      * @return id - 账号
@@ -309,5 +315,23 @@ public class User {
      */
     public void setLatelyLoginDate(Date latelyLoginDate) {
         this.latelyLoginDate = latelyLoginDate;
+    }
+
+    /**
+     * 获取登陆状态
+     *
+     * @return loginStat - 登陆状态
+     */
+    public Integer getLoginstat() {
+        return loginstat;
+    }
+
+    /**
+     * 设置登陆状态
+     *
+     * @param loginstat 登陆状态
+     */
+    public void setLoginstat(Integer loginstat) {
+        this.loginstat = loginstat;
     }
 }
