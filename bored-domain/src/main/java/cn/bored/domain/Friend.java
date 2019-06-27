@@ -8,7 +8,7 @@ import java.util.Date;
 
 @Data
 @Table(name = "friend")
-public class Friend {
+public class Friend  extends  BaseEntity{
     /**
      * 用户id
      */

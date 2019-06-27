@@ -5,7 +5,7 @@ import lombok.Data;
 import javax.persistence.*;
 @Data
 @Table(name = "friends")
-public class Friends {
+public class Friends extends  BaseEntity{
     /**
      * 标识列
      */

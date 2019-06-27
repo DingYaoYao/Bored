@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.Date;
 @Data
 @Table(name = "space")
-public class Space {
+public class Space extends  BaseEntity{
     /**
      * 空间编号
      */

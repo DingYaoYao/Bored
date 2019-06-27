@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 @Data
 @Table(name = "topic")
-public class Topic {
+public class Topic extends  BaseEntity{
     /**
      * 标识列自增加
      */

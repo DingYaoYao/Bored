@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.Date;
 @Data
 @Table(name = "user")
-public class User {
+public class User extends  BaseEntity{
     /**
      * 账号
      */
@@ -57,18 +57,6 @@ public class User {
     private String phone;
 
     /**
-     * 创建时间
-     */
-    @Column(name = "create_date")
-    private Date createDate;
-
-    /**
-     * 更新时间
-     */
-    @Column(name = "update_date")
-    private Date updateDate;
-
-    /**
      * 头像路径
      */
     private String picturepath;
@@ -84,5 +72,16 @@ public class User {
      */
     @Column(name = "loginStat")
     private Integer loginstat;
+    /**
+     * 创建时间
+     */
+    @Column(name = "create_date")
+    private Date createDate;
+
+    /**
+     * 更新时间
+     */
+    @Column(name = "update_date")
+    private Date updateDate;
 
    }

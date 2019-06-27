@@ -8,7 +8,7 @@ import javax.persistence.Table;
 import java.util.Date;
 @Data
 @Table(name = "groupchat")
-public class Groupchat {
+public class Groupchat  extends  BaseEntity{
     /**
      * 群号
      */

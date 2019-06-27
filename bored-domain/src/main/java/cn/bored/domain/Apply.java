@@ -9,7 +9,7 @@ import javax.persistence.Table;
 import java.util.Date;
 @Data
 @Table(name = "apply")
-public class Apply {
+public class Apply extends  BaseEntity{
     /**
      * 申请编号
      */

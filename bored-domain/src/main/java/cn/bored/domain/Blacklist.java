@@ -5,7 +5,7 @@ import lombok.Data;
 import javax.persistence.Table;
 @Data
 @Table(name = "blacklist")
-public class Blacklist {
+public class Blacklist extends  BaseEntity {
     /**
      * 拉黑的人
      */

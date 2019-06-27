@@ -5,7 +5,7 @@ import lombok.Data;
 import javax.persistence.Table;
 @Data
 @Table(name = "sensitiveword")
-public class Sensitiveword {
+public class Sensitiveword  extends  BaseEntity{
     /**
      * 敏感词汇
      */
