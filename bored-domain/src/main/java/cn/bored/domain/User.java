@@ -1,5 +1,6 @@
 package cn.bored.domain;
 
+import cn.bored.common.dto.AbstractBaseDomain;
 import cn.bored.common.utils.RegexpUtils;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -13,7 +14,7 @@ import java.util.Date;
 @Data
 @Table(name = "user")
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class User extends  BaseEntity{
+public class User extends  BaseEntity {
     /**
      * 账号
      */
