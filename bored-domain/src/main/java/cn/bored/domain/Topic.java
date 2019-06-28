@@ -14,7 +14,7 @@ public class Topic extends  BaseEntity{
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     /**
      * 话题的标题

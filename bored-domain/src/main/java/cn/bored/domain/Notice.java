@@ -11,7 +11,7 @@ import javax.persistence.Table;
 public class Notice  extends  BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     private String text1;
 

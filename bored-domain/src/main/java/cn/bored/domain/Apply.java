@@ -2,19 +2,12 @@ package cn.bored.domain;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 @Data
 @Table(name = "apply")
 public class Apply extends  BaseEntity{
-    /**
-     * 申请编号
-     */
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+
 
     /**
      * 申请用户

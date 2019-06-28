@@ -28,7 +28,6 @@ public class RegController extends AbstractBaseController<User> {
             return error(message, null);
         }
 
-
         // 验证邮箱是否重复
         if (!tbUserService.unique("email", tbUser.getEmail())) {
             return error("邮箱重复，请重试", null);
@@ -36,7 +35,7 @@ public class RegController extends AbstractBaseController<User> {
 
         // 注册用户
         tbUser.setPassword(DigestUtils.md5DigestAsHex(tbUser.getPassword().getBytes()));
-        TbUser user = tbUserService.save(tbUser);
+        User user = tbUserService.save(tbUser);
         if (user != null) {
             response.setStatus(HttpStatus.CREATED.value());
             return success(request.getRequestURI(), user);

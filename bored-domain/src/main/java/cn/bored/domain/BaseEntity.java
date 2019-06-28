@@ -4,6 +4,9 @@ import cn.bored.common.dto.AbstractBaseDomain;
 import lombok.Data;
 
 import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -14,7 +17,11 @@ import java.util.Date;
  **/
 @Data
 public class BaseEntity extends AbstractBaseDomain implements Serializable{
-
+    /**
+     * id主键自增
+     */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
 }
