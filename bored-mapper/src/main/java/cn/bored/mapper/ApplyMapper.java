@@ -1,7 +1,6 @@
 package cn.bored.mapper;
 
-import com.bored.myshop.commons.domain.Apply;
-import tk.mybatis.mapper.MyMapper;
-
+import cn.bored.domain.Apply;
+import mapper.MyMapper;
 public interface ApplyMapper extends MyMapper<Apply> {
 }

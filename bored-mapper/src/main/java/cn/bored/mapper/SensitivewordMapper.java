@@ -1,7 +1,6 @@
 package cn.bored.mapper;
 
-import com.bored.myshop.commons.domain.Sensitiveword;
-import tk.mybatis.mapper.MyMapper;
-
+import cn.bored.domain.Sensitiveword;
+import mapper.MyMapper;
 public interface SensitivewordMapper extends MyMapper<Sensitiveword> {
 }

@@ -1,7 +1,7 @@
 package cn.bored.mapper;
 
-import com.bored.myshop.commons.domain.Friends;
-import tk.mybatis.mapper.MyMapper;
+import cn.bored.domain.Friends;
+import mapper.MyMapper;
 
 public interface FriendsMapper extends MyMapper<Friends> {
 }

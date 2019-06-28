@@ -1,7 +1,7 @@
 package cn.bored.mapper;
 
-import com.bored.myshop.commons.domain.Groupchat;
-import tk.mybatis.mapper.MyMapper;
+import cn.bored.domain.Groupchat;
+import mapper.MyMapper;
 
 public interface GroupchatMapper extends MyMapper<Groupchat> {
 }

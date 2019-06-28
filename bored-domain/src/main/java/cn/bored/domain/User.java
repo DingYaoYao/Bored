@@ -45,7 +45,6 @@ public class User extends  BaseEntity{
     /**
      * 邮箱
      */
-    @NotNull(message = "邮箱不可为空")
     @Pattern(regexp = RegexpUtils.EMAIL, message = "邮箱格式不正确")
     private String email;
 

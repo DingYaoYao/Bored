@@ -1,7 +1,6 @@
 package cn.bored.mapper;
 
-import com.bored.myshop.commons.domain.Notice;
-import tk.mybatis.mapper.MyMapper;
-
+import cn.bored.domain.Notice;
+import mapper.MyMapper;
 public interface NoticeMapper extends MyMapper<Notice> {
 }

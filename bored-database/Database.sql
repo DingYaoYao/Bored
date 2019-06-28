@@ -134,16 +134,16 @@ CREATE TABLE `user` (
   `password` varchar(50) NOT NULL COMMENT '密码',
   `niceName` varchar(50) NOT NULL COMMENT '昵称',
   `signature` varchar(50) NOT NULL COMMENT '签名',
-  `email` varchar(20) NOT NULL COMMENT '邮箱',
+  `email` varchar(20) DEFAULT NULL COMMENT '邮箱',
   `sex` int(1) NOT NULL COMMENT '1=男 2=女',
-  `birthday` datetime NOT NULL COMMENT '生日',
+  `birthday` datetime DEFAULT NULL COMMENT '生日',
   `address_id` varchar(200) DEFAULT NULL COMMENT '详细地址',
-  `phone` varchar(20) DEFAULT NULL COMMENT '电话号码',
-  `create_date` datetime DEFAULT NULL COMMENT '创建时间',
+  `phone` varchar(20) NOT NULL COMMENT '电话号码',
+  `create_date` datetime NOT NULL COMMENT '创建时间',
   `update_date` datetime DEFAULT NULL COMMENT '更新时间',
   `picturepath` varchar(200) NOT NULL COMMENT '头像路径',
   `lately_login_date` datetime DEFAULT NULL COMMENT '最近登录时间',
-  `loginStat` int(4) NOT NULL COMMENT '登陆状态',
+  `loginStat` int(4) DEFAULT NULL COMMENT '登陆状态',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
