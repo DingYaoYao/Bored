@@ -21,12 +21,13 @@ USE `bored`;
 DROP TABLE IF EXISTS `apply`;
 
 CREATE TABLE `apply` (
-  `id` int(15) DEFAULT NULL COMMENT '申请编号',
+  `id` int(15) NOT NULL AUTO_INCREMENT COMMENT '申请编号',
   `from_user` bigint(15) DEFAULT NULL COMMENT '申请用户',
   `to_user` bigint(15) DEFAULT NULL COMMENT '被申请用户',
   `message` varchar(50) DEFAULT NULL COMMENT '附加消息',
   `status` int(1) DEFAULT NULL COMMENT '申请状态',
-  `apply_date` datetime DEFAULT NULL COMMENT '申请时间'
+  `apply_date` datetime DEFAULT NULL COMMENT '申请时间',
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Table structure for table `blacklist` */
