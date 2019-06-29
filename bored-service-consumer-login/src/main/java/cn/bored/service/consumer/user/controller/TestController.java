@@ -4,6 +4,7 @@ import cn.bored.service.consumer.user.consumer.UserConsumerService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpSession;
  * @create: 2019-06-28 17:54
  **/
 @RestController
+@Controller("/login")
 public class TestController {
 
     @Autowired

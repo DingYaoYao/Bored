@@ -9,13 +9,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl extends BaseServiceImpl<User, UserMapper> implements UserService<User> {
 
+    /**
+     *
+     */
     @Autowired
     private UserMapper userMapper;
 
-    void test() {
-
-
+    @Override
+    public User userlogin(User user) {
+        User login = userMapper.userlogin(user);
+        return login;
     }
-
-
 }

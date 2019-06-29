@@ -9,18 +9,23 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.DigestUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "reg")
+@RequestMapping("reg")
 public class RegController extends AbstractBaseController<User> {
 
     @Autowired
     private TbUserService tbUserService;
+    @GetMapping("/test")
+    public String sd(){
+    return "啊啊撒";
+    }
 
-    @PostMapping(value = "")
+    @PostMapping(value ="/a")
     public AbstractBaseResult reg(User tbUser) {
         // 数据校验
         String message = BeanValidator.validator(tbUser);

@@ -5,8 +5,6 @@ import cn.bored.service.provider.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.Mapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -26,9 +24,8 @@ public class TestController {
         System.out.println("privider user serive value===>"+userService);
         return "hello word";
     }
-    @GetMapping("/abc")
-    public String abc(){
-        System.out.println("privider user serive value===>"+userService);
-        return "hello word  abc";
+    @GetMapping(value = "/login")
+    public String loginl(User user){
+        return "登陆成功！";
     }
 }

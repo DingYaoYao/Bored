@@ -8,8 +8,8 @@ import tk.mybatis.spring.annotation.MapperScan;
 @SpringBootApplication(scanBasePackages = "cn.bored")
 @EnableDiscoveryClient
 @MapperScan(basePackages = "cn.bored.mapper")
-public class BoredServiceRegApplication {
+public class BoredServiceProviderRegApplication {
     public static void main(String[] args) {
-        SpringApplication.run(BoredServiceRegApplication.class, args);
+        SpringApplication.run(BoredServiceProviderRegApplication.class, args);
     }
 }

@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.bored</groupId>
+        <groupId>cn.bored</groupId>
         <artifactId>bored-dependencies</artifactId>
         <version>1.0.0-SNAPSHOT</version>
         <relativePath>../bored-dependencies/pom.xml</relativePath>
@@ -24,8 +24,8 @@
 
         <!-- Projects Begin -->
         <dependency>
-            <groupId>com.bored</groupId>
-            <artifactId>bored-common-web</artifactId>
+            <groupId>cn.bored</groupId>
+            <artifactId>bored-common-consumer</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
         <!-- Projects End -->
