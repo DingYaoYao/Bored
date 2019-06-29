@@ -2,7 +2,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <parent>
         <groupId>com.bored</groupId>
         <artifactId>bored-dependencies</artifactId>
@@ -10,40 +9,37 @@
         <relativePath>../bored-dependencies/pom.xml</relativePath>
     </parent>
 
-    <artifactId>bored-domain</artifactId>
+    <artifactId>bored-service-consumer-login</artifactId>
     <packaging>jar</packaging>
 
 
-
     <dependencies>
-        <!-- Commons Begin -->
-        <dependency>
-            <groupId>org.hibernate.javax.persistence</groupId>
-            <artifactId>hibernate-jpa-2.1-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate.validator</groupId>
-            <artifactId>hibernate-validator</artifactId>
-        </dependency>
-        <!-- Commons End -->
 
-        <!-- Spring Begin -->
-        <!--<dependency>-->
-            <!--<groupId>org.springframework</groupId>-->
-            <!--<artifactId>spring-context</artifactId>-->
-        <!--</dependency>-->
-        <!-- Spring End -->
-
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!-- Spring Boot End -->
 
         <!-- Projects Begin -->
         <dependency>
             <groupId>com.bored</groupId>
-            <artifactId>bored-common</artifactId>
+            <artifactId>bored-common-web</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
         <!-- Projects End -->
-
     </dependencies>
-
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>cn.bored.service.consumer.user.BoredServiceConsumerUserApplication</mainClass>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

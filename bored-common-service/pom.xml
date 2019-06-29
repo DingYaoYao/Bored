@@ -21,11 +21,6 @@
         <!--common Begin-->
         <dependency>
             <groupId>com.bored</groupId>
-            <artifactId>bored-common</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.bored</groupId>
             <artifactId>bored-mapper</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
@@ -46,6 +41,28 @@
             <scope>runtime</scope>
         </dependency>
         <!--Environment End-->
+
+<!--Spring boot Begin-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <!--Spring boot End-->
+        <!-- Spring Cloud Begin -->
+        <!--将配置放在nacos中是，加入jar-->
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.cloud</groupId>-->
+            <!--<artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>-->
+        <!--</dependency>-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+        <!-- Spring Cloud End -->
     </dependencies>
 
 </project>
