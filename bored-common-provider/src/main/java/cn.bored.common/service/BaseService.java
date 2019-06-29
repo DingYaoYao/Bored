@@ -10,7 +10,7 @@ import java.util.List;
  * @create: 2019-06-27 16:38
  **/
 public interface BaseService<T extends BaseEntity> {
-  
+
     int add(T entity);
     int delByID(T entity);
     int delByObject(T entity);
