@@ -15,4 +15,7 @@ public interface UserConsumerService {
     @GetMapping("/test")
      String test();
 
+
+    @GetMapping("/abc")
+    String abc();
 }

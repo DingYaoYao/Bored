@@ -26,4 +26,9 @@ public class TestController {
         System.out.println("privider user serive value===>"+userService);
         return "hello word";
     }
+    @GetMapping("/abc")
+    public String abc(){
+        System.out.println("privider user serive value===>"+userService);
+        return "hello word  abc";
+    }
 }

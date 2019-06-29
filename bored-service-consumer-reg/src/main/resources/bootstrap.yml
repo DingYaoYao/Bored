@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: bored-service-consumer-reg
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+feign:
+  sentinel:
+    enabled: true
+
+server:
+  port: 8801
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

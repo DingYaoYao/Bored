@@ -10,8 +10,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserConsumerServiceFallback  implements  UserConsumerService{
 
+
     @Override
     public  String test(){
         return "fallback";
+    }
+
+
+    @Override
+    public  String abc(){
+        return "abc";
     }
 }

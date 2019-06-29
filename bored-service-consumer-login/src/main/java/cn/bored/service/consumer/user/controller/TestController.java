@@ -1,7 +1,6 @@
 package cn.bored.service.consumer.user.controller;
 
 import cn.bored.service.consumer.user.consumer.UserConsumerService;
-import cn.bored.service.consumer.user.consumer.UserConsumerServiceFallback;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
