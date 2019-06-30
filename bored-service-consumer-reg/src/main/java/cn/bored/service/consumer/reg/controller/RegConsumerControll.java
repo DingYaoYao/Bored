@@ -1,4 +1,5 @@
 package cn.bored.service.consumer.reg.controller;
+import cn.bored.common.dto.AbstractBaseResult;
 import cn.bored.domain.User;
 import cn.bored.service.consumer.reg.service.RegConsumerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class RegConsumerControll {
     }
 
     @PostMapping("/useradd")
-    public String regz(User tbUser){
+    public AbstractBaseResult regz(User tbUser){
         return regConsumerService.regz(tbUser);
     }
 }

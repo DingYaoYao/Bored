@@ -15,9 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.sql.Date;
-import java.text.SimpleDateFormat;
-
 @RestController
 @RequestMapping("reg")
 public class RegController extends AbstractBaseController<User> {
@@ -31,15 +28,21 @@ public class RegController extends AbstractBaseController<User> {
 
     @PostMapping(value ="/useradd")
     public AbstractBaseResult reg(User tbUser) {
+        System.out.println("啦啦啦啦啦啦啦啦啦啦啦");
         // 数据校验
         String message = BeanValidator.validator(tbUser);
         if (StringUtils.isNotBlank(message)) {
+
+            //现在返回的是401
             return error(message, null);
         }
         // 验证邮箱是否重复
-        if (!tbUserService.unique("email", tbUser.getEmail())) {
-            return error("邮箱重复，请重试", null);
+        if (!tbUserService.unique("phone", tbUser.getPhone())) {
+            return error("手机号重复，请重试", null);
         }
+        //验证手机号验证码
+
+
         // 注册用户
         tbUser.setPicturepath("默认路径");
         tbUser.setPassword(DigestUtils.md5DigestAsHex(tbUser.getPassword().getBytes()));

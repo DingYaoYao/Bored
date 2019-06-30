@@ -20,6 +20,19 @@ public class RegexpUtils {
      */
     public static final String EMAIL = "\\w+(\\.\\w)*@\\w+(\\.\\w{2,3}){1,3}";
 
+    /***
+     * 验证性别
+     */
+    public static  final String SEX="1|2";
+
+    /**
+     * 验证性别的
+     * @param SEX
+     *
+     */
+    public static boolean checkSEX(String SEX) {
+        return SEX.matches(SEX);
+    }
     /**
      * 验证手机号
      * @param phone

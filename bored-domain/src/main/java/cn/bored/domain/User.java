@@ -24,6 +24,8 @@ public class User extends  BaseEntity {
     /**
      * 密码
      */
+    @NotNull(message = "密码不能为空")
+    @Length(min = 1, max = 20, message = "用户密码长度必须介于 1 和 20 之间")
     @JsonIgnore
     private String password;
 
@@ -38,7 +40,6 @@ public class User extends  BaseEntity {
     /**
      * 签名
      */
-    @NotNull(message = "留下一句话介绍一下自己吧！个性签名不可为空")
     @Length(min = 1, max = 50, message = "个性签名长度必须介于 1 和 20 之间")
     private String signature;
 
@@ -51,7 +52,6 @@ public class User extends  BaseEntity {
     /**
      * 1=男 2=女
      */
-    @NotNull(message = "性别不可为空")
     private Integer sex;
 
     /**
