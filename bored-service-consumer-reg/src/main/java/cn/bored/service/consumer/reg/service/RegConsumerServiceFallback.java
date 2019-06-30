@@ -1,6 +1,5 @@
 package cn.bored.service.consumer.reg.service;
 
-import cn.bored.common.dto.AbstractBaseResult;
 import cn.bored.domain.User;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +11,7 @@ public class RegConsumerServiceFallback implements RegConsumerService{
     }
 
     @Override
-    public AbstractBaseResult reg(User tbUser) {
-        return  null;
+    public String regz(User tbUser) {
+        return  "触发了用户熔断";
     }
 }

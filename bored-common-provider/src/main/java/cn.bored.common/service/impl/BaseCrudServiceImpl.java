@@ -31,17 +31,27 @@ public class BaseCrudServiceImpl<T extends AbstractBaseDomain, M extends MyMappe
     public T save(T domain) {
         int result = 0;
         Date currentDate = new Date();
-        domain.setUpdated(currentDate);
+        domain.setUpdate_date(currentDate);
 
         // 创建
         if (domain.getId() == null) {
-            domain.setCreated(currentDate);
-
+            domain.setCreate_date(currentDate);
+            String randomStr="";
+            for (int i = 0; i < 9; i++) {
+                int random=(int)(Math.random()*9);
+                if(randomStr.indexOf(random+"")!=-1){
+                    i=i-1;
+                }else{
+                    randomStr+=random;
+                }
+            }
+            long b = Integer.parseInt(randomStr);
+            domain.setId(b);
             /**
              * 用于自动回显 ID，领域模型中需要 @ID 注解的支持
              * {@link AbstractBaseDomain}
              */
-            result = mapper.insertUseGeneratedKeys(domain);
+            result = mapper.insert(domain);
         }
 
         // 更新

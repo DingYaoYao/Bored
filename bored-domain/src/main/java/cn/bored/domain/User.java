@@ -1,6 +1,5 @@
 package cn.bored.domain;
 
-import cn.bored.common.dto.AbstractBaseDomain;
 import cn.bored.common.utils.RegexpUtils;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -52,6 +51,7 @@ public class User extends  BaseEntity {
     /**
      * 1=男 2=女
      */
+    @NotNull(message = "性别不可为空")
     private Integer sex;
 
     /**
@@ -88,17 +88,5 @@ public class User extends  BaseEntity {
      */
     @Column(name = "loginStat")
     private Integer loginstat;
-    /**
-     * 创建时间
-     */
-    @NotNull(message = "创建时间不可为空")
-    @Column(name = "create_date")
-    private Date createDate;
-
-    /**
-     * 更新时间
-     */
-    @Column(name = "update_date")
-    private Date updateDate;
 
    }
