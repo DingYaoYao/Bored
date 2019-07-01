@@ -1,4 +1,4 @@
-package cn.bored.service.reg.controller;
+package cn.bored.service.userupdate.controller;
 
 import cn.bored.common.dto.AbstractBaseResult;
 import cn.bored.common.service.TbUserService;
