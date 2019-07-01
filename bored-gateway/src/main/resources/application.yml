@@ -1,6 +1,6 @@
 spring:
   application:
-    name: myshop-service-gateway
+    name: bored-service-gateway
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8

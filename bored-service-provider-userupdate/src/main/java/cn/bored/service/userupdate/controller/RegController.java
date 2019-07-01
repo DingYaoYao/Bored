@@ -15,23 +15,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("reg")
+@RequestMapping("user")
 public class RegController extends AbstractBaseController<User> {
 
     @Autowired
     private TbUserService tbUserService;
-    @GetMapping("/test")
-    public String sd(){
-    return "啊啊撒";
-    }
 
-    @PostMapping(value ="/useradd")
+    /***
+     * 用户传入一个完成user对象  返回0和1标识成功失败
+     * @param tbUser
+     * @return
+     */
+    @PostMapping(value ="/update")
     public AbstractBaseResult reg(User tbUser) {
         System.out.println("啦啦啦啦啦啦啦啦啦啦啦");
         // 数据校验
         String message = BeanValidator.validator(tbUser);
         if (StringUtils.isNotBlank(message)) {
-
             //现在返回的是200  以前是401
             return error(message, null);
         }
@@ -40,7 +40,6 @@ public class RegController extends AbstractBaseController<User> {
             return error("手机号重复，请重试", null);
         }
         //验证手机号验证码
-
 
         // 注册用户
         tbUser.setPicturepath("默认路径");

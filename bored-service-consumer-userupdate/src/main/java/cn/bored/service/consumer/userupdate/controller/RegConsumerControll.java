@@ -15,17 +15,8 @@ public class RegConsumerControll {
     @Autowired
     private RegConsumerService regConsumerService;
 
-    @Value(value = "${server.port}")
-    String port;
-    @RequestMapping("/testt")
-    public String test(HttpServletRequest httpServletRequest){
-        String test = regConsumerService.test();
-        System.out.println("----------------------------\n\n");
-        return "结果等于===》"+test+port;
-    }
-
-    @PostMapping("/useradd")
-    public AbstractBaseResult regz(User tbUser){
-        return regConsumerService.regz(tbUser);
+    @PostMapping("/userupdate")
+    public AbstractBaseResult update(User tbUser){
+        return regConsumerService.update(tbUser);
     }
 }
