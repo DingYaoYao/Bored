@@ -4,7 +4,6 @@ import com.google.common.collect.Lists;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.apache.commons.lang3.StringUtils;
-
 import java.util.List;
 
 /**
@@ -63,6 +62,7 @@ public class SuccessResult<T extends AbstractBaseDomain> extends AbstractBaseRes
         dataBean.setId(attributes.getId());
         dataBean.setType(attributes.getClass().getSimpleName());
         dataBean.setAttributes(attributes);
+
 
         if (StringUtils.isNotBlank(self)) {
             Links links = new Links();

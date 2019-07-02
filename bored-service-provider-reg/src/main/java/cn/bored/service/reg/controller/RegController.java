@@ -11,10 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.DigestUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("reg")
@@ -28,8 +25,7 @@ public class RegController extends AbstractBaseController<User> {
     }
 
     @PostMapping(value ="/useradd")
-    public AbstractBaseResult reg(User tbUser) {
-        System.out.println("啦啦啦啦啦啦啦啦啦啦啦");
+    public AbstractBaseResult reg(@RequestBody User tbUser) {
         // 数据校验
         String message = BeanValidator.validator(tbUser);
         if (StringUtils.isNotBlank(message)) {
@@ -45,13 +41,16 @@ public class RegController extends AbstractBaseController<User> {
 
         // 注册用户
         tbUser.setPicturepath("默认路径");
-        ImServiceDTO accid = RequestImService.createACCID(tbUser.getNicename());
-        tbUser.setAccid(accid.getInfo().getAccid());
-        tbUser.setToken(accid.getInfo().getToken());
+       // ImServiceDTO accid = RequestImService.createACCID(tbUser.getNicename());
+//        tbUser.setAccid(accid.getInfo().getAccid());
+//        tbUser.setToken(accid.getInfo().getToken());
+        tbUser.setAccid("dfgd");
+        tbUser.setToken("gfh");
         tbUser.setPassword(DigestUtils.md5DigestAsHex(tbUser.getPassword().getBytes()));
         User user = tbUserService.save(tbUser);
         if (user != null) {
             //现在返回的是 200  以前是201
+            user.setPassword("null");
             response.setStatus(HttpStatus.OK.value());
             return success(request.getRequestURI(), user);
         }
