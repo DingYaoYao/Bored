@@ -21,6 +21,7 @@ import lombok.EqualsAndHashCode;
 // JSON 不显示为 null 的属性
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ErrorResult extends AbstractBaseResult {
+
     private int code;
     private String title;
 
@@ -28,4 +29,5 @@ public class ErrorResult extends AbstractBaseResult {
      * 调试信息
      */
     private String detail;
+
 }

@@ -15,6 +15,14 @@ import java.util.Date;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class User extends  BaseEntity {
     /**
+     * im  用户标识
+     */
+    private String accid;
+    /**
+     * 身份验证标识
+     */
+    private String token;
+    /**
      * 账号
      */
     @Id
