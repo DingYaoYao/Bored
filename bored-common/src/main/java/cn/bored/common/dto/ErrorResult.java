@@ -22,9 +22,8 @@ import lombok.EqualsAndHashCode;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ErrorResult extends AbstractBaseResult {
 
-    private int code;
+    private int error;
     private String title;
-
     /**
      * 调试信息
      */

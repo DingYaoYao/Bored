@@ -2,6 +2,8 @@ package cn.bored.service.reg.controller;
 
 import cn.bored.common.dto.AbstractBaseResult;
 import cn.bored.common.service.TbUserService;
+import cn.bored.common.utils.ImServiceDTO;
+import cn.bored.common.utils.RequestImService;
 import cn.bored.common.validator.BeanValidator;
 import cn.bored.common.web.AbstractBaseController;
 import cn.bored.domain.User;
@@ -31,7 +33,6 @@ public class RegController extends AbstractBaseController<User> {
         // 数据校验
         String message = BeanValidator.validator(tbUser);
         if (StringUtils.isNotBlank(message)) {
-
             //现在返回的是200  以前是401
             return error(message, null);
         }
@@ -44,6 +45,9 @@ public class RegController extends AbstractBaseController<User> {
 
         // 注册用户
         tbUser.setPicturepath("默认路径");
+        ImServiceDTO accid = RequestImService.createACCID(tbUser.getNicename());
+        tbUser.setAccid(accid.getInfo().getAccid());
+        tbUser.setToken(accid.getInfo().getToken());
         tbUser.setPassword(DigestUtils.md5DigestAsHex(tbUser.getPassword().getBytes()));
         User user = tbUserService.save(tbUser);
         if (user != null) {
