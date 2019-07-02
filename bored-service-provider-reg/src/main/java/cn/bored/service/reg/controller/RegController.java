@@ -47,13 +47,17 @@ public class RegController extends AbstractBaseController<User> {
         tbUser.setAccid("dfgd");
         tbUser.setToken("gfh");
         tbUser.setPassword(DigestUtils.md5DigestAsHex(tbUser.getPassword().getBytes()));
-        User user = tbUserService.save(tbUser);
-        if (user != null) {
-            //现在返回的是 200  以前是201
-            user.setPassword("null");
-            response.setStatus(HttpStatus.OK.value());
-            return success(request.getRequestURI(), user);
-        }
+       try {
+           User user = tbUserService.save(tbUser);
+           if (user != null) {
+               //现在返回的是 200  以前是201
+               user.setPassword("null");
+               response.setStatus(HttpStatus.OK.value());
+               return success(request.getRequestURI(), user);
+           }
+       }catch (Exception e){
+           return error("注册失败，请重试", null);
+       }
         // 注册失败
         return error("注册失败，请重试", null);
     }

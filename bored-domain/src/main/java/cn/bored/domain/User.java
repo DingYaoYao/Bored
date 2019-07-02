@@ -65,6 +65,7 @@ public class User extends  BaseEntity {
     /**
      * 生日
      */
+
     private Date birthday;
 
     /**

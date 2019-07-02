@@ -14,6 +14,6 @@ public class RegConsumerServiceFallback extends AbstractBaseController implement
 
     @Override
     public String regz(User tbUser) {
-       return null;
+       return "回滚";
     }
 }

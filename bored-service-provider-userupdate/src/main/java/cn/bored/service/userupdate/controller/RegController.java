@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,7 +29,7 @@ public class RegController extends AbstractBaseController<User> {
      * @return
      */
     @PostMapping(value ="/update")
-    public AbstractBaseResult reg(User tbUser) {
+    public AbstractBaseResult reg(@RequestBody User tbUser) {
         //查询token是否是这个user的
         // 数据校验
         String message = BeanValidator.validator(tbUser);
@@ -39,22 +40,41 @@ public class RegController extends AbstractBaseController<User> {
         User usera= new User();
         usera.setId(tbUser.getId());
         User userl=userMapper.selectByPrimaryKey(usera);
-            if (!tbUserService.unique("phone", tbUser.getPhone())) {
-                if(userl.getPhone().equals(tbUser.getPhone())){
-                    //验证手机号验证码
-                    // 执行修改的操作
-                    tbUser.setPassword(DigestUtils.md5DigestAsHex(tbUser.getPassword().getBytes()));
-                    tbUser.setCreate_date(userl.getCreate_date());
-                    User user = tbUserService.save(tbUser);
-                    if (user != null) {
-                        user.setPassword("null");
-                        response.setStatus(HttpStatus.OK.value());
-                        return success(request.getRequestURI(), user);
-                    }
-                }
-                return error("手机号重复，请重试", null);
+        if (!tbUserService.unique("phone", tbUser.getPhone())) {
+            if(userl.getPhone().equals(tbUser.getPhone())){
+                return userupdate(tbUser,userl);
             }
-        // 注册失败
+            return error("手机号重复，请重试", null);
+        }else{
+            //执行修改了手机号并且通过了数据库中的重复验证之后进行修改
+            return  userupdate(tbUser,userl);
+        }
+    }
+
+    /***
+     * 内部方法
+     * @param tbUser
+     * @param userl
+     * @return
+     */
+    public AbstractBaseResult userupdate(User tbUser,User userl){
+
+        //验证手机号验证码
+        // 执行未修改手机号的修改的操作
+        tbUser.setPassword(DigestUtils.md5DigestAsHex(tbUser.getPassword().getBytes()));
+        tbUser.setCreate_date(userl.getCreate_date());
+        try{
+            User user = tbUserService.save(tbUser);
+            if (user != null) {
+                user.setPassword("null");
+                response.setStatus(HttpStatus.OK.value());
+                return success(request.getRequestURI(), user);
+            }
+        }catch (Exception e){
+            System.out.print(     e.getMessage());
+            return error("修改失败，请重试", null);
+        }
         return error("修改失败，请重试", null);
     }
+
 }

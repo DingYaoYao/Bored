@@ -4,6 +4,10 @@
   <resultMap id="BaseResultMap" type="cn.bored.domain.User">
     <!--
       WARNING - @mbg.generated
+
+          <result column="accid" jdbcType="VARCHAR" property="accid" />
+    <result column="token" jdbcType="VARCHAR" property="token" />
+
     -->
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="password" jdbcType="VARCHAR" property="password" />
@@ -17,8 +21,7 @@
     <result column="picturepath" jdbcType="VARCHAR" property="picturepath" />
     <result column="lately_login_date" jdbcType="TIMESTAMP" property="latelyLoginDate" />
     <result column="loginStat" jdbcType="INTEGER" property="loginstat" />
-    <result column="accid" jdbcType="VARCHAR" property="accid" />
-    <result column="token" jdbcType="VARCHAR" property="token" />
+
   </resultMap>
   <select id="userlogin" parameterType="cn.bored.domain.User" resultMap="BaseResultMap">
     SELECT * FROM user WHERE id=#{id} AND password=#{password}

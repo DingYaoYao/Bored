@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 public class RegConsumerServiceFallback extends AbstractBaseController implements RegConsumerService{
 
     @Override
-    public AbstractBaseResult update(User tbUser) {
-       return error("注册失败，请重试", null);
+    public String update(User tbUser) {
+       return "回滚";
     }
 }
