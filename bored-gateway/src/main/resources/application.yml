@@ -21,10 +21,10 @@ spring:
 #        locator:
 #          enabled: true
       routes:
-        - id: BORED-SERVICE-CONSUMER-LOGIN
-          uri: lb://bored-service-consumer-login
+        - id: BORED-SERVICE-CONSUMER-USERUPDATE
+          uri: lb://bored-service-consumer-userupdate
           predicates:
-            - Path=/api/login/**
+            - Path=/api/user/**
           filters:
             - StripPrefix=1
 
