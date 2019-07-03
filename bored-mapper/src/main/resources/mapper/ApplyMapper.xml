@@ -21,6 +21,7 @@
     SELECT * FROM apply
     WHERE from_user=#{id} AND STATUS=1
   </select>
+  <!--查询我被拒绝的-->
   <select id="getApplyDefeated" resultMap="BaseResultMap">
     SELECT * FROM apply
     WHERE STATUS =2 AND from_user=#{id}

@@ -35,17 +35,24 @@ public class ApplyController {
     public String add(Apply apply){
         apply.setApplyDate(new Date());
         int add = applyService.add(apply);
-        return add>1?"ok":null;
+        System.out.println(add>0?"ok":null);
+        return add>0?"ok":"nokkk";
     }
     @GetMapping("/del")
-    public String del(Apply applyid){
-        int del = applyService.delByID(applyid);
-        return del>1?"ok":null;
+    public String del(@RequestParam  Integer id){
+        Apply apply = new Apply();
+        apply.setId((long)id);
+        int del = applyService.delByID(apply);
+        return del>0?"ok":null;
     }
+    //拒绝添加好友
     @GetMapping("/update")
-    public String update(Apply applyid){
-        applyid.setApplyDate(new Date());
-        int update = applyService.updateByPrimaryKeySelective(applyid);
-        return update>1?"ok":null;
+    public String update(long id){
+        Apply apply = new Apply();
+        apply.setId(id);
+        apply.setApplyDate(new Date());
+        apply.setStatus(2);
+        int update = applyService.updateByPrimaryKeySelective(apply);
+        return update>0?"ok":null;
     }
 }

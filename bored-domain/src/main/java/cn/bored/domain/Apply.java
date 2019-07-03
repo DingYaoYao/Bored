@@ -1,10 +1,12 @@
 package cn.bored.domain;
 
 import com.google.common.io.BaseEncoding;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Date;
 
+@Data
 @Table(name = "apply")
 public class Apply extends BaseEntity {
 
