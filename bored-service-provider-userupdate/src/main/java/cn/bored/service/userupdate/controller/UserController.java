@@ -30,7 +30,7 @@ public class UserController extends AbstractBaseController<User> {
     }
 
     /***
-     * 用户传入一个完成user对象  返回0和1标识成功失败
+     * 用户传入一个完成user对象
      * @param tbUser
      * @return
      */

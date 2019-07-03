@@ -8,12 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
-
-/**
- * @description
- * @author: hanghang
- * @create: 2019-07-03 13:41
- **/
 @Service
 public class UserServiceImpl extends BaseServiceImpl<User, UserMapper> implements UserService<User>  {
 
