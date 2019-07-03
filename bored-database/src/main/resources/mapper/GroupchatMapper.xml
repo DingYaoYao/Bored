@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.bored.commons.mapper.GroupchatMapper">
-  <resultMap id="BaseResultMap" type="cn.bored.commons.domain.Groupchat">
+<mapper namespace="com.bored.commons.mapper.GroupchatMapper">
+  <resultMap id="BaseResultMap" type="com.bored.commons.domain.Groupchat">
     <!--
       WARNING - @mbg.generated
     -->
-    <id column="groupid" jdbcType="INTEGER" property="groupid" />
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="groupid" jdbcType="INTEGER" property="groupid" />
     <result column="groupname" jdbcType="VARCHAR" property="groupname" />
     <result column="groupuserid" jdbcType="BIGINT" property="groupuserid" />
     <result column="member_list" jdbcType="VARCHAR" property="memberList" />

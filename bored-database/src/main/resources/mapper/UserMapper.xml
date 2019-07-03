@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.bored.commons.mapper.UserMapper">
-  <resultMap id="BaseResultMap" type="cn.bored.commons.domain.User">
+<mapper namespace="com.bored.commons.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.bored.commons.domain.User">
     <!--
       WARNING - @mbg.generated
     -->
@@ -19,5 +19,7 @@
     <result column="picturepath" jdbcType="VARCHAR" property="picturepath" />
     <result column="lately_login_date" jdbcType="TIMESTAMP" property="latelyLoginDate" />
     <result column="loginStat" jdbcType="INTEGER" property="loginstat" />
+    <result column="accid" jdbcType="VARCHAR" property="accid" />
+    <result column="token" jdbcType="VARCHAR" property="token" />
   </resultMap>
 </mapper>

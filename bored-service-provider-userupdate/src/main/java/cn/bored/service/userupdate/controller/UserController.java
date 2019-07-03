@@ -45,7 +45,6 @@ public class UserController extends AbstractBaseController<User> {
         // 验证手机号是否和其他的重复
         User usera= new User();
         usera.setId(tbUser.getId());
-<<<<<<< HEAD:bored-service-provider-userupdate/src/main/java/cn/bored/service/userupdate/controller/RegController.java
 
         try{
             User userl=userMapper.selectByPrimaryKey(usera);
@@ -60,22 +59,10 @@ public class UserController extends AbstractBaseController<User> {
             }
         }catch (Exception e){
             return error("修改失败，请重试", null);
-=======
-        User userl=userMapper.selectByPrimaryKey(usera);
-        if (!tbUserService.unique("phone", tbUser.getPhone())) {
-            if(userl.getPhone().equals(tbUser.getPhone())){
-                return userupdate(tbUser,userl);
-            }
-            return error("手机号重复，请重试", null);
-        }else{
-            //执行修改了手机号并且通过了数据库中的重复验证之后进行修改
-            return  userupdate(tbUser,userl);
->>>>>>> 5dc9446b9cfcdce0b121cac6fdcbc0171f2c8b3f:bored-service-provider-userupdate/src/main/java/cn/bored/service/userupdate/controller/UserController.java
         }
     }
 
-        // 根据用户得id查询用户得信息
-    @GetMapping(value = "getid")
+
 
 
 

@@ -25,16 +25,14 @@
     <result column="loginStat" jdbcType="INTEGER" property="loginstat" />
 
   </resultMap>
-<<<<<<< HEAD
+
   <select id="userlogin" resultMap="BaseResultMap">SELECT * FROM user WHERE id=#{id} AND password=#{password} </select>
 
-  <update id="updateLoginStat" parameterMap="String">UPDATE userSETlately_login_date = #{latelyLoginDate},loginStat = #{loginStat}WHERE id = ${id} </update>
-=======
-  <select id="userlogin" parameterType="cn.bored.domain.User" resultMap="BaseResultMap">
-    SELECT * FROM user WHERE id=#{id} AND password=#{password}
-  </select>
+  <update id="updateLoginStat" >UPDATE userSETlately_login_date = #{latelyLoginDate},loginStat = #{loginStat}WHERE id = ${id} </update>
+
+
   <select id="getUserByToken" resultMap="BaseResultMap">
     SELECT * FROM USER WHERE token=#{token}
   </select>
->>>>>>> 5dc9446b9cfcdce0b121cac6fdcbc0171f2c8b3f
+
 </mapper>

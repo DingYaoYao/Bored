@@ -37,7 +37,7 @@ public class TestController {
     }
     //判断用户登录 成功更新--登录时间/登录状态
     @PostMapping(value = "/login")
-    public String loginl(@Param("id") Long id, @Param("password")String password) throws ParseException {
+    public String loginl( Long id, String password) throws ParseException {
 
         User user;
      //   long lid = Long.parseLong(id);
