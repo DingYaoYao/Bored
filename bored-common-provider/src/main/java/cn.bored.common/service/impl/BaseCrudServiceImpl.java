@@ -32,7 +32,6 @@ public class BaseCrudServiceImpl<T extends AbstractBaseDomain, M extends MyMappe
         int result = 0;
         Date currentDate = new Date();
         domain.setUpdate_date(currentDate);
-
         // 创建
         if (domain.getId() == null) {
             domain.setCreate_date(currentDate);

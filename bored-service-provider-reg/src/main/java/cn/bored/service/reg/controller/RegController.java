@@ -5,6 +5,7 @@ import cn.bored.common.service.TbUserService;
 import cn.bored.common.validator.BeanValidator;
 import cn.bored.common.web.AbstractBaseController;
 import cn.bored.domain.User;
+import cn.bored.service.reg.service.RegService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,14 +21,12 @@ public class RegController extends AbstractBaseController<User> {
 
     @Autowired
     private TbUserService tbUserService;
-    @GetMapping("/test")
-    public String sd(){
-    return "啊啊撒";
-    }
+
+    @Autowired
+    private RegService regService;
 
     @PostMapping(value ="/useradd")
     public AbstractBaseResult reg(User tbUser) {
-        System.out.println("啦啦啦啦啦啦啦啦啦啦啦");
         // 数据校验
         String message = BeanValidator.validator(tbUser);
         if (StringUtils.isNotBlank(message)) {
@@ -45,7 +44,7 @@ public class RegController extends AbstractBaseController<User> {
         // 注册用户
         tbUser.setPicturepath("默认路径");
         tbUser.setPassword(DigestUtils.md5DigestAsHex(tbUser.getPassword().getBytes()));
-        User user = tbUserService.save(tbUser);
+        User user = regService.save(tbUser);
 
         if (user != null) {
             //现在返回的是 200  以前是201

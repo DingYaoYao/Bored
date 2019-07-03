@@ -63,9 +63,6 @@ public class UserController extends AbstractBaseController<User> {
     }
 
 
-
-
-
     /***
      * 内部方法
      * @param tbUser
@@ -79,7 +76,7 @@ public class UserController extends AbstractBaseController<User> {
         tbUser.setPassword(DigestUtils.md5DigestAsHex(tbUser.getPassword().getBytes()));
         tbUser.setCreate_date(userl.getCreate_date());
         try{
-            User user = tbUserService.save(tbUser);
+            User user = userService.save(tbUser);
             if (user != null) {
                 user.setPassword("null");
                 response.setStatus(HttpStatus.OK.value());

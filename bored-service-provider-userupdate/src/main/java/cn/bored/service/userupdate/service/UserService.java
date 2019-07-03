@@ -13,4 +13,5 @@ import cn.bored.domain.User;
 public interface UserService<T extends BaseEntity> extends BaseService<T> {
 
     public User getUserByToken(String token);
+    public User save(User domain);
 }
