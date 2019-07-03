@@ -1,7 +1,8 @@
 package cn.bored.mapper;
 
-import com.bored.commons.domain.Areas;
-import tk.mybatis.mapper.MyMapper;
+import cn.bored.domain.Areas;
+import mapper.MyMapper;
+
 
 public interface AreasMapper extends MyMapper<Areas> {
 }

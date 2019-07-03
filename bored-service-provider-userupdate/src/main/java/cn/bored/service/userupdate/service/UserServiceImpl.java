@@ -5,7 +5,6 @@ import cn.bored.common.service.impl.BaseServiceImpl;
 import cn.bored.domain.User;
 import cn.bored.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;

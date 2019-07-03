@@ -1,7 +1,8 @@
 package cn.bored.mapper;
 
-import com.bored.commons.domain.Provinces;
-import tk.mybatis.mapper.MyMapper;
+
+import cn.bored.domain.Provinces;
+import mapper.MyMapper;
 
 public interface ProvincesMapper extends MyMapper<Provinces> {
 }

@@ -31,10 +31,8 @@ public class BaseCrudServiceImpl<T extends AbstractBaseDomain, M extends MyMappe
     public T save(T domain) {
         int result = 0;
         Date currentDate = new Date();
-        domain.setUpdate_date(currentDate);
         // 创建
         if (domain.getId() == null) {
-            domain.setCreate_date(currentDate);
             String randomStr="";
             for (int i = 0; i < 9; i++) {
                 int random=(int)(Math.random()*9);
