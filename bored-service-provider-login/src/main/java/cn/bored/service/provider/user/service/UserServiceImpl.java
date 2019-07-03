@@ -16,8 +16,14 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserMapper> implement
     private UserMapper userMapper;
 
     @Override
-    public User userlogin(User user) {
-        User login = userMapper.userlogin(user);
+    public User userlogin(Long id,String password) {
+        User login = userMapper.userlogin(id,password);
         return login;
+    }
+
+    @Override
+    public int updateLoginStat(User user) {
+        int result = userMapper.updateLoginStat(user);
+        return result;
     }
 }

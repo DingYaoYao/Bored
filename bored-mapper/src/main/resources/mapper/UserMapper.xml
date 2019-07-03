@@ -25,7 +25,7 @@
     <result column="loginStat" jdbcType="INTEGER" property="loginstat" />
 
   </resultMap>
-  <select id="userlogin" parameterType="cn.bored.domain.User" resultMap="BaseResultMap">
-    SELECT * FROM user WHERE id=#{id} AND password=#{password}
-  </select>
+  <select id="userlogin" resultMap="BaseResultMap">SELECT * FROM user WHERE id=#{id} AND password=#{password} </select>
+
+  <update id="updateLoginStat" parameterMap="String">UPDATE userSETlately_login_date = #{latelyLoginDate},loginStat = #{loginStat}WHERE id = ${id} </update>
 </mapper>

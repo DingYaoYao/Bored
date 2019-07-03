@@ -11,10 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.DigestUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 @RestController
 @RequestMapping("user")
 public class RegController extends AbstractBaseController<User> {
@@ -40,21 +38,26 @@ public class RegController extends AbstractBaseController<User> {
         User usera= new User();
         usera.setId(tbUser.getId());
 
-       try{
-           User userl=userMapper.selectByPrimaryKey(usera);
-           if (!tbUserService.unique("phone", tbUser.getPhone())) {
-               if(userl.getPhone().equals(tbUser.getPhone())){
-                   return userupdate(tbUser,userl);
-               }
-               return error("手机号重复，请重试", null);
-           }else{
-               //执行修改了手机号并且通过了数据库中的重复验证之后进行修改
-               return  userupdate(tbUser,userl);
-           }
-       }catch (Exception e){
-           return error("修改失败，请重试", null);
-       }
+        try{
+            User userl=userMapper.selectByPrimaryKey(usera);
+            if (!tbUserService.unique("phone", tbUser.getPhone())) {
+                if(userl.getPhone().equals(tbUser.getPhone())){
+                    return userupdate(tbUser,userl);
+                }
+                return error("手机号重复，请重试", null);
+            }else{
+                //执行修改了手机号并且通过了数据库中的重复验证之后进行修改
+                return  userupdate(tbUser,userl);
+            }
+        }catch (Exception e){
+            return error("修改失败，请重试", null);
+        }
     }
+
+        // 根据用户得id查询用户得信息
+    @GetMapping(value = "getid")
+
+
 
     /***
      * 内部方法
