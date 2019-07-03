@@ -3,6 +3,7 @@ package cn.bored.common.interceptor;
 
 
 import cn.bored.common.service.RedisConsumerService;
+import cn.bored.common.service.UserConsumerService;
 import cn.bored.common.utils.ConsumerConstant;
 import cn.bored.common.utils.JsonUtils;
 import cn.bored.domain.User;
@@ -19,7 +20,8 @@ import javax.servlet.http.HttpSession;
  * token 验证
  */
 public class TokenInterceptor implements HandlerInterceptor {
-
+    @Autowired
+    private UserConsumerService userConsumerService;
     @Autowired
     private RedisConsumerService redisConsumerService;
 
@@ -31,13 +33,18 @@ public class TokenInterceptor implements HandlerInterceptor {
 
         //标识不能为空
         if(!StringUtils.isEmpty(token)){
+
             String userString = redisConsumerService.get(token);
             User user=null;
+
             //判断缓存没有用户
             if(StringUtils.isEmpty(token)){
-                user=null;
+
                 //从数据库查询得到用户，
+                 user=userConsumerService.getUserByToken(token);
                  if(StringUtils.isEmpty(user)){
+
+                     System.out.println("");
                      return false;
                  }
                 session.setAttribute(ConsumerConstant.SESSION_USER,user);
@@ -48,6 +55,7 @@ public class TokenInterceptor implements HandlerInterceptor {
             session.setAttribute(ConsumerConstant.SESSION_USER,user);
             return true;
         }
+        //重定向登录页
         return false;
     }
 
