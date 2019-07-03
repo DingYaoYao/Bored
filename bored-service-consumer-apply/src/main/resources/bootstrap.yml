@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: bored-service-consumer-apply
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+feign:
+  sentinel:
+    enabled: true
+
+server:
+  port: 9021
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

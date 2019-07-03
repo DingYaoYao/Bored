@@ -17,9 +17,11 @@
   <select id="getApplydDecided" resultMap="BaseResultMap">
     SELECT * FROM apply
     WHERE to_user=#{id} AND STATUS=1
+    ORDER BY apply_date DESC
     UNION
     SELECT * FROM apply
     WHERE from_user=#{id} AND STATUS=1
+    ORDER BY apply_date DESC
   </select>
   <!--查询我被拒绝的-->
   <select id="getApplyDefeated" resultMap="BaseResultMap">

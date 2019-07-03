@@ -39,9 +39,9 @@ public class ApplyController {
         return add>0?"ok":"nokkk";
     }
     @GetMapping("/del")
-    public String del(@RequestParam  Integer id){
+    public String del(long id){
         Apply apply = new Apply();
-        apply.setId((long)id);
+        apply.setId(id);
         int del = applyService.delByID(apply);
         return del>0?"ok":null;
     }
