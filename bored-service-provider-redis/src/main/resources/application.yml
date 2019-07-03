@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: bored-service-provider-redis
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+  redis:
+    lettuce:
+      pool:
+        max-active: 8
+        max-idle: 8
+        max-wait: -1ms
+        min-idle: 0
+    sentinel:
+      master: mymaster
+      nodes: 129.28.157.98:26379, 129.28.157.98:26380, 129.28.157.98:26381
+
+server:
+  port: 9051
+
+
+# Services Versions
+services:
+  versions:
+    redis:
+      v1: 1.0.0
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

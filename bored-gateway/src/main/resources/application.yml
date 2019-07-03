@@ -27,7 +27,12 @@ spring:
             - Path=/api/login/**
           filters:
             - StripPrefix=1
-
+        - id: BORED-SERVICE-PROVIDER-REG
+          uri: lb://bored-service-provider-reg
+          predicates:
+            - Path=/api/reg/**
+          filters:
+            - StripPrefix=1
 
 server:
   port: 9000

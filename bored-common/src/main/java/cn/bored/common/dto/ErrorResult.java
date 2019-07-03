@@ -22,7 +22,7 @@ import lombok.EqualsAndHashCode;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ErrorResult extends AbstractBaseResult {
 
-    private int code;
+    private int RRRcode;
     private String title;
 
     /**

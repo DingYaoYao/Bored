@@ -28,39 +28,9 @@ import java.util.Map;
 public class AuthFilter implements GlobalFilter, Ordered {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-//        Mono<WebSession> session = exchange.ge
-//        System.out.println("进入路由-------");
-//        System.out.println("回话==========="+session);
-//        System.out.println("---------------\n\n");
-//        session
-        String token = exchange.getRequest().getQueryParams().getFirst("token");
 
-        if (token == null || token.isEmpty()) {
-            ServerHttpResponse response = exchange.getResponse();
 
-            // 封装错误信息
-            Map<String, Object> responseData = Maps.newHashMap();
-            responseData.put("code", 401);
-            responseData.put("message", "非法请求");
-            responseData.put("cause", "Token is empty");
-
-            try {
-                // 将信息转换为 JSON
-                ObjectMapper objectMapper = new ObjectMapper();
-                byte[] data = objectMapper.writeValueAsBytes(responseData);
-
-                // 输出错误信息到页面
-                DataBuffer buffer = response.bufferFactory().wrap(data);
-                response.setStatusCode(HttpStatus.UNAUTHORIZED);
-                response.getHeaders().add("Content-Type", "application/json;charset=UTF-8");
-                return response.writeWith(Mono.just(buffer));
-            } catch (JsonProcessingException e) {
-                e.printStackTrace();
-            }
-        }
-//        exchange.getSession().flatMap(session -> session.getAttributes().put());
         return chain.filter(exchange);
-
     }
 
     /**

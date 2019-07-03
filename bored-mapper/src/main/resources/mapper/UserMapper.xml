@@ -14,6 +14,8 @@
     <result column="birthday" jdbcType="TIMESTAMP" property="birthday" />
     <result column="address_id" jdbcType="VARCHAR" property="addressId" />
     <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="accid" jdbcType="VARCHAR" property="accid" />
+    <result column="token" jdbcType="VARCHAR" property="token" />
     <result column="picturepath" jdbcType="VARCHAR" property="picturepath" />
     <result column="lately_login_date" jdbcType="TIMESTAMP" property="latelyLoginDate" />
     <result column="loginStat" jdbcType="INTEGER" property="loginstat" />

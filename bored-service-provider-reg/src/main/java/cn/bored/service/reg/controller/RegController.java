@@ -27,11 +27,11 @@ public class RegController extends AbstractBaseController<User> {
 
     @PostMapping(value ="/useradd")
     public AbstractBaseResult reg(User tbUser) {
+
         System.out.println("啦啦啦啦啦啦啦啦啦啦啦");
         // 数据校验
         String message = BeanValidator.validator(tbUser);
         if (StringUtils.isNotBlank(message)) {
-
             //现在返回的是200  以前是401
             return error(message, null);
         }
