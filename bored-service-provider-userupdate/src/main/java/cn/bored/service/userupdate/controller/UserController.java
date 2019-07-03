@@ -29,6 +29,16 @@ public class UserController extends AbstractBaseController<User> {
         return userService.getUserByToken(token);
     }
 
+    @GetMapping("getuser/{userid}")
+    public AbstractBaseResult getuser(@PathVariable  Long userid){
+        User user=userMapper.selectByPrimaryKey(userid);
+        if(user==null){
+            return error("查询失败，用户Id不正确", null);
+        }
+        user.setPassword("xuang");
+        return success(request.getRequestURI(), user);
+    }
+
     /***
      * 用户传入一个完成user对象
      * @param tbUser
