@@ -1,16 +1,13 @@
 package cn.bored.domain;
 
+import com.google.common.io.BaseEncoding;
+
 import javax.persistence.*;
 import java.util.Date;
 
 @Table(name = "apply")
-public class Apply {
-    /**
-     * 申请编号
-     */
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+public class Apply extends BaseEntity {
+
 
     /**
      * 申请用户
@@ -40,111 +37,5 @@ public class Apply {
     @Column(name = "apply_date")
     private Date applyDate;
 
-    /**
-     * 获取申请编号
-     *
-     * @return id - 申请编号
-     */
-    public Integer getId() {
-        return id;
-    }
 
-    /**
-     * 设置申请编号
-     *
-     * @param id 申请编号
-     */
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    /**
-     * 获取申请用户
-     *
-     * @return from_user - 申请用户
-     */
-    public Long getFromUser() {
-        return fromUser;
-    }
-
-    /**
-     * 设置申请用户
-     *
-     * @param fromUser 申请用户
-     */
-    public void setFromUser(Long fromUser) {
-        this.fromUser = fromUser;
-    }
-
-    /**
-     * 获取被申请用户
-     *
-     * @return to_user - 被申请用户
-     */
-    public Long getToUser() {
-        return toUser;
-    }
-
-    /**
-     * 设置被申请用户
-     *
-     * @param toUser 被申请用户
-     */
-    public void setToUser(Long toUser) {
-        this.toUser = toUser;
-    }
-
-    /**
-     * 获取附加消息
-     *
-     * @return message - 附加消息
-     */
-    public String getMessage() {
-        return message;
-    }
-
-    /**
-     * 设置附加消息
-     *
-     * @param message 附加消息
-     */
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    /**
-     * 获取申请状态
-     *
-     * @return status - 申请状态
-     */
-    public Integer getStatus() {
-        return status;
-    }
-
-    /**
-     * 设置申请状态
-     *
-     * @param status 申请状态
-     */
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
-    /**
-     * 获取申请时间
-     *
-     * @return apply_date - 申请时间
-     */
-    public Date getApplyDate() {
-        return applyDate;
-    }
-
-    /**
-     * 设置申请时间
-     *
-     * @param applyDate 申请时间
-     */
-    public void setApplyDate(Date applyDate) {
-        this.applyDate = applyDate;
-    }
 }

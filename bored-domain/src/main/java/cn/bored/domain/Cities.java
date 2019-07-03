@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Table(name = "cities")
-public class Cities {
+public class Cities extends BaseEntity {
     /**
      * 主键
      */
@@ -29,14 +29,7 @@ public class Cities {
      */
     private String provinceid;
 
-    /**
-     * 获取主键
-     *
-     * @return id - 主键
-     */
-    public Integer getId() {
-        return id;
-    }
+
 
     /**
      * 设置主键

@@ -33,7 +33,7 @@ public class ApplyController {
 
     @PostMapping("/add")
     public String add(Apply apply){
-        apply.setCreate_date(new Date());
+        apply.setApplyDate(new Date());
         int add = applyService.add(apply);
         return add>1?"ok":null;
     }
