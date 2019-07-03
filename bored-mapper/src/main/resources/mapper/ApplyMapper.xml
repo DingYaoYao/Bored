@@ -12,4 +12,19 @@
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="apply_date" jdbcType="TIMESTAMP" property="applyDate" />
   </resultMap>
+
+  <!--总结  首先别人发给我的，我发送给别人的，-->
+  <select id="getApplydDecided" resultMap="BaseResultMap">
+    SELECT * FROM apply
+    WHERE to_user=#{id} AND STATUS=1
+    UNION
+    SELECT * FROM apply
+    WHERE from_user=#{id} AND STATUS=1
+  </select>
+  <select id="getApplyDefeated" resultMap="BaseResultMap">
+    SELECT * FROM apply
+    WHERE STATUS =2 AND from_user=#{id}
+    ORDER BY apply_date DESC
+    LIMIT 0,5
+  </select>
 </mapper>

@@ -6,21 +6,29 @@ import cn.bored.common.validator.BeanValidator;
 import cn.bored.common.web.AbstractBaseController;
 import cn.bored.domain.User;
 import cn.bored.mapper.UserMapper;
+import cn.bored.service.userupdate.service.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("user")
-public class RegController extends AbstractBaseController<User> {
+@RequestMapping("/user")
+public class UserController extends AbstractBaseController<User> {
 
     @Autowired
-    private TbUserService tbUserService;
+   private TbUserService tbUserService;
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private UserService<User> userService;
+
+    @GetMapping("/getUserByToken")
+    public User getUserByToken(String token){
+        return userService.getUserByToken(token);
+    }
+
     /***
      * 用户传入一个完成user对象  返回0和1标识成功失败
      * @param tbUser
@@ -37,6 +45,7 @@ public class RegController extends AbstractBaseController<User> {
         // 验证手机号是否和其他的重复
         User usera= new User();
         usera.setId(tbUser.getId());
+<<<<<<< HEAD:bored-service-provider-userupdate/src/main/java/cn/bored/service/userupdate/controller/RegController.java
 
         try{
             User userl=userMapper.selectByPrimaryKey(usera);
@@ -51,6 +60,17 @@ public class RegController extends AbstractBaseController<User> {
             }
         }catch (Exception e){
             return error("修改失败，请重试", null);
+=======
+        User userl=userMapper.selectByPrimaryKey(usera);
+        if (!tbUserService.unique("phone", tbUser.getPhone())) {
+            if(userl.getPhone().equals(tbUser.getPhone())){
+                return userupdate(tbUser,userl);
+            }
+            return error("手机号重复，请重试", null);
+        }else{
+            //执行修改了手机号并且通过了数据库中的重复验证之后进行修改
+            return  userupdate(tbUser,userl);
+>>>>>>> 5dc9446b9cfcdce0b121cac6fdcbc0171f2c8b3f:bored-service-provider-userupdate/src/main/java/cn/bored/service/userupdate/controller/UserController.java
         }
     }
 
