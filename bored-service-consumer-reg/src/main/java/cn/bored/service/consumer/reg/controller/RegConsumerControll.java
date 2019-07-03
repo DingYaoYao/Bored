@@ -26,7 +26,7 @@ public class RegConsumerControll {
     }
 
     @PostMapping("/useradd")
-    public AbstractBaseResult regz(User tbUser){
+    public String regz(User tbUser){
         return regConsumerService.regz(tbUser);
     }
 }

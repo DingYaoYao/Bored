@@ -71,7 +71,7 @@ public abstract class AbstractBaseController<T extends AbstractBaseDomain> {
      */
     protected AbstractBaseResult error(String title, String detail) {
         // return error(HttpStatus.UNAUTHORIZED.value(), title, detail);
-        return error(HttpStatus.OK.value(), title, detail);
+       return error(HttpStatus.OK.value(), title, detail);
     }
 
     /**

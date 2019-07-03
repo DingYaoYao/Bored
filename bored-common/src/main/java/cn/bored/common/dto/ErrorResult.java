@@ -24,7 +24,6 @@ public class ErrorResult extends AbstractBaseResult {
 
     private int RRRcode;
     private String title;
-
     /**
      * 调试信息
      */

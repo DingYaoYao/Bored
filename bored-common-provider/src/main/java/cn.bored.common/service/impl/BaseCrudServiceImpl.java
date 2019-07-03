@@ -56,7 +56,8 @@ public class BaseCrudServiceImpl<T extends AbstractBaseDomain, M extends MyMappe
 
         // 更新
         else {
-            result = mapper.updateByPrimaryKey(domain);
+
+            result = mapper.updateByPrimaryKeySelective(domain);
         }
 
         // 保存数据成功

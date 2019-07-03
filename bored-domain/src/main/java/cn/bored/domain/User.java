@@ -34,7 +34,7 @@ public class User extends  BaseEntity {
      */
     @NotNull(message = "密码不能为空")
     @Length(min = 1, max = 20, message = "用户密码长度必须介于 1 和 20 之间")
-    @JsonIgnore
+   // @JsonIgnore
     private String password;
 
     /**
@@ -65,6 +65,7 @@ public class User extends  BaseEntity {
     /**
      * 生日
      */
+
     private Date birthday;
 
     /**

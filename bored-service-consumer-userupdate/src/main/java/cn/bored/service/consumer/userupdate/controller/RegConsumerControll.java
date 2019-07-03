@@ -15,8 +15,8 @@ public class RegConsumerControll {
     @Autowired
     private RegConsumerService regConsumerService;
 
-    @PostMapping("/userupdate")
-    public AbstractBaseResult update(User tbUser){
+    @PostMapping("/update")
+    public String update(User tbUser){
         return regConsumerService.update(tbUser);
     }
 }

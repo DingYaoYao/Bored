@@ -13,7 +13,7 @@ public class RegConsumerServiceFallback extends AbstractBaseController implement
     }
 
     @Override
-    public AbstractBaseResult regz(User tbUser) {
-       return error("注册失败，请重试", null);
+    public String regz(User tbUser) {
+       return "回滚";
     }
 }
