@@ -46,6 +46,7 @@ public class RegController extends AbstractBaseController<User> {
         tbUser.setPicturepath("默认路径");
         tbUser.setPassword(DigestUtils.md5DigestAsHex(tbUser.getPassword().getBytes()));
         User user = tbUserService.save(tbUser);
+
         if (user != null) {
             //现在返回的是 200  以前是201
             response.setStatus(HttpStatus.OK.value());

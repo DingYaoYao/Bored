@@ -1,7 +1,10 @@
 package cn.bored.service.provider.apply.service;
 
 import cn.bored.common.service.BaseService;
+import cn.bored.domain.Apply;
 import cn.bored.domain.BaseEntity;
+
+import java.util.List;
 
 /**
  * @description
@@ -10,4 +13,8 @@ import cn.bored.domain.BaseEntity;
  **/
 public interface ApplyService<T extends BaseEntity> extends BaseService<T> {
 
+    //查询带申请
+    List<Apply> getApplydDecided(String id);
+    //查询被拒绝的，默认只查询五条
+    List<Apply> getApplyDefeated(String id);
 }
