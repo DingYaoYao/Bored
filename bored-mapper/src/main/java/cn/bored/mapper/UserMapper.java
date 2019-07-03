@@ -6,6 +6,6 @@ import mapper.MyMapper;
 public interface UserMapper extends MyMapper<User> {
 
     User userlogin(User user);
-
+    User getUserByToken(String token);
 
 }

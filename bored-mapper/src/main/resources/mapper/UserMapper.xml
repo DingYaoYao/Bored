@@ -28,4 +28,7 @@
   <select id="userlogin" parameterType="cn.bored.domain.User" resultMap="BaseResultMap">
     SELECT * FROM user WHERE id=#{id} AND password=#{password}
   </select>
+  <select id="getUserByToken" resultMap="BaseResultMap">
+    SELECT * FROM USER WHERE token=#{token}
+  </select>
 </mapper>

@@ -1,6 +1,6 @@
 package cn.bored.service.consumer.userupdate.service;
 
-import cn.bored.common.dto.AbstractBaseResult;
+
 import cn.bored.common.web.AbstractBaseController;
 import cn.bored.domain.User;
 import org.springframework.stereotype.Component;

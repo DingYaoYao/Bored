@@ -9,4 +9,5 @@ import cn.bored.domain.BaseEntity;
  * @create: 2019-07-03 07:49
  **/
 public interface ApplyService<T extends BaseEntity> extends BaseService<T> {
+
 }
