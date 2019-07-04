@@ -29,4 +29,6 @@ public class ErrorResult extends AbstractBaseResult {
      */
     private String detail;
 
+
+
 }

@@ -20,6 +20,11 @@ import java.util.List;
 public class SuccessResult<T extends AbstractBaseDomain> extends AbstractBaseResult {
     private Links links;
     private List<DataBean> data;
+    private int code;
+
+    public SuccessResult(){
+        code=200;
+    }
 
     /**
      * 请求的结果（单笔）

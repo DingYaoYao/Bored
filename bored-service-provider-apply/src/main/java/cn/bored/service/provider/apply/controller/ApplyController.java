@@ -22,12 +22,12 @@ public class ApplyController {
 
     //查询带申请
     @GetMapping("/decided/{id}")
-    List<Apply> getApplydDecided(@PathVariable String id){
+    List<Apply> getApplydDecided(@PathVariable long id){
      return applyService.getApplydDecided(id);
     }
     //查询被拒绝的，默认只查询五条
     @GetMapping("/defeated/{id}")
-    List<Apply> getApplyDefeated(@PathVariable String id){
+    List<Apply> getApplyDefeated(@PathVariable long id){
      return applyService.getApplyDefeated(id);
     }
 
@@ -36,7 +36,7 @@ public class ApplyController {
         apply.setApplyDate(new Date());
         int add = applyService.add(apply);
         System.out.println(add>0?"ok":null);
-        return add>0?"ok":"nokkk";
+        return add>0?"ok":null;
     }
     @GetMapping("/del")
     public String del(long id){

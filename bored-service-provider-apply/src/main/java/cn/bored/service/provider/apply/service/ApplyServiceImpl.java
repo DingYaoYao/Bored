@@ -21,12 +21,12 @@ public class ApplyServiceImpl extends BaseServiceImpl<Apply, ApplyMapper> implem
     private ApplyMapper applyMapper;
 
     @Override
-    public List<Apply> getApplydDecided(String id) {
+    public List<Apply> getApplydDecided(long id) {
         return applyMapper.getApplydDecided(id);
     }
 
     @Override
-    public List<Apply> getApplyDefeated(String id) {
+    public List<Apply> getApplyDefeated(long id) {
         return applyMapper.getApplyDefeated(id);
     }
 }

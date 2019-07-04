@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface ApplyMapper extends MyMapper<Apply> {
    //查询带申请
-   List<Apply> getApplydDecided(String id);
+   List<Apply> getApplydDecided(long id);
    //查询被拒绝的，默认只查询五条
-   List<Apply> getApplyDefeated(String id);
+   List<Apply> getApplyDefeated(long id);
 
 }

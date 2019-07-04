@@ -62,7 +62,14 @@ public abstract class AbstractBaseController<T extends AbstractBaseDomain> {
     protected AbstractBaseResult success(String self, int next, int last, List<T> attributes) {
         return BaseResultFactory.getInstance(response).build(self, next, last, attributes);
     }
-
+    //用户只返回集合
+    protected AbstractBaseResult success(List<T> attributes) {
+        return BaseResultFactory.getInstance(response).build("", 0, 0, attributes);
+    }
+    //成功只返回状态
+    protected AbstractBaseResult success() {
+        return BaseResultFactory.getInstance(response).build();
+    }
     /**
      * 请求失败
      * @param title
@@ -73,7 +80,22 @@ public abstract class AbstractBaseController<T extends AbstractBaseDomain> {
         // return error(HttpStatus.UNAUTHORIZED.value(), title, detail);
        return error(HttpStatus.OK.value(), title, detail);
     }
-
+    /**
+     * 请求失败
+     * @return
+     */
+    protected AbstractBaseResult userError() {
+        // return error(HttpStatus.UNAUTHORIZED.value(), title, detail);
+        return error(201, "", "用户没登陆");
+    }
+    /**
+     * 请求失败
+     * @return
+     */
+    protected AbstractBaseResult sentinelError() {
+        // return error(HttpStatus.UNAUTHORIZED.value(), title, detail);
+        return error(202, "", "熔断异常，请刷新重试");
+    }
     /**
      * 请求失败
      * @param code

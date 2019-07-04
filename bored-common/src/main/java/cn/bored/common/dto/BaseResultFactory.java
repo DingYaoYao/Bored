@@ -65,6 +65,9 @@ public class BaseResultFactory<T extends AbstractBaseDomain> {
     public AbstractBaseResult build(String self, int next, int last, List<T> attributes) {
         return new SuccessResult(self, next, last, attributes);
     }
+    public AbstractBaseResult build(){
+        return new SuccessResult();
+    }
 
     /**
      * 构建请求错误的响应结构
