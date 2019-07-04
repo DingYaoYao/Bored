@@ -12,4 +12,45 @@
     <result column="Video——path" jdbcType="VARCHAR" property="video——path" />
     <result column="like" jdbcType="INTEGER" property="like" />
   </resultMap>
+
+  <!--查询自己的朋友圈信息-->
+  <select id="MyFriends" resultType="cn.bored.domain.Friend" resultMap="BaseResultMap">
+    SELECT 	userid,
+	context,
+	Image_path,
+	createtime,
+	Video_path,
+	`like`
+	FROM
+	friend
+	WHERE userid=#{userid}
+  </select>
+
+  <!--查询自己朋友的朋友圈信息,根据时间降序-->
+  <select id="MyfriendFriends" resultType="cn.bored.domain.Friend" resultMap="BaseResultMap">
+    SELECT userid,
+	context,
+	Image_path,
+	createtime,
+	Video_path,
+	`like`
+	FROM
+	friend
+	WHERE userid IN
+	(SELECT friend_user_id
+	FROM friends
+	WHERE userid=#{userid} AND friend_user_id NOT IN (
+	SELECT userid FROM blacklist WHERE fouserid=#{userid}
+	))
+	ORDER BY createtime DESC
+  </select>
+
+	<!--给朋友圈点赞-->
+	<update id="" parameterType="int">
+	UPDATE friend
+	SET
+	`like` = `like`+1
+	WHERE
+	userid = #{userid}
+	</update>
 </mapper>
