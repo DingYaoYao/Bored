@@ -2,6 +2,7 @@ package cn.bored.domain;
 
 import cn.bored.common.dto.AbstractBaseDomain;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -16,6 +17,7 @@ import java.util.Date;
  * @create: 2019-06-27 16:40
  **/
 @Data
+@EqualsAndHashCode(callSuper=false)
 public class BaseEntity extends AbstractBaseDomain implements Serializable{
     /**
      * id主键自增

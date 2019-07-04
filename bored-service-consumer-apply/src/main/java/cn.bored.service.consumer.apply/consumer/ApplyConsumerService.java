@@ -4,7 +4,6 @@ import cn.bored.domain.Apply;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -16,16 +15,16 @@ import java.util.List;
 public interface ApplyConsumerService {
 
     //查询带申请
-    @GetMapping("/decided/{id}")
+    @GetMapping("/apply/decided/{id}")
     List<Apply> getApplydDecided(@PathVariable long id);
     //查询被拒绝的，默认只查询五条
-    @GetMapping("/defeated/{id}")
+    @GetMapping("/apply/defeated/{id}")
     List<Apply> getApplyDefeated(@PathVariable long id);
-    @PostMapping("/add")
+    @PostMapping("/apply/add")
     public String add(@RequestBody  Apply apply);
-    @GetMapping("/del")
+    @GetMapping("/apply/del")
     public String del(@RequestParam  long id);
     //拒绝添加好友
-    @GetMapping("/update")
+    @GetMapping("/apply/update")
     public String update(@RequestParam long id);
 }

@@ -2,15 +2,19 @@ package cn.bored.domain;
 
 import com.google.common.io.BaseEncoding;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
+import javax.jnlp.ServiceManagerStub;
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Data
 @Table(name = "apply")
-public class Apply extends BaseEntity {
+@EqualsAndHashCode(callSuper=false)
+public class Apply extends BaseEntity implements  Serializable  {
 
-
+//    private static final long serialVersionUID = 2174158115699351071L;
     /**
      * 申请用户
      */
@@ -31,6 +35,7 @@ public class Apply extends BaseEntity {
     /**
      * 申请状态
      */
+
     private Integer status;
 
     /**

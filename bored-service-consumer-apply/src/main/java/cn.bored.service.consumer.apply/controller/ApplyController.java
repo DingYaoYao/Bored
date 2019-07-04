@@ -6,13 +6,9 @@ import cn.bored.common.web.AbstractBaseController;
 import cn.bored.domain.Apply;
 import cn.bored.domain.User;
 import cn.bored.service.consumer.apply.consumer.ApplyConsumerService;
-import cn.bored.service.provider.apply.service.ApplyService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
-
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -48,24 +44,22 @@ public class ApplyController extends AbstractBaseController<Apply> {
     public AbstractBaseResult add(Apply apply){
         User user = ConsumerConstant.getUser(request);
         if(user==null)return userError();
+        apply.setFromUser(user.getId());
         String add = applyConsumerService.add(apply);
-        return add==null?error("操作失败"):success();
+        return add==null?error("申请好友失败"):success();
     }
-    @GetMapping("/del")
-    public String del(long id){
-        Apply apply = new Apply();
-        apply.setId(id);
-        int del = applyService.delByID(apply);
-        return del>0?"ok":null;
+    @GetMapping("/del/{id}")
+    public AbstractBaseResult del(@PathVariable long id){
+        String del = applyConsumerService.del(id);
+        //此操作会在好友同意添加为好友（节省数据库资源删除数据）
+        return del==null?error("添加好友失败！"):success();
     }
     //拒绝添加好友
-    @GetMapping("/update")
-    public String update(long id){
-        Apply apply = new Apply();
-        apply.setId(id);
-        apply.setApplyDate(new Date());
-        apply.setStatus(2);
-        int update = applyService.updateByPrimaryKeySelective(apply);
-        return update>0?"ok":null;
+    @GetMapping("/update/{id}")
+    public AbstractBaseResult update(@PathVariable  long id){
+        User user = ConsumerConstant.getUser(request);
+        if(user==null)return userError();
+        String update = applyConsumerService.update(id);
+        return update==null?error("拒绝好友失败！"):success();
     }
 }

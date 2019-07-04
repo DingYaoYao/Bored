@@ -11,11 +11,13 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  * @author: hanghang
  * @create: 2019-07-03 18:34
  **/
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"cn.bored.common","cn.bored.service.consumer.apply"})
 @EnableDiscoveryClient
-@EnableFeignClients
+@EnableFeignClients(basePackages = {"cn.bored.common","cn.bored.service.consumer.apply"})
 public class BoredServiceConsumerApplyApplication {
+
     public static void main(String[] args) {
+
         SpringApplication.run(BoredServiceConsumerApplyApplication.class,args);
     }
 }

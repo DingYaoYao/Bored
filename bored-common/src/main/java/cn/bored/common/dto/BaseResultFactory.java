@@ -88,7 +88,7 @@ public class BaseResultFactory<T extends AbstractBaseDomain> {
             return new ErrorResult(code, title, null);
         }
     }
-    public AbstractBaseResult build( String detail) {
+    public AbstractBaseResult build(String detail) {
      return  new ErrorResult(detail);
     }
 

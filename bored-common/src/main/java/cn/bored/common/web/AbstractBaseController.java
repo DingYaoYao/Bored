@@ -83,7 +83,7 @@ public abstract class AbstractBaseController<T extends AbstractBaseDomain> {
     //执行失败，状态码为203
     protected AbstractBaseResult error(String detail) {
         // return error(HttpStatus.UNAUTHORIZED.value(), title, detail);
-        return error(detail);
+        return BaseResultFactory.getInstance(response).build(detail);
     }
     /**
      * 请求失败
@@ -91,7 +91,7 @@ public abstract class AbstractBaseController<T extends AbstractBaseDomain> {
      */
     protected AbstractBaseResult userError() {
         // return error(HttpStatus.UNAUTHORIZED.value(), title, detail);
-        return error(201, "", "用户没登陆");
+        return error(201, "用户没登陆", "");
     }
     /**
      * 请求失败
@@ -99,7 +99,7 @@ public abstract class AbstractBaseController<T extends AbstractBaseDomain> {
      */
     protected AbstractBaseResult sentinelError() {
         // return error(HttpStatus.UNAUTHORIZED.value(), title, detail);
-        return error(202, "", "熔断异常，请刷新重试");
+        return error(202, "熔断异常，请刷新重试", "");
     }
     /**
      * 请求失败

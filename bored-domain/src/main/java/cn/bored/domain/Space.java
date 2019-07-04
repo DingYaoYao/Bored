@@ -1,9 +1,12 @@
 package cn.bored.domain;
 
+import lombok.EqualsAndHashCode;
+
 import javax.persistence.*;
 import java.util.Date;
 
 @Table(name = "space")
+@EqualsAndHashCode(callSuper=false)
 public class Space extends BaseEntity {
 
 

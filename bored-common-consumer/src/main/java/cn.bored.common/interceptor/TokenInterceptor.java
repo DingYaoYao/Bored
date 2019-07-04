@@ -38,15 +38,15 @@ public class TokenInterceptor implements HandlerInterceptor {
             User user=null;
 
             //判断缓存没有用户
-            if(StringUtils.isEmpty(token)){
+            if(StringUtils.isEmpty(userString)){
 
                 //从数据库查询得到用户，
                  user=userConsumerService.getUserByToken(token);
                  if(StringUtils.isEmpty(user)){
-
-                     System.out.println("");
+                       response.getWriter().write("用户未登录，请获得用户标识.如：bored:token1");
                      return false;
                  }
+                redisConsumerService.set2(token,JsonUtils.objectToJson(user));
                 session.setAttribute(ConsumerConstant.SESSION_USER,user);
                 return true;
             }
@@ -56,6 +56,8 @@ public class TokenInterceptor implements HandlerInterceptor {
             return true;
         }
         //重定向登录页
+        response.getWriter().write("用户未登录，请获得用户标识.如：bored:token1");
+
         return false;
     }
 

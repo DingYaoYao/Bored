@@ -32,10 +32,10 @@ public class ApplyController {
     }
 
     @PostMapping("/add")
-    public String add(Apply apply){
+    public String add(@RequestBody  Apply apply){
         apply.setApplyDate(new Date());
+        apply.setStatus(1);
         int add = applyService.add(apply);
-        System.out.println(add>0?"ok":null);
         return add>0?"ok":null;
     }
     @GetMapping("/del")

@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
  **/
 @FeignClient(value = "bored-service-provider-userupdate",fallback = UserConsumerServiceFallback.class)
 public interface UserConsumerService {
-
-    @GetMapping("/getUserByToken")
+    @GetMapping("/user/getUserByToken")
      User getUserByToken(@RequestParam  String token);
 }

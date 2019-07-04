@@ -1,9 +1,12 @@
 package cn.bored.domain;
 
+import lombok.EqualsAndHashCode;
+
 import javax.persistence.*;
 import java.util.Date;
 
 @Table(name = "groupchat")
+@EqualsAndHashCode(callSuper=false)
 public class Groupchat extends BaseEntity {
 
 

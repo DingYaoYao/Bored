@@ -27,6 +27,12 @@ spring:
             - Path=/api/user/**
           filters:
             - StripPrefix=1
+        - id: BORED-SERVICE-CONSUMER-APPLY
+          uri: lb://bored-service-consumer-apply
+          predicates:
+            - Path=/api/apply/**
+          filters:
+            - StripPrefix=1
 
 
 server:

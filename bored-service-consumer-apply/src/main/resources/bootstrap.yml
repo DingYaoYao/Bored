@@ -9,6 +9,7 @@ feign:
   sentinel:
     enabled: true
 
+
 server:
   port: 9021
 

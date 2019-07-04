@@ -1,11 +1,14 @@
 package cn.bored.domain;
 
+import lombok.EqualsAndHashCode;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Table(name = "cities")
+@EqualsAndHashCode(callSuper=false)
 public class Cities extends BaseEntity {
     /**
      * 主键

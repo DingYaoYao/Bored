@@ -26,6 +26,7 @@ public class UserController extends AbstractBaseController<User> {
 
     @GetMapping("/getUserByToken")
     public User getUserByToken(String token){
+
         return userService.getUserByToken(token);
     }
 

@@ -2,7 +2,8 @@ package cn.bored.common.service;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 /**
  * @description
@@ -13,15 +14,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public interface RedisConsumerService {
 
     @GetMapping("/redis/set")
-     String set(String key,String value,int second);
+     String set(@RequestParam  String key, @RequestParam  String value, @RequestParam  int second);
 
      @GetMapping("/redis/set2")
-     String set2(String key,String value);
+     String set2(@RequestParam String key,@RequestParam String value);
 
     @GetMapping("/redis/get")
-     String get(String key);
+     String get(@RequestParam String key);
 
     @GetMapping("/redis/del")
-     String del(String key,String value);
+     String del(@RequestParam String key,@RequestParam String value);
 
 }

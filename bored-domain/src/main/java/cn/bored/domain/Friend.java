@@ -1,9 +1,12 @@
 package cn.bored.domain;
 
+import lombok.EqualsAndHashCode;
+
 import javax.persistence.*;
 import java.util.Date;
 
 @Table(name = "friend")
+@EqualsAndHashCode(callSuper=false)
 public class Friend extends BaseEntity {
 
 

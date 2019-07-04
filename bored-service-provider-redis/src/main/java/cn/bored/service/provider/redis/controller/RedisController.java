@@ -24,7 +24,7 @@ public class RedisController {
     }
     @RequestMapping("/set2")
     public String set2(String key,String value){
-        redisService.set(key,value);
+        redisService.set(key,value,60*60*24);
         return "ok";
     }
     @RequestMapping("/get")
