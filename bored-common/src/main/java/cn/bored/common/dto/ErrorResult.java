@@ -29,6 +29,9 @@ public class ErrorResult extends AbstractBaseResult {
      */
     private String detail;
 
-
+  public ErrorResult(String detail){
+      this.detail=detail;
+      this.code=203;
+  }
 
 }

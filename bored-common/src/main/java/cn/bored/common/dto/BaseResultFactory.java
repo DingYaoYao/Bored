@@ -88,6 +88,9 @@ public class BaseResultFactory<T extends AbstractBaseDomain> {
             return new ErrorResult(code, title, null);
         }
     }
+    public AbstractBaseResult build( String detail) {
+     return  new ErrorResult(detail);
+    }
 
     /**
      * 初始化 HttpServletResponse

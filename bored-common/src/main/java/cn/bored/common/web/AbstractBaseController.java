@@ -80,6 +80,11 @@ public abstract class AbstractBaseController<T extends AbstractBaseDomain> {
         // return error(HttpStatus.UNAUTHORIZED.value(), title, detail);
        return error(HttpStatus.OK.value(), title, detail);
     }
+    //执行失败，状态码为203
+    protected AbstractBaseResult error(String detail) {
+        // return error(HttpStatus.UNAUTHORIZED.value(), title, detail);
+        return error(detail);
+    }
     /**
      * 请求失败
      * @return

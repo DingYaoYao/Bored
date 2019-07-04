@@ -49,7 +49,7 @@ public class ApplyController extends AbstractBaseController<Apply> {
         User user = ConsumerConstant.getUser(request);
         if(user==null)return userError();
         String add = applyConsumerService.add(apply);
-        return add==null?error("","操作失败"):success();
+        return add==null?error("操作失败"):success();
     }
     @GetMapping("/del")
     public String del(long id){

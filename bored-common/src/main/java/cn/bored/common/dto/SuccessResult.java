@@ -20,10 +20,10 @@ import java.util.List;
 public class SuccessResult<T extends AbstractBaseDomain> extends AbstractBaseResult {
     private Links links;
     private List<DataBean> data;
-    private int code;
+    private int code=200;
 
     public SuccessResult(){
-        code=200;
+
     }
 
     /**
