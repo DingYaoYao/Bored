@@ -11,7 +11,7 @@ import java.util.Date;
 
 @Data
 @Table(name = "apply")
-public class Apply extends BaseEntity {
+public class Apply extends BaseEntity implements  Serializable{
 
     private static final long serialVersionUID = 2174158115699351071L;
     /**
