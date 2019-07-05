@@ -49,7 +49,7 @@ public class SuccessResult<T extends AbstractBaseDomain> extends AbstractBaseRes
         links.setSelf(self);
         links.setNext(self + "?page=" + next);
         links.setLast(self + "?page=" + last);
-
+       if(attributes!=null && attributes.size()>0)
         attributes.forEach(attribute -> createDataBean(self, attribute));
     }
 
