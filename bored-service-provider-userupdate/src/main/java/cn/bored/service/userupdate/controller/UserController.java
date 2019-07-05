@@ -1,11 +1,12 @@
 package cn.bored.service.userupdate.controller;
 
 import cn.bored.common.dto.AbstractBaseResult;
+import cn.bored.common.mapper.UserMapper;
 import cn.bored.common.service.TbUserService;
 import cn.bored.common.validator.BeanValidator;
 import cn.bored.common.web.AbstractBaseController;
 import cn.bored.domain.User;
-import cn.bored.mapper.UserMapper;
+
 import cn.bored.service.userupdate.service.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
