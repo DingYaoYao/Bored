@@ -34,7 +34,7 @@ public class UserController extends AbstractBaseController<User> {
     public AbstractBaseResult getuser(@PathVariable  Long userid){
         User user=userMapper.selectByPrimaryKey(userid);
         if(user==null){
-            return error("查询失败，用户Id不正确", null);
+            return error("查询失败，用户Id不正确");
         }
         user.setPassword("xuang");
         return success(request.getRequestURI(), user);
@@ -48,6 +48,7 @@ public class UserController extends AbstractBaseController<User> {
     @PostMapping(value ="/update")
     public AbstractBaseResult reg(@RequestBody User tbUser) {
         //查询token是否是这个user的
+
         // 数据校验
         String message = BeanValidator.validator(tbUser);
         if (StringUtils.isNotBlank(message)) {

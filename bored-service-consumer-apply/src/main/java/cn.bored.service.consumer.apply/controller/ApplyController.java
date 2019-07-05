@@ -45,12 +45,40 @@ public class ApplyController extends AbstractBaseController<Apply> {
         User user = ConsumerConstant.getUser(request);
         if(user==null)return userError();
         apply.setFromUser(user.getId());
+        /***
+         *
+         *
+         * Ding
+         *
+         * 一定注意申请人和被申请人不能申请两次   不然会在好友表出现两次，好友列表加载出来，申请列表加载出来全是一个人的
+         * 中间要进女性判断两个人是否申请过
+         *
+         *
+         *
+         *
+         *
+         */
         String add = applyConsumerService.add(apply);
         return add==null?error("申请好友失败"):success();
     }
     @GetMapping("/del/{id}")
     public AbstractBaseResult del(@PathVariable long id){
         String del = applyConsumerService.del(id);
+
+        /****
+         *
+         *
+         *
+         *
+         *Ding
+         *
+         * 当点击了同意  去操作Friends表  让两人成为好友后 在申请表中删除这条数据
+         *
+         *
+         *
+         *
+         *
+         */
         //此操作会在好友同意添加为好友（节省数据库资源删除数据）
         return del==null?error("添加好友失败！"):success();
     }

@@ -1,5 +1,4 @@
 package cn.bored.service.consumer.userupdate.controller;
-import cn.bored.common.dto.AbstractBaseResult;
 import cn.bored.domain.User;
 import cn.bored.service.consumer.userupdate.service.RegConsumerService;
 import org.springframework.beans.factory.annotation.Autowired;

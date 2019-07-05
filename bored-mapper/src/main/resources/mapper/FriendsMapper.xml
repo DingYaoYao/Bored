@@ -10,4 +10,17 @@
     <result column="friend_user_id" jdbcType="BIGINT" property="friendUserId" />
     <result column="friend_nicename" jdbcType="VARCHAR" property="friendNicename" />
   </resultMap>
+
+  <select id="getFriendsdDecided" resultMap="BaseResultMap">
+        SELECT * FROM friends
+    WHERE userid=#{id}
+    ORDER BY apply_date DESC
+  </select>
+  <delete id="Friendsdel" >
+DELETE
+FROM
+  friends
+WHERE userid = #{id} AND friend_user_id= #{Friendsid} OR userid = #{id} AND friend_user_id= #{Friendsid};
+</delete>
+
 </mapper>

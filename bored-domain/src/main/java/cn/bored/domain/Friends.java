@@ -1,9 +1,10 @@
 package cn.bored.domain;
 
+import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
-
+@Data
 @Table(name = "friends")
 @EqualsAndHashCode(callSuper=false)
 public class Friends extends BaseEntity {
