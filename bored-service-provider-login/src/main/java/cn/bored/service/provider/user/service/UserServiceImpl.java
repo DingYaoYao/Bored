@@ -1,8 +1,9 @@
 package cn.bored.service.provider.user.service;
 
+import cn.bored.common.mapper.UserMapper;
 import cn.bored.common.service.impl.BaseServiceImpl;
 import cn.bored.domain.User;
-import cn.bored.mapper.UserMapper;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

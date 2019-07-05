@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.bored.common.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="cn.bored.domain.User">
+    <!--
+      WARNING - @mbg.generated
+
+          <result column="accid" jdbcType="VARCHAR" property="accid" />
+    <result column="token" jdbcType="VARCHAR" property="token" />
+
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="niceName" jdbcType="VARCHAR" property="nicename" />
+    <result column="signature" jdbcType="VARCHAR" property="signature" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="birthday" jdbcType="TIMESTAMP" property="birthday" />
+    <result column="address_id" jdbcType="VARCHAR" property="addressId" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="accid" jdbcType="VARCHAR" property="accid" />
+    <result column="token" jdbcType="VARCHAR" property="token" />
+    <result column="picturepath" jdbcType="VARCHAR" property="picturepath" />
+    <result column="lately_login_date" jdbcType="TIMESTAMP" property="latelyLoginDate" />
+    <result column="loginStat" jdbcType="INTEGER" property="loginstat" />
+
+  </resultMap>
+
+  <select id="userlogin" resultMap="BaseResultMap">SELECT * FROM user WHERE id=#{id} AND password=#{password} </select>
+
+  <update id="updateLoginStat" >UPDATE userSETlately_login_date = #{latelyLoginDate},loginStat = #{loginStat}WHERE id = ${id} </update>
+
+
+  <select id="getUserByToken" resultMap="BaseResultMap">
+    SELECT * FROM USER WHERE token=#{token}
+  </select>
+
+</mapper>
