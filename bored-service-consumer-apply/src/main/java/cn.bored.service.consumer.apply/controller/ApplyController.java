@@ -49,7 +49,8 @@ public class ApplyController extends AbstractBaseController<Apply> {
          *
          *
          * Ding
-         *
+         * s
+         *select touser-di from apply where from-User=1  and status=1 and to-dromuser=2
          * 一定注意申请人和被申请人不能申请两次   不然会在好友表出现两次，好友列表加载出来，申请列表加载出来全是一个人的
          * 中间要进女性判断两个人是否申请过
          *
