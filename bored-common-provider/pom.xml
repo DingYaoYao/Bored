@@ -24,22 +24,10 @@
         </dependency>
         <!--common End-->
 
-        <!--Environment Begin-->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid-spring-boot-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.github.pagehelper</groupId>
-            <artifactId>pagehelper-spring-boot-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        <!--Environment End-->
 
+<!--redis begin-->
+
+        <!--redis end-->
 <!--Spring boot Begin-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

@@ -17,13 +17,7 @@ import java.util.Date;
  * @create: 2019-06-27 16:40
  **/
 @Data
-@EqualsAndHashCode(callSuper=false)
 public class BaseEntity extends AbstractBaseDomain implements Serializable{
-    /**
-     * id主键自增
-     */
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private static final long serialVersionUID = 1040389733453825245L;
 
 }

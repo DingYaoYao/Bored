@@ -11,10 +11,9 @@ import java.util.Date;
 
 @Data
 @Table(name = "apply")
-@EqualsAndHashCode(callSuper=false)
-public class Apply extends BaseEntity implements  Serializable  {
+public class Apply extends BaseEntity {
 
-//    private static final long serialVersionUID = 2174158115699351071L;
+    private static final long serialVersionUID = 2174158115699351071L;
     /**
      * 申请用户
      */
