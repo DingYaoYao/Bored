@@ -21,7 +21,10 @@
             <scope>test</scope>
         </dependency>
         <!-- Spring Boot End -->
-
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
         <!-- Projects Begin -->
         <dependency>
             <groupId>cn.bored</groupId>
