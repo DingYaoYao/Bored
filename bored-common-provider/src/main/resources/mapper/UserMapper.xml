@@ -35,4 +35,8 @@
     SELECT * FROM USER WHERE token=#{token}
   </select>
 
+  <select id="LoginStat" resultType="int">
+    SELECT loginstat FROM USER WHERE id=#{id}
+  </select>
+
 </mapper>

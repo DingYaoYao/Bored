@@ -27,4 +27,10 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserMapper> implement
         int result = userMapper.updateLoginStat(user);
         return result;
     }
+
+    @Override
+    public Integer LoginStat(Long id) {
+        Integer stat = userMapper.LoginStat(id);
+        return stat;
+    }
 }

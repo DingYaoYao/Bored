@@ -37,7 +37,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>cn.bored.service.consumer.user.BoredServiceConsumerUserApplication</mainClass>
+                    <mainClass>cn.bored.service.consumer.login.BoredServiceConsumerLoginApplication</mainClass>
                 </configuration>
             </plugin>
         </plugins>
