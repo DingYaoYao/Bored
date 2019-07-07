@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -36,15 +37,14 @@ public class FriendController extends AbstractBaseController<Friend> {
     }
 
     @PostMapping(value = "/add")
-    public int add(@RequestBody Friend friend){
-
-        return friendService.add(friend);
-
+    public int addFriend(@RequestBody Friend friend){
+        friend.setCreatetime(new Date());
+        return friendService.addFriend(friend);
     }
 
     @GetMapping(value = "/del")
-    public int del(Friend friend){
-         return friendService.delByID(friend);
+    public int del(int id){
+         return friendService.delFriend(id);
     }
 
     @GetMapping(value = "/updatelike")

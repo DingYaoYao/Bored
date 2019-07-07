@@ -40,15 +40,15 @@ public class friendConsumerControll extends AbstractBaseController<Friend> {
         return friends==null?sentinelError():success(friends);
     }
 
-    @PostMapping(value = "/add")
-    public AbstractBaseResult add(@RequestBody Friend friend){
-        int add = friendService.add(friend);
+    @PostMapping (value = "/add")
+    public AbstractBaseResult add(Friend friend){
+        int add = friendService.addFriend(friend);
         return add==0?error("添加朋友圈失败"):success();
     }
 
     @GetMapping(value = "/del")
-    public AbstractBaseResult del(@RequestBody Friend friend){
-        int del = friendService.del(friend);
+    public AbstractBaseResult del(int id){
+        int del = friendService.del(id);
         return del==0?error("删除朋友圈失败"):success();
     }
 

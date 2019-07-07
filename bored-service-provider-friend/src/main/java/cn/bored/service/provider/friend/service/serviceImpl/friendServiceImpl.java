@@ -33,4 +33,14 @@ public class friendServiceImpl extends BaseServiceImpl<Friend, FriendMapper> imp
         return friendMapper.updateFriendlike(userid);
     }
 
+    @Override
+    public int addFriend(Friend friend) {
+        return friendMapper.addFriend(friend);
+    }
+
+    @Override
+    public int delFriend(int id) {
+        return friendMapper.delFriend(id);
+    }
+
 }

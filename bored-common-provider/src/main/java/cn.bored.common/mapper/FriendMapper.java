@@ -15,4 +15,10 @@ public interface FriendMapper extends MyMapper<Friend> {
 
     //给朋友圈点赞
     int updateFriendlike(long userid);
+
+    //添加朋友圈
+    int addFriend(Friend friend);
+
+    //删除朋友圈
+    int delFriend(int id);
 }
