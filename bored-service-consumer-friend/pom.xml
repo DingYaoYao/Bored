@@ -28,6 +28,12 @@
             <artifactId>bored-common-consumer</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>cn.bored</groupId>
+            <artifactId>bored-service-api-friend</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
         <!-- Projects End -->
     </dependencies>
     <build>

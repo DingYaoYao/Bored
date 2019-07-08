@@ -16,6 +16,12 @@ spring:
       discovery:
         server-addr: localhost:8848
 
+logging:
+  level:
+    cn:
+      bored:
+        common:
+          mapper: debug
 
 server:
   port: 9031

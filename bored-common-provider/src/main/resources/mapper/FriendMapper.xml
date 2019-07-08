@@ -30,7 +30,7 @@
   <select id="MyfriendFriends" resultType="cn.bored.domain.Friend" resultMap="BaseResultMap">
     SELECT userid,
 	context,
-	Image_path,
+	`Image_path`,
 	createtime,
 	Video_path,
 	`like`
