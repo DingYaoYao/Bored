@@ -25,7 +25,8 @@ public class Friend extends BaseEntity {
     /**
      * 图片和视频的路径逗号分隔
      */
-    private String Image_path;
+    @Column(name = "imagepath")
+    private String imagepath;
 
 
 
@@ -38,11 +39,15 @@ public class Friend extends BaseEntity {
      * 预留的视频路径
      */
 
-    private String Video_path;
+    @Column(name = "videopath")
+    private String videopath;
 
     /**
      * 点赞
      */
     private Integer like;
+
+
+
 
 }
