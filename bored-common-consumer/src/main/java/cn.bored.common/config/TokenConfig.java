@@ -22,10 +22,12 @@ public class TokenConfig implements WebMvcConfigurer {
         return new TokenInterceptor();
     }
 
-    //添加拦截器，不拦截登陆注册
+    //添加拦截器，不拦截登陆注册,
+    // 想添加不拦截路径在 excludePathPatterns("/login/login","reg/useradd")追加
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(TokenInterceptor()).addPathPatterns("/**").excludePathPatterns("/login/login","reg/useradd");
+        registry.addInterceptor(TokenInterceptor()).addPathPatterns("/**").
+                excludePathPatterns("/login/login","reg/useradd");
     }
 
 }

@@ -29,7 +29,7 @@ public class TokenInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
          //获得请求头保存的用户标识
-        String token = request.getHeader("bored");
+        String token = request.getParameter("bored");
         HttpSession session = request.getSession();
 
         //标识不能为空

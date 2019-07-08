@@ -5,7 +5,7 @@ import cn.bored.common.utils.ConsumerConstant;
 import cn.bored.common.web.AbstractBaseController;
 import cn.bored.domain.Apply;
 import cn.bored.domain.User;
-import cn.bored.service.consumer.apply.consumer.ApplyConsumerService;
+import cn.bored.service.api.apply.ApplyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
@@ -21,14 +21,14 @@ import java.util.List;
 public class ApplyController extends AbstractBaseController<Apply> {
 
     @Autowired
-    private ApplyConsumerService applyConsumerService;
+    private ApplyService applyService;
 
     //查询带申请
     @GetMapping("/decided")
     AbstractBaseResult getApplydDecided(HttpServletRequest request){
         User user = ConsumerConstant.getUser(request);
         if(user==null)return userError();
-        List<Apply> applydDecided = applyConsumerService.getApplydDecided(user.getId());
+        List<Apply> applydDecided = applyService.getApplydDecided(user.getId());
         return  applydDecided==null?sentinelError():success(applydDecided);
     }
     //查询被拒绝的，默认只查询五条
@@ -36,7 +36,7 @@ public class ApplyController extends AbstractBaseController<Apply> {
     AbstractBaseResult getApplyDefeated(){
         User user = ConsumerConstant.getUser(request);
         if(user==null)return userError();
-        List<Apply> applyDefeated = applyConsumerService.getApplyDefeated(user.getId());
+        List<Apply> applyDefeated = applyService.getApplyDefeated(user.getId());
         return  applyDefeated==null?sentinelError():success(applyDefeated);
     }
 
@@ -59,12 +59,12 @@ public class ApplyController extends AbstractBaseController<Apply> {
          *
          *
          */
-        String add = applyConsumerService.add(apply);
+        Integer add = applyService.adds(apply);
         return add==null?error("申请好友失败"):success();
     }
     @GetMapping("/del/{id}")
     public AbstractBaseResult del(@PathVariable long id){
-        String del = applyConsumerService.del(id);
+        Integer del = applyService.del(id);
 
         /****
          *
@@ -88,7 +88,7 @@ public class ApplyController extends AbstractBaseController<Apply> {
     public AbstractBaseResult update(@PathVariable  long id){
         User user = ConsumerConstant.getUser(request);
         if(user==null)return userError();
-        String update = applyConsumerService.update(id);
+        Integer update = applyService.update(id);
         return update==null?error("拒绝好友失败！"):success();
     }
 }

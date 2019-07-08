@@ -1,6 +1,8 @@
-package cn.bored.service.consumer.apply.consumer;
+package cn.bored.service.api.apply;
 
 import cn.bored.domain.Apply;
+
+
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -11,7 +13,7 @@ import java.util.List;
  * @create: 2019-07-04 10:03
  **/
 @Component
-public class ApplyConsumerServiceImpl implements ApplyConsumerService {
+public class ApplyServiceFallback implements ApplyService {
     @Override
     public List<Apply> getApplydDecided(long id) {
         return null;
@@ -23,17 +25,17 @@ public class ApplyConsumerServiceImpl implements ApplyConsumerService {
     }
 
     @Override
-    public String add(Apply apply) {
+    public Integer adds(Apply apply) {
         return null;
     }
 
     @Override
-    public String del(long id) {
+    public Integer del(long id) {
         return null;
     }
 
     @Override
-    public String update(long id) {
+    public Integer update(long id) {
         return null;
     }
 }
