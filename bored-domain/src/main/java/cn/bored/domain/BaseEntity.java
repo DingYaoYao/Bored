@@ -18,6 +18,6 @@ import java.util.Date;
  **/
 @Data
 public class BaseEntity extends AbstractBaseDomain implements Serializable{
-    private static final long serialVersionUID = 1040389733453825245L;
+
 
 }
