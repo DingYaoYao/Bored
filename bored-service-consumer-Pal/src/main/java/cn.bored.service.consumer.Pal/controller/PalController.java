@@ -25,9 +25,11 @@ public class PalController extends AbstractBaseController<Friends> {
         //获取好友列表
     @GetMapping("/GetuserPal")
     public AbstractBaseResult GetuserPal(){
-        User user = ConsumerConstant.getUser(request);
-        if(user==null)return userError();
-        List<Friends> friends= palConsumerService.GetuserPal(user.getId());
+      //  User user = ConsumerConstant.getUser(request);
+      //  if(user==null)return userError();
+       // List<Friends> friends= palConsumerService.GetuserPal(user.getid());
+        Long i=Long.getLong("1");
+        List<Friends> friends= palConsumerService.GetuserPal(i);
         return friends.size()==0?error("用户没有好友，或执行失败"):success(friends);
     }
     //执行双向添加

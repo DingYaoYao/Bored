@@ -1,8 +1,9 @@
 package cn.bored.service.provider.pal.service;
 
+import cn.bored.common.mapper.FriendMapper;
+import cn.bored.common.mapper.FriendsMapper;
 import cn.bored.common.service.impl.BaseServiceImpl;
 import cn.bored.domain.Friends;
-import cn.bored.mapper.FriendsMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +13,7 @@ import java.util.List;
 public class PalServiceimpl extends BaseServiceImpl<Friends, FriendsMapper> implements  PalService<Friends>{
 
     @Autowired
-    private  FriendsMapper friendsMapper;
+    private FriendsMapper friendsMapper;
     @Override
     public List<Friends> getFriendsdDecided(long id) {
         return friendsMapper.getFriendsDecided(id);
