@@ -1,6 +1,6 @@
 spring:
   application:
-    name: bored-service-provider-pal
+    name: bored-service-provider-userupdate
   datasource:
     druid:
       url: jdbc:mysql://localhost:3306/bored?useUnicode=true&serverTimezone=GMT&characterEncoding=utf-8&useSSL=false
@@ -10,26 +10,13 @@ spring:
       min-idle: 1
       max-active: 20
       test-on-borrow: true
-      driver-class-name: com.mysql.cj.jdbc.Driver
+      driver-class-name: com.mysql.jdbc.Driver
   cloud:
     nacos:
       discovery:
         server-addr: localhost:8848
 
-  mybatis:
-    configuration:
-      cache-enabled: true
 
-  redis:
-    lettuce:
-      pool:
-        max-active: 8
-        max-idle: 8
-        max-wait: -1ms
-        min-idle: 0
-    sentinel:
-      master: mymaster
-      nodes: 129.28.157.98:26379, 129.28.157.98:26380, 129.28.157.98:26381
 server:
   port: 9031
 
