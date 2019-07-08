@@ -6,9 +6,12 @@ spring:
       discovery:
         server-addr: localhost:8848
 
+feign:
+  sentinel:
+    enabled: true
 
 server:
-  port: 8801
+  port: 8601
 
 management:
   endpoints:

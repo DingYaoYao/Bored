@@ -1,28 +1,43 @@
 package cn.bored.service.consumer.login.controller;
 
+import cn.bored.common.utils.JsonUtils;
+import cn.bored.service.api.login.LoginService;
 import cn.bored.common.dto.AbstractBaseResult;
+import cn.bored.common.service.RedisConsumerService;
 import cn.bored.common.web.AbstractBaseController;
 import cn.bored.domain.User;
-import cn.bored.service.consumer.login.service.LoginService;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.io.Serializable;
 
 @RestController
 @RequestMapping(value = "/login")
 public class loginConorller extends AbstractBaseController<User> {
 
+    @Data
+    public static class  test implements Serializable {
+        private static final long serialVersionUID = -697641090554208861L;
+        private String id;
+        private String password;
+    }
     @Autowired
     private LoginService loginService;
+    @Autowired
+    private RedisConsumerService redisConsumerService;
 
-    public AbstractBaseResult loginl(Long id, String password) {
-        User login1 = loginService.loginl(id,password);
-        if(login1 == null){
+    @GetMapping(value = "/login")
+    public AbstractBaseResult loginl(test test) {
+        User login = loginService.loginl(Long.valueOf(test.id),test.password);
+        if(login == null){
             return error("账号密码错误");
-        }else if(login1.getNicename().equals("")){
+        }else if(login.getNicename()==null || login.getNicename().equals("")){
             return error("该账户已登录");
         }
-        return success("",login1);
+        //redis保存用户
+       redisConsumerService.set2(login.getToken(), JsonUtils.objectToJson(login));
+        return success("",login);
     }
 
 

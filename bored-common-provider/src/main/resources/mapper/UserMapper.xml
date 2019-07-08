@@ -26,9 +26,13 @@
 
   </resultMap>
 
-  <select id="userlogin" resultMap="BaseResultMap">SELECT * FROM user WHERE id=#{id} AND password=#{password} </select>
+  <select id="userlogin" resultMap="BaseResultMap">
+    SELECT * FROM user WHERE id=#{id} AND password=#{password}
+  </select>
 
-  <update id="updateLoginStat" >UPDATE userSETlately_login_date = #{latelyLoginDate},loginStat = #{loginStat}WHERE id = ${id} </update>
+  <update id="updateLoginStat">
+    UPDATE bored.user SET lately_login_date = #{latelyLoginDate},loginstat = #{loginstat} WHERE id = #{id}
+  </update>
 
 
   <select id="getUserByToken" resultMap="BaseResultMap">
@@ -36,7 +40,7 @@
   </select>
 
   <select id="LoginStat" resultType="int">
-    SELECT loginstat FROM USER WHERE id=#{id}
+    SELECT loginStat FROM USER WHERE id=#{id}
   </select>
 
 </mapper>

@@ -28,6 +28,11 @@
             <artifactId>bored-common-provider</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
+        <dependency>
+            <groupId>cn.bored</groupId>
+            <artifactId>bored-service-api-login</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
         <!-- Projects End -->
     </dependencies>
     <build>
@@ -36,7 +41,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>cn.bored.service.provider.user.BoredServicveProviderUserApplication</mainClass>
+                    <mainClass>cn.bored.service.provider.user.BoredServicveProviderLoginApplication</mainClass>
                 </configuration>
             </plugin>
         </plugins>
