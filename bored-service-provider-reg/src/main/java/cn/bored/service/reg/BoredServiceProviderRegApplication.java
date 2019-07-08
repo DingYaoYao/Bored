@@ -6,7 +6,7 @@ import tk.mybatis.spring.annotation.MapperScan;
 
 @SpringBootApplication(scanBasePackages = "cn.bored")
 @EnableDiscoveryClient
-@MapperScan(basePackages = "cn.bored.mapper")
+@MapperScan(basePackages = "cn.bored.common.mapper")
 public class BoredServiceProviderRegApplication {
     public static void main(String[] args) {
         SpringApplication.run(BoredServiceProviderRegApplication.class, args);

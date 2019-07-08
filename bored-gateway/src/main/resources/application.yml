@@ -33,7 +33,18 @@ spring:
             - Path=/api/apply/**
           filters:
             - StripPrefix=1
-
+        - id: BORED-SERVICE=CONSUMER-LOGIN
+          uri: lb://bored-service-consumer-login
+          predicates:
+            - Path=/api/login/**
+          filters:
+            - StripPrefix=1
+        - id: BORED-SERVICE=CONSUMER-REG
+          uri: lb://bored-service-consumer-reg
+          predicates:
+            - Path=/api/reg/**
+          filters:
+            - StripPrefix=1
 
 server:
   port: 9000

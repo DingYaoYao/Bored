@@ -93,6 +93,7 @@ public abstract class AbstractBaseController<T extends AbstractBaseDomain> {
         // return error(HttpStatus.UNAUTHORIZED.value(), title, detail);
         return error(201, "用户没登陆", "");
     }
+
     /**
      * 请求失败
      * @return

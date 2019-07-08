@@ -10,7 +10,7 @@ spring:
       min-idle: 1
       max-active: 20
       test-on-borrow: true
-      driver-class-name: com.mysql.cj.jdbc.Driver
+      driver-class-name: com.mysql.jdbc.Driver
   cloud:
     nacos:
       discovery:
@@ -29,3 +29,5 @@ management:
     web:
       exposure:
         include: "*"
+
+

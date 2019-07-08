@@ -1,16 +1,17 @@
 package cn.bored.service.reg.service.impl;
 
 import cn.bored.common.dto.AbstractBaseDomain;
+import cn.bored.common.mapper.UserMapper;
 import cn.bored.common.service.impl.BaseServiceImpl;
 import cn.bored.domain.User;
-import cn.bored.mapper.UserMapper;
+
 import cn.bored.service.reg.service.RegService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 @Service
-public class RegServiceimpl extends BaseServiceImpl<User,UserMapper> implements RegService<User>{
+public class RegServiceimpl extends BaseServiceImpl<User, UserMapper> implements RegService<User>{
     @Autowired
     private UserMapper userMapper;
     public User save(User domain) {

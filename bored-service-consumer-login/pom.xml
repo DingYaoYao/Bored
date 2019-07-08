@@ -29,6 +29,11 @@
             <artifactId>bored-common-consumer</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
+        <dependency>
+            <groupId>cn.bored</groupId>
+            <artifactId>bored-service-api-login</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
         <!-- Projects End -->
     </dependencies>
     <build>
@@ -37,7 +42,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>cn.bored.service.consumer.user.BoredServiceConsumerUserApplication</mainClass>
+                    <mainClass>cn.bored.service.consumer.login.BoredServiceConsumerLoginApplication</mainClass>
                 </configuration>
             </plugin>
         </plugins>

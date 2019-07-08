@@ -23,16 +23,17 @@ public class friendConsumerServiceFallback extends AbstractBaseController implem
     }
 
     @Override
-    public int add(Friend friend) {
-        System.out.println("进入熔断//////////////////////////////////////////////////////");
+    public int addFriend(Friend friend) {
         return 0;
     }
 
+
     @Override
-    public int del(Friend friend) {
-        System.out.println("进入熔断//////////////////////////////////////////////////////");
+    public int del(int id) {
+        System.out.println("进入熔断////////////////////////////////////////");
         return 0;
     }
+
 
     @Override
     public int updatelike(long userid) {

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.bored.common.mapper.FriendMapper">
+  <resultMap id="BaseResultMap" type="cn.bored.domain.Friend">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <result column="userid" jdbcType="BIGINT" property="userid" />
+    <result column="context" jdbcType="VARCHAR" property="context" />
+    <result column="Image_path" jdbcType="VARCHAR" property="imagePath" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="Video——path" jdbcType="VARCHAR" property="video——path" />
+    <result column="like" jdbcType="INTEGER" property="like" />
+  </resultMap>
+
+  <!--查询自己的朋友圈信息-->
+  <select id="MyFriends" resultType="cn.bored.domain.Friend" resultMap="BaseResultMap">
+    SELECT 	userid,
+	context,
+	Image_path,
+	createtime,
+	Video_path,
+	`like`
+	FROM
+	friend
+	WHERE userid=#{userid}
+  </select>
+
+  <!--查询自己朋友的朋友圈信息,根据时间降序-->
+  <select id="MyfriendFriends" resultType="cn.bored.domain.Friend" resultMap="BaseResultMap">
+    SELECT userid,
+	context,
+	Image_path,
+	createtime,
+	Video_path,
+	`like`
+	FROM
+	friend
+	WHERE userid IN
+	(SELECT friend_user_id
+	FROM friends
+	WHERE userid=#{userid} AND friend_user_id NOT IN (
+	SELECT userid FROM blacklist WHERE fouserid=#{userid}
+	))
+	ORDER BY createtime DESC
+  </select>
+
+	<!--给朋友圈点赞-->
+	<update id="updateFriendlike">
+		UPDATE friend
+		SET
+		`like` = `like`+1
+		WHERE
+		userid = #{userid}
+	</update>
+
+	<!--添加朋友圈-->
+	<insert id="addFriend">
+		INSERT INTO friend
+		(userid,
+		context,
+		Image_path,
+		createtime,
+		Video_path,
+		`like`
+		)
+		VALUES
+		( #{userid},
+		#{context},
+		#{Image_path},
+		#{createtime},
+		#{Video_path},
+		#{like}
+		)
+	</insert>
+
+	<!--删除朋友圈-->
+	<delete id="delFriend">
+		DELETE FROM friend
+		WHERE
+		id = #{id}
+	</delete>
+</mapper>

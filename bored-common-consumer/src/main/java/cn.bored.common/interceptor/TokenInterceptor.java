@@ -6,6 +6,7 @@ import cn.bored.common.service.RedisConsumerService;
 import cn.bored.common.service.UserConsumerService;
 import cn.bored.common.utils.ConsumerConstant;
 import cn.bored.common.utils.JsonUtils;
+import cn.bored.common.web.AbstractBaseController;
 import cn.bored.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
@@ -28,7 +29,7 @@ public class TokenInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
          //获得请求头保存的用户标识
-        String token = request.getParameter("bored");
+        String token = request.getHeader("bored");
         HttpSession session = request.getSession();
 
         //标识不能为空
@@ -43,7 +44,7 @@ public class TokenInterceptor implements HandlerInterceptor {
                 //从数据库查询得到用户，
                  user=userConsumerService.getUserByToken(token);
                  if(StringUtils.isEmpty(user)){
-                       response.getWriter().write("用户未登录，请获得用户标识.如：bored:token1");
+                       response.getWriter().write("{code:201,detail:请登录}");
                      return false;
                  }
                 redisConsumerService.set2(token,JsonUtils.objectToJson(user));
@@ -56,7 +57,7 @@ public class TokenInterceptor implements HandlerInterceptor {
             return true;
         }
         //重定向登录页
-        response.getWriter().write("用户未登录，请获得用户标识.如：bored:token1");
+        response.getWriter().write("{code:201,detail:请登录}");
 
         return false;
     }

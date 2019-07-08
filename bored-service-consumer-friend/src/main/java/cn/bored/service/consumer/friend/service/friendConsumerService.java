@@ -19,10 +19,10 @@ public interface  friendConsumerService {
     public List<Friend> myfriendFriends(@RequestParam long userid);
 
     @PostMapping(value = "/friend/add")
-    public int add(@RequestBody Friend friend);
+    public int addFriend(@RequestBody Friend friend);
 
     @GetMapping(value = "/friend/del")
-    public int del(@RequestBody Friend friend);
+    public int del(@RequestParam int id);
 
     @GetMapping(value = "/friend/updatelike")
     public int updatelike(@RequestParam long userid);

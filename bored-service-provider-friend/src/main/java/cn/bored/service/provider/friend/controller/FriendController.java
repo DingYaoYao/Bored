@@ -4,12 +4,10 @@ import cn.bored.common.web.AbstractBaseController;
 import cn.bored.domain.Friend;
 import cn.bored.service.provider.friend.service.friendService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -39,15 +37,14 @@ public class FriendController extends AbstractBaseController<Friend> {
     }
 
     @PostMapping(value = "/add")
-    public int add(Friend friend){
-
-        return friendService.add(friend);
-
+    public int addFriend(@RequestBody Friend friend){
+        friend.setCreatetime(new Date());
+        return friendService.addFriend(friend);
     }
 
     @GetMapping(value = "/del")
-    public int del(Friend friend){
-         return friendService.delByID(friend);
+    public int del(int id){
+         return friendService.delFriend(id);
     }
 
     @GetMapping(value = "/updatelike")
