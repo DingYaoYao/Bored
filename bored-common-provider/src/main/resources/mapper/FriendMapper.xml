@@ -17,9 +17,9 @@
   <select id="MyFriends" resultType="cn.bored.domain.Friend" resultMap="BaseResultMap">
     SELECT 	userid,
 	context,
-	Image_path,
+	imagepath,
 	createtime,
-	Video_path,
+	videopath,
 	`like`
 	FROM
 	friend
@@ -30,9 +30,9 @@
   <select id="MyfriendFriends" resultType="cn.bored.domain.Friend" resultMap="BaseResultMap">
     SELECT userid,
 	context,
-	Image_path,
+	imagepath,
 	createtime,
-	Video_path,
+	videopath,
 	`like`
 	FROM
 	friend
@@ -59,17 +59,17 @@
 		INSERT INTO friend
 		(userid,
 		context,
-		Image_path,
+		imagepath,
 		createtime,
-		Video_path,
+		videopath,
 		`like`
 		)
 		VALUES
 		( #{userid},
 		#{context},
-		#{Image_path},
+		#{imagepath},
 		#{createtime},
-		#{Video_path},
+		#{videopath},
 		#{like}
 		)
 	</insert>

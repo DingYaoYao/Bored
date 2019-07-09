@@ -1,4 +1,4 @@
-package cn.bored.service.consumer.friend.service;
+package cn.bored.service.api.friend;
 
 import cn.bored.domain.Friend;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
-@FeignClient(value = "bored-service-provider-friend",fallback = friendConsumerServiceFallback.class)
-public interface  friendConsumerService {
+@FeignClient(value = "bored-service-provider-friend",fallback =friendServiceFallback.class )
+public interface friendService {
 
     @GetMapping(value = "/friend/myfriend")
     public List<Friend> myfriend(@RequestParam long userid);

@@ -5,21 +5,18 @@ import cn.bored.common.utils.ConsumerConstant;
 import cn.bored.common.web.AbstractBaseController;
 import cn.bored.domain.Friend;
 import cn.bored.domain.User;
-import cn.bored.service.consumer.friend.service.friendConsumerService;
+import cn.bored.service.api.friend.friendService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 
 @RestController
 @RequestMapping(value = "friend")
 public class friendConsumerControll extends AbstractBaseController<Friend> {
 
     @Autowired
-    private friendConsumerService friendService;
+    private friendService friendService;
 
     @GetMapping(value = "/myfriend")
     public AbstractBaseResult myfriend(HttpServletRequest request){

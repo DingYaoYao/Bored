@@ -24,6 +24,12 @@
         <!-- Spring Boot End -->
 
 
+        <dependency>
+            <groupId>cn.bored</groupId>
+            <artifactId>bored-service-api-friend</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
         <!-- Projects Begin -->
         <dependency>
             <groupId>cn.bored</groupId>
