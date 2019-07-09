@@ -1,5 +1,6 @@
 package cn.bored.service.provider.apply.service;
 
+import cn.bored.common.context.ApplicationContextHolder;
 import cn.bored.common.mapper.ApplyMapper;
 import cn.bored.common.service.impl.BaseServiceImpl;
 import cn.bored.domain.Apply;
@@ -24,6 +25,8 @@ public class ApplyServiceImpl extends BaseServiceImpl<Apply, ApplyMapper> implem
 
     @Autowired
     private ApplyMapper applyMapper;
+    @Autowired
+    private ApplicationContextHolder applicationContextHolder;
 
     //查询带申请
     @GetMapping("/decided/{id}")

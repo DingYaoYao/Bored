@@ -11,7 +11,7 @@ import tk.mybatis.spring.annotation.MapperScan;
  * @author: hanghang
  * @create: 2019-07-03 07:44
  **/
-@SpringBootApplication(scanBasePackages = "cn.bored")
+@SpringBootApplication(scanBasePackages = {"cn.bored.service.provider.apply","cn.bored.common"})
 @MapperScan("cn.bored.common.mapper")
 @EnableDiscoveryClient
 @Transactional(readOnly = true)

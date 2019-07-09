@@ -14,7 +14,7 @@
   </resultMap>
 
   <!--总结  首先别人发给我的，我发送给别人的，-->
-  <select id="getApplydDecided" resultMap="BaseResultMap">
+  <select id="getApplydDecided" resultType="cn.bored.domain.Apply">
     (SELECT * FROM apply
     WHERE to_user=#{id} AND STATUS=1
     ORDER BY apply_date DESC)
@@ -24,7 +24,7 @@
     ORDER BY apply_date DESC)
   </select>
   <!--查询我被拒绝的-->
-  <select id="getApplyDefeated" resultMap="BaseResultMap">
+  <select id="getApplyDefeated" resultType="cn.bored.domain.Apply">
     SELECT * FROM apply
     WHERE STATUS =2 AND from_user=#{id}
     ORDER BY apply_date DESC

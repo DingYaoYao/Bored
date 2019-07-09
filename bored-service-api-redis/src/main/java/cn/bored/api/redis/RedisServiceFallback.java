@@ -1,15 +1,14 @@
-package cn.bored.common.service;
+package cn.bored.api.redis;
 
-import org.springframework.boot.autoconfigure.cache.CacheProperties;
 import org.springframework.stereotype.Component;
 
 /**
  * @description
  * @author: hanghang
- * @create: 2019-07-03 12:08
+ * @create: 2019-07-08 22:18
  **/
 @Component
-public class RedisConsumerServiceFallback  implements RedisConsumerService {
+public class RedisServiceFallback  implements RedisService{
     @Override
     public String set(String key, String value, int second) {
         return null;
@@ -26,7 +25,7 @@ public class RedisConsumerServiceFallback  implements RedisConsumerService {
     }
 
     @Override
-    public String del(String key, String value) {
+    public String del(String key) {
         return null;
     }
 }

@@ -1,8 +1,6 @@
 package cn.bored.common.interceptor;
 
-
-
-import cn.bored.common.service.RedisConsumerService;
+import cn.bored.api.redis.RedisService;
 import cn.bored.common.service.UserConsumerService;
 import cn.bored.common.utils.ConsumerConstant;
 import cn.bored.common.utils.JsonUtils;
@@ -24,7 +22,7 @@ public class TokenInterceptor implements HandlerInterceptor {
     @Autowired
     private UserConsumerService userConsumerService;
     @Autowired
-    private RedisConsumerService redisConsumerService;
+    private RedisService redisService;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -35,7 +33,7 @@ public class TokenInterceptor implements HandlerInterceptor {
         //标识不能为空
         if(!StringUtils.isEmpty(token)){
 
-            String userString = redisConsumerService.get(token);
+            String userString = redisService.get(token);
             User user=null;
 
             //判断缓存没有用户
@@ -47,7 +45,7 @@ public class TokenInterceptor implements HandlerInterceptor {
                        response.getWriter().write("{code:201,detail:请登录}");
                      return false;
                  }
-                redisConsumerService.set2(token,JsonUtils.objectToJson(user));
+                redisService.set2(token,JsonUtils.objectToJson(user));
                 session.setAttribute(ConsumerConstant.SESSION_USER,user);
                 return true;
             }

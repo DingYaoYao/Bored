@@ -1,6 +1,7 @@
 package cn.bored.common.context;
 
 
+
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,7 +10,6 @@ import org.springframework.beans.factory.DisposableBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
-
 
 /**
  * @description
@@ -73,7 +73,6 @@ public class ApplicationContextHolder implements ApplicationContextAware, Dispos
      * @throws BeansException
      */
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        System.out.println("ssfs");
         ApplicationContextHolder.applicationContext = applicationContext;
     }
 
@@ -81,7 +80,6 @@ public class ApplicationContextHolder implements ApplicationContextAware, Dispos
      * 断言 Context 已经注入
      */
     private static void assertContextInjected() {
-        System.out.println("sdfsd");
         Validate.validState(applicationContext != null, "applicationContext 属性未注入，请在 spring-context.xml 配置中定义 ApplicationContextHolder");
     }
 }

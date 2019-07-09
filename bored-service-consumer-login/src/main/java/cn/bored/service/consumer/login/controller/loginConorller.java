@@ -1,9 +1,9 @@
 package cn.bored.service.consumer.login.controller;
 
+import cn.bored.api.redis.RedisService;
 import cn.bored.common.utils.JsonUtils;
 import cn.bored.service.api.login.LoginService;
 import cn.bored.common.dto.AbstractBaseResult;
-import cn.bored.common.service.RedisConsumerService;
 import cn.bored.common.web.AbstractBaseController;
 import cn.bored.domain.User;
 import lombok.Data;
@@ -25,7 +25,7 @@ public class loginConorller extends AbstractBaseController<User> {
     @Autowired
     private LoginService loginService;
     @Autowired
-    private RedisConsumerService redisConsumerService;
+    private RedisService redisService;
 
     @GetMapping(value = "/login")
     public AbstractBaseResult loginl(test test) {
@@ -36,7 +36,7 @@ public class loginConorller extends AbstractBaseController<User> {
             return error("该账户已登录");
         }
         //redis保存用户
-       redisConsumerService.set2(login.getToken(), JsonUtils.objectToJson(login));
+        redisService.set2(login.getToken(), JsonUtils.objectToJson(login));
         return success("",login);
     }
 

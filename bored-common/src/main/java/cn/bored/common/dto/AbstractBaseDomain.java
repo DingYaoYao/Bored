@@ -22,6 +22,7 @@ import java.util.Date;
 @Data
 public abstract class AbstractBaseDomain implements Serializable {
 
+    private static final long serialVersionUID = 1739981318655410197L;
     /**
      * 该注解需要保留，用于 tk.mybatis 回显 ID
      */
