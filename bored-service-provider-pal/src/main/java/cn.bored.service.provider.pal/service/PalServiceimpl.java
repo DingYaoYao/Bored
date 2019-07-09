@@ -15,24 +15,27 @@ public class PalServiceimpl extends BaseServiceImpl<Friends, FriendsMapper> impl
     @Autowired
     private FriendsMapper friendsMapper;
     @Override
-    public List<Friends> getFriendsdDecided(long id) {
+    public List<Friends> getFriendsdDecided(Long id) {
         return friendsMapper.getFriendsDecided(id);
     }
     @Override
-    public int Friendsadd(Long id, String Friendsid) {
+    public int Friendsadd(Long id, Long Friendsid) {
         Friends friends=new Friends();
-        friends.setId(id);
-        friends.setFriendUserId(Friendsid);
+        friends.setUserid(id);
+        friends.setFriendUserId(String.valueOf(Friendsid));
         int resut= friendsMapper.insert(friends);
         Friends friendsa=new Friends();
-        long l = Long.parseLong(Friendsid);
-        friendsa.setId(l);
-        friendsa.setFriendUserId(id.toString());
+        friendsa.setUserid(Friendsid);
+        friendsa.setFriendUserId(String.valueOf(id));
         int resuat= friendsMapper.insert(friendsa);
-        return resut+resuat;
+        int a=resut+resuat;
+        return a;
     }
     @Override
-    public int Friendsdel(Long id, String Friendsid) {
-        return friendsMapper.Friendsdel(id,Friendsid);
+    public int Friendsdel(Long id, Long Friendsid) {
+            int resoulta=friendsMapper.Friendsdel(Friendsid,id);
+        int resoultb=friendsMapper.Friendsdel(id,Friendsid);
+        int a=resoulta+resoultb;
+        return a;
     }
 }

@@ -1,6 +1,6 @@
 spring:
   application:
-    name: bored-service-provider-userupdate
+    name: bored-service-provider-Pal
   datasource:
     druid:
       url: jdbc:mysql://localhost:3306/bored?useUnicode=true&serverTimezone=GMT&characterEncoding=utf-8&useSSL=false

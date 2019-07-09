@@ -5,9 +5,9 @@ spring:
     nacos:
       discovery:
         server-addr: localhost:8848
-feign:
-  sentinel:
-    enabled: true
+#feign:
+#  sentinel:
+#    enabled: true
 
 
 server:

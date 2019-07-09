@@ -24,11 +24,11 @@ public class PalController {
         return palService.getFriendsdDecided(id);
     }
     @PostMapping("/addPal")
-    public int AddPAl(@RequestParam Long id,String Friendsid){
+    public int AddPAl(@RequestParam Long id,@RequestParam Long Friendsid){
         return  palService.Friendsadd(id,Friendsid);
     }
     @PostMapping("/delPal")
-    public int delPal(@RequestParam Long id,String Friendsid){
+    public int delPal(@RequestParam Long id,@RequestParam Long Friendsid){
         return  palService.Friendsdel(id,Friendsid);
     }
 
