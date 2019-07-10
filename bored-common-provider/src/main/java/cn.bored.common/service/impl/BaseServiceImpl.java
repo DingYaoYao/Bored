@@ -4,6 +4,7 @@ import cn.bored.common.service.BaseService;
 import cn.bored.domain.BaseEntity;
 import mapper.MyMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ import java.util.List;
  * @author: hanghang
  * @create: 2019-06-27 16:48
  **/
+
 public class BaseServiceImpl<T extends  BaseEntity,D extends MyMapper> implements BaseService<T> {
 
    @Autowired

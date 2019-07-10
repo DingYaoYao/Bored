@@ -4,13 +4,9 @@ import cn.bored.common.context.ApplicationContextHolder;
 import cn.bored.common.mapper.ApplyMapper;
 import cn.bored.common.service.impl.BaseServiceImpl;
 import cn.bored.domain.Apply;
-
-
 import cn.bored.service.api.apply.ApplyService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
-import tk.mybatis.mapper.entity.Example;
 
 import java.util.Date;
 import java.util.List;
@@ -25,15 +21,16 @@ public class ApplyServiceImpl extends BaseServiceImpl<Apply, ApplyMapper> implem
 
     @Autowired
     private ApplyMapper applyMapper;
-    @Autowired
-    private ApplicationContextHolder applicationContextHolder;
+
 
     //查询带申请
     @GetMapping("/decided/{id}")
     @Override
    public  List<Apply> getApplydDecided(@PathVariable long id){
+
         return applyMapper.getApplydDecided(id);
     }
+
     //查询被拒绝的，默认只查询五条
     @GetMapping("/defeated/{id}")
     @Override

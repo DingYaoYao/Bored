@@ -9,19 +9,13 @@
         <version>1.0.0-SNAPSHOT</version>
         <relativePath>../bored-dependencies/pom.xml</relativePath>
     </parent>
-
     <artifactId>bored-common-api</artifactId>
     <packaging>jar</packaging>
-
     <dependencies>
         <dependency>
             <groupId>cn.bored</groupId>
             <artifactId>bored-domain</artifactId>
             <version>${project.parent.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

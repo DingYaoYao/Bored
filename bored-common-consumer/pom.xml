@@ -14,41 +14,11 @@
     <packaging>jar</packaging>
 
     <dependencies>
-        <!--common Begin-->
-        <dependency>
-            <groupId>cn.bored</groupId>
-            <artifactId>bored-domain</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
-        <!--common End-->
-<!--Spring boot Begin-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
-        <!--Spring boot End-->
-        <!-- Spring Cloud Begin -->
-        <!--将配置放在nacos中是，加入jar-->
-        <!--<dependency>-->
-        <!--<groupId>org.springframework.cloud</groupId>-->
-        <!--<artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>-->
-        <!--</dependency>-->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-        </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
-        </dependency>
+
         <dependency>
             <groupId>cn.bored</groupId>
             <artifactId>bored-service-api-redis</artifactId>

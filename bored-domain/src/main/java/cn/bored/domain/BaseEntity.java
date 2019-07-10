@@ -17,6 +17,7 @@ import java.util.Date;
  * @create: 2019-06-27 16:40
  **/
 @Data
+@EqualsAndHashCode(callSuper=false)
 public class BaseEntity extends AbstractBaseDomain implements Serializable{
 
 

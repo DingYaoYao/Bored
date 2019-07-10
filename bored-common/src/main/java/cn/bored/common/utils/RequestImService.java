@@ -29,20 +29,23 @@ import java.util.UUID;
 public class RequestImService {
 
     public static void main(String[] args) {
-//        ImServiceDTO xuang = createACCID("xuang");
-//        System.out.println(xuang);
+        for (int i = 0; i <3 ; i++) {
+            ImServiceDTO xuang = createACCID("xuang2");
+            System.out.println(xuang);
+        }
+
 
 //        ImServiceDTO fa6f0 = refreshToken("fa6f0");
 //        System.out.println(fa6f0);
 
 //        ImServiceDTO fa6f0 = block("fa6f0");
 //        System.out.println(fa6f0);
-        ImServiceDTO fa6f0 = unBlock("fa6f0");
-        System.out.println(fa6f0);
+//        ImServiceDTO fa6f0 = unBlock("fa6f0");
+//        System.out.println(fa6f0);
     }
 
     //text file path
-    private static final String  filePath="C:\\Users\\35584\\Desktop\\";
+    private static final String  filePath="C:\\Users\\DELL\\Desktop\\";
     private static final String create=filePath+"create.txt";
     private static final String refresh=filePath+"refresh.txt";
     private static final String block=filePath+"block.txt";

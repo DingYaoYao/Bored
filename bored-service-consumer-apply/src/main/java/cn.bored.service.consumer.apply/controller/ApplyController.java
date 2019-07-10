@@ -6,9 +6,11 @@ import cn.bored.common.web.AbstractBaseController;
 import cn.bored.domain.Apply;
 import cn.bored.domain.User;
 import cn.bored.service.api.apply.ApplyService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -25,12 +27,15 @@ public class ApplyController extends AbstractBaseController<Apply> {
 
     //查询带申请
     @GetMapping("/decided")
-    AbstractBaseResult getApplydDecided(HttpServletRequest request){
+    AbstractBaseResult getApplydDecided(HttpServletRequest request, HttpServletResponse response){
+
+
         User user = ConsumerConstant.getUser(request);
         if(user==null)return userError();
         List<Apply> applydDecided = applyService.getApplydDecided(user.getId());
         return  applydDecided==null?sentinelError():success(applydDecided);
     }
+
     //查询被拒绝的，默认只查询五条
     @GetMapping("/defeated")
     AbstractBaseResult getApplyDefeated(){

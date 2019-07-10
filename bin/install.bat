@@ -10,13 +10,18 @@ cd ..
 cd bored-domain
 call mvn clean install
 
-cd ..
-cd bored-mapper
-call mvn clean install
 
 
 cd ..
 cd bored-common-provider
+call mvn clean install
+
+cd ..
+cd bored-common-api
+call mvn clean install
+
+cd ..
+cd bored-service-api-redis
 call mvn clean install
 
 cd ..
