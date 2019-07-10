@@ -8,7 +8,7 @@ import java.util.List;
 public interface FriendsMapper extends MyMapper<Friends> {
 
     //查询我的好友
-    List<Friends> getFriendsDecided(long id);
+    List<Friends> getFriendsDecided(Long id);
     //双向删除
-    int Friendsdel(Long id, String Friendsid);
+    int Friendsdel(Long id, Long Friendsid);
 }

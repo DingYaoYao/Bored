@@ -17,11 +17,11 @@ import java.util.List;
 @FeignClient(value = "bored-service-provider-Pal",fallback = PalConsumerServiceimpl.class)
 public interface PalConsumerService {
 
-    @GetMapping("/GetuserPal/{id}")
-    public List<Friends> GetuserPal( Long id);
-    @PostMapping("/addPal")
-    public int AddPAl(@RequestParam Long id, String Friendsid);
-    @PostMapping("/delPal")
-    public int delPal(@RequestParam Long id,String Friendsid);
+    @GetMapping("Pal/GetuserPal/{id}")
+    public List<Friends> GetuserPal(@PathVariable  Long id);
+    @PostMapping("Pal/addPal")
+    public int AddPAl(@RequestParam Long id,@RequestParam Long Friendsid);
+    @PostMapping("Pal/delPal")
+    public int delPal(@RequestParam Long id,@RequestParam Long Friendsid);
 
 }

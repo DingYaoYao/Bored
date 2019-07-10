@@ -12,12 +12,12 @@ public class PalConsumerServiceimpl implements  PalConsumerService {
     }
 
     @Override
-    public int AddPAl(Long id, String Friendsid) {
+    public int AddPAl(Long id, Long Friendsid) {
         return 0;
     }
 
     @Override
-    public int delPal(Long id, String Friendsid) {
+    public int delPal(Long id, Long Friendsid) {
         return 0;
     }
 }

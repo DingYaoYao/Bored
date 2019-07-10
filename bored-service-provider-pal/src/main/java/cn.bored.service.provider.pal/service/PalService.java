@@ -9,9 +9,9 @@ import java.util.List;
 
 public interface PalService<T extends BaseEntity> extends BaseService<T> {
     //查询一个用户的好友
-    List<Friends> getFriendsdDecided(long id);
+    List<Friends> getFriendsdDecided(Long id);
     //双向添加
-    int Friendsadd(Long id,String Friendsid);
+    int Friendsadd(Long id,Long Friendsid);
     //双向删除
-    int Friendsdel(Long id,String Friendsid);
+    int Friendsdel(Long id,Long Friendsid);
 }
