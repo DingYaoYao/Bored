@@ -19,7 +19,6 @@
             <groupId>cn.bored</groupId>
             <artifactId>bored-common-api</artifactId>
             <version>${project.parent.version}</version>
-            <scope>provided</scope>
         </dependency>
         <!--common End-->
         <dependency>
