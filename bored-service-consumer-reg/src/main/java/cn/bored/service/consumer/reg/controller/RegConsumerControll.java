@@ -27,8 +27,7 @@ public class RegConsumerControll {
     }
 
     @PostMapping("/useradd")
-    public String regz(@RequestBody  User tbUser){
-
+    public String regz( User tbUser){
         return regConsumerService.regz(tbUser);
     }
 }
