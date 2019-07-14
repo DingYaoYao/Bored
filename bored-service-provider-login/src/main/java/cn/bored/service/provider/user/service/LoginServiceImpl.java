@@ -27,6 +27,7 @@ public class LoginServiceImpl extends BaseServiceImpl<User, UserMapper> implemen
     @PostMapping(value = "/login")
     @Override
     public User loginl(Long id, String password) {
+        System.out.println("privoder log");
         User user;
         user = userMapper.userlogin(id, DigestUtils.md5DigestAsHex(password.getBytes()));
         if(!StringUtils.isEmpty(user)){

@@ -29,6 +29,7 @@ public class loginConorller extends AbstractBaseController<User> {
 
     @PostMapping(value = "/login")
     public DtoResult<User> loginl(test test) {
+        System.out.println("consumer log");
         User login = loginService.loginl(Long.valueOf(test.id),test.password);
         if(login == null){
             return error("账号密码错误");

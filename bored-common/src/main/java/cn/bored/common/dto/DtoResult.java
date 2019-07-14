@@ -10,7 +10,7 @@ import java.io.Serializable;
  * @create: 2019-07-14 10:39
  **/
 @Data
-public class DtoResult<T extends AbstractBaseDomain>  implements Serializable {
+public class DtoResult<T extends Object>  implements Serializable {
 
     private static final long serialVersionUID = 3503118331702318357L;
 

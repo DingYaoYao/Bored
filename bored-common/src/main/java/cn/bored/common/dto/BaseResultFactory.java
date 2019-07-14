@@ -12,7 +12,7 @@ import java.util.List;
  * @date 2019/1/23 15:16
  */
 @SuppressWarnings("all")
-public class BaseResultFactory<T extends AbstractBaseDomain> {
+public class BaseResultFactory<T extends Object> {
 
 
 

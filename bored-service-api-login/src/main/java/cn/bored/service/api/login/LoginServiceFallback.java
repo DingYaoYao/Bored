@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 public class LoginServiceFallback  implements  LoginService{
     @Override
     public User loginl(Long id, String password) {
+        System.out.println("login  熔断");
         return null;
     }
 }

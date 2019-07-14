@@ -23,7 +23,7 @@ import java.util.List;
  * @version 1.0.0
  * @date 2019/1/25 11:11
  */
-public abstract class AbstractBaseController<T extends AbstractBaseDomain> {
+public abstract class AbstractBaseController<T extends Object> {
 
     // 用于动态获取配置文件的属性值
     private static final String ENVIRONMENT_LOGGING_LEVEL_MY_SHOP = "日志文件的路径在哪里？？？";

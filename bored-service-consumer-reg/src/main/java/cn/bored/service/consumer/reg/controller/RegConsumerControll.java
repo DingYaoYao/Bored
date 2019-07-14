@@ -16,7 +16,7 @@ import java.util.AbstractCollection;
 
 @RestController
 @RequestMapping("/reg")
-public class RegConsumerControll extends AbstractBaseController<User> {
+public class RegConsumerControll extends AbstractBaseController {
 
     @Autowired
     private RegConsumerService regConsumerService;
@@ -31,14 +31,15 @@ public class RegConsumerControll extends AbstractBaseController<User> {
     }
 
     @PostMapping("/useradd")
-    public DtoResult<User> regz(User tbUser){
+    public DtoResult<Long> regz(User tbUser){
         DtoResult<User> regz = regConsumerService.regz(tbUser);
         if(StringUtils.isEmpty(regz)){
             return  error("网络异常请重试");
         }else if(StringUtils.isEmpty(regz.getData())){
             return  error(regz.getMessage());
         }else{
-            return success(regz.getData().getId().toString());
+
+            return success(regz.getData().getId());
         }
     }
 }
