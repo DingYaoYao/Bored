@@ -17,19 +17,21 @@
 		<div class="lowin-box lowin-login">
 			<div class="lowin-box-inner">
 				<form>
-					<p>会员登录</p>
+					<p id="info-login">会员登录</p>
 					<div class="lowin-group">
 						<label>帐号 <a href="#" class="login-back-link">登录</a></label>
-						<input type="email" autocomplete="email" name="email" value="" class="lowin-input">
+						<input type="email" id="loginid" autocomplete="email" name="email" value="" class="lowin-input">
 					</div>
 					<div class="lowin-group password-group">
 						<label>密码 <a href="#" class="forgot-link">忘记密码?</a></label>
-						<input type="password" name="password" autocomplete="current-password" class="lowin-input">
+						<input type="password" id="loginpwd" name="password" autocomplete="current-password" class="lowin-input">
 					</div>
-					<button class="lowin-btn login-btn">
+			<!--		<button class="lowin-btn login-btn">
 						登录
-					</button>
-
+					</button>-->
+					<div id="Ding" class="lowin-btn" style="text-align: center">
+						登陆
+					</div>
 					<div class="text-foot">
 						没有帐户? <a href="" class="register-link">注册</a>
 					</div>
@@ -53,10 +55,12 @@
 						<label>密码</label>
 						<input type="password" id="regpwd" name="password" autocomplete="current-password" class="lowin-input">
 					</div>
-					<button class="lowin-btn" id="reg" >
-						注册
-					</button>
-<div id="hang">注册</div>
+<!--					<button class="lowin-btn" id="reg" >-->
+<!--						注册-->
+<!--					</button>-->
+<div id="hang" class="lowin-btn" style="text-align: center">
+	注册
+</div>
 					<div class="text-foot">
 						已经有账户了? <a href="" class="login-link">登录</a>
 					</div>
@@ -77,15 +81,40 @@
 		forgot_url: '#forgot'
 	});
 
+	var  reg=$("#Ding");
+	reg.on("click",function(){
+		var loginid = $("#regname").val();
+		var loginpwd = $("#regpwd").val();
+		$.ajax({
+			type : "POST", //请求类型
+			url : "http://127.0.0.1:9000/api/login/login     ?id=753081624&password=qwdasd", //请求的url
+			data : {
+				nicename:regname,password:regpwd,phone:regphone,sex:2
+			},
+			dataType : "json", //ajax接口（请求url）返回的数据类型
+			success : function(data) { //data：返回数据（json对象）
+				if (data.title!=null) {
+					$("#info-reg").html(data.title);
+				} else { //账号可用，正确提示
+					$("#info-reg").html("注册成功  牢记你的账号"+data.data[0].attributes.id);
+				}
+			},
+			error : function(data) {//当访问时候，404，500 等非200的错误状态码
+				$("#info-reg").html("注册失败 出现了我无法预知的错误");
+				alert("注册失败 出现了我无法预知的错误");
+			}
+		})
+
+	})
+
+
 
 
 	var  reg=$("#hang");
 	reg.on("click",function(){
-
 		var regname = $("#regname").val();
 		var regpwd = $("#regpwd").val();
 		var regphone = $("#regphone").val();
-
 		$.ajax({
 			type : "POST", //请求类型
 			url : "http://127.0.0.1:9000/api/reg/useradd", //请求的url
@@ -97,7 +126,7 @@
 				if (data.title!=null) {
 					$("#info-reg").html(data.title);
 				} else { //账号可用，正确提示
-					$("#info-reg").html("注册 成功请牢记你的账号"+data.attributes.id);
+					$("#info-reg").html("注册成功  牢记你的账号"+data.data[0].attributes.id);
 				}
 			},
 			error : function(data) {//当访问时候，404，500 等非200的错误状态码
@@ -105,8 +134,6 @@
 			alert("注册失败 出现了我无法预知的错误");
 			}
 		})
-
-
 	})
 
 
