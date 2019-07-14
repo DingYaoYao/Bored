@@ -110,6 +110,28 @@
 	<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
 <script type="text/javascript">
 
+	var  a=localStorage.getItem('BORED');
+var b=JSON.parse(a);
+
+	// $.ajax({
+	// 	type : "POST", //请求类型
+	// 	url : "http://127.0.0.1:9000/api/reg/useradd", //请求的url
+	// 	data : {
+	// 		nicename:regname,password:regpwd,phone:regphone,sex:2
+	// 	},
+	// 	dataType : "json", //ajax接口（请求url）返回的数据类型
+	// 	success : function(data) { //data：返回数据（json对象）
+	// 		if (data.code==401) {
+	// 			$("#info-reg").html(data.message);
+	// 		} else { //账号可用，正确提示
+	// 			$("#info-reg").html("注册成功  牢记你的账号"+data.data);
+	// 		}
+	// 	},
+	// 	error : function(data) {//当访问时候，404，500 等非200的错误状态码
+	// 		$("#info-reg").html("注册失败 出现了我无法预知的错误");
+	// 		alert("注册失败 出现了我无法预知的错误");
+	// 	}
+	// })
 
 
 </script>
