@@ -1,6 +1,6 @@
 package cn.bored.service.consumer.Pal.controller;
 
-import cn.bored.common.dto.AbstractBaseResult;
+import cn.bored.common.dto.DtoResult;
 import cn.bored.common.utils.ConsumerConstant;
 import cn.bored.common.web.AbstractBaseController;
 import cn.bored.domain.Friends;
@@ -17,14 +17,14 @@ import java.util.List;
  * @create: 2019-07-03 14:54
  **/
 @RestController
-@RequestMapping("/Pal")
-public class PalController extends AbstractBaseController<Friends> {
+@RequestMapping("/pal")
+public class PalController extends AbstractBaseController {
 
     @Autowired
     private PalConsumerService palConsumerService;
     //获取好友列表
     @GetMapping("/GetuserPal")
-    public AbstractBaseResult GetuserPal(){
+    public DtoResult<List<Friends>> GetuserPal(){
         User user = ConsumerConstant.getUser(request);
         if(user==null)return userError();
         List<Friends> friends= palConsumerService.GetuserPal(user.getId());
@@ -32,7 +32,7 @@ public class PalController extends AbstractBaseController<Friends> {
     }
     //执行双向添加
     @PostMapping("/addPal")
-    public AbstractBaseResult addPal(@RequestParam Long id, Long Friendsid){
+    public DtoResult addPal(@RequestParam Long id, Long Friendsid){
         User user = ConsumerConstant.getUser(request);
         if(user==null)return userError();
         if (user.getId()==id){
@@ -48,7 +48,7 @@ public class PalController extends AbstractBaseController<Friends> {
     }
     //执行双向删除
     @PostMapping("/delPal")
-    public AbstractBaseResult delPal(@RequestParam Long id,Long Friendsid){
+    public DtoResult<Friends> delPal(@RequestParam Long id, Long Friendsid){
         User user = ConsumerConstant.getUser(request);
         if(user==null)return userError();
         if (user.getId()==id){

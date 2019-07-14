@@ -42,7 +42,8 @@ public class TokenInterceptor implements HandlerInterceptor {
                 //从数据库查询得到用户，
                  user=userConsumerService.getUserByToken(token);
                  if(StringUtils.isEmpty(user)){
-                       response.getWriter().write("{code:201,detail:请登录}");
+                     response.setCharacterEncoding("utf-8");
+                       response.getWriter().write("{code:200,message:用户没登陆}");
                      return false;
                  }
                 redisService.set2(token,JsonUtils.objectToJson(user));

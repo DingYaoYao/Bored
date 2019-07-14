@@ -42,6 +42,10 @@ public abstract class AbstractBaseController<T extends Object> {
         this.request = request;
         this.response = response;
     }
+    //权限
+    public  DtoResult<T> userError(){
+        return init(response).build("用户没登陆",201);
+    }
 //失败
     public DtoResult<T> error(){
         return error(null,null);

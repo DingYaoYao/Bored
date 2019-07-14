@@ -1,6 +1,6 @@
 spring:
   application:
-    name: bored-service-consumer-Pal
+    name: bored-service-consumer-pal
   cloud:
     nacos:
       discovery:
@@ -9,6 +9,10 @@ spring:
 #  sentinel:
 #    enabled: true
 
+
+feign:
+  sentinel:
+    enabled: true
 
 server:
   port: 9041

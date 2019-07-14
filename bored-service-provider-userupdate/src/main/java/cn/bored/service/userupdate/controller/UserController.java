@@ -1,6 +1,7 @@
 package cn.bored.service.userupdate.controller;
 
-import cn.bored.common.dto.AbstractBaseResult;
+
+import cn.bored.common.dto.DtoResult;
 import cn.bored.common.mapper.UserMapper;
 import cn.bored.common.service.TbUserService;
 import cn.bored.common.validator.BeanValidator;
@@ -32,7 +33,7 @@ public class UserController extends AbstractBaseController<User> {
     }
 
     @GetMapping("getuser/{userid}")
-    public AbstractBaseResult getuser(@PathVariable  Long userid){
+    public DtoResult<User> getuser(@PathVariable  Long userid){
         User user=userMapper.selectByPrimaryKey(userid);
         if(user==null){
             return error("查询失败，用户Id不正确");
@@ -47,7 +48,7 @@ public class UserController extends AbstractBaseController<User> {
      * @return
      */
     @PostMapping(value ="/update")
-    public AbstractBaseResult reg(@RequestBody User tbUser) {
+    public DtoResult<User> reg(@RequestBody User tbUser) {
         //查询token是否是这个user的
 
         // 数据校验
@@ -82,7 +83,7 @@ public class UserController extends AbstractBaseController<User> {
      * @param userl
      * @return
      */
-    public AbstractBaseResult userupdate(User tbUser,User userl){
+    public DtoResult<User> userupdate(User tbUser, User userl){
 
         //验证手机号验证码
         // 执行未修改手机号的修改的操作
@@ -97,9 +98,9 @@ public class UserController extends AbstractBaseController<User> {
             }
         }catch (Exception e){
             System.out.print(     e.getMessage());
-            return error("修改失败，请重试", null);
+            return error("修改失败，请重试");
         }
-        return error("修改失败，请重试", null);
+        return error("修改失败，请重试");
     }
 
 }
