@@ -28,26 +28,8 @@
 			  <div class="static">
 			    <div class="static__text">左滑进入</div>
 			  </div>
-			  <div class="sidebar-content">
+			  <div class="sidebar-content" id="dingyao">
 
-
-
-			    <div class="contact">
-			      <img src="img/6.png" alt="" class="contact__photo" />
-			      <span class="contact__name">Scarlett Johansson</span>
-			      <span class="contact__status online"></span>
-			    </div>
-			    <div class="contact">
-			      <img src="img/7.png" alt="" class="contact__photo" />
-			      <span class="contact__name">Tom Cruise</span>
-			      <span class="contact__status"></span>
-			    </div>
-
-
-			    <div class="search">
-			      <img src="img/t8TeL1S.png" alt="" class="search__img" />
-			      <input type="text" class="search__input" placeholder="Search" />
-			    </div>
 			  </div>
 			  <div class="chat">
 			    <span class="chat__back"></span>
@@ -58,48 +40,18 @@
 			    </div>
 			    <div class="chat__messages">
 			      <div class="chat__msgRow">
-			        <div class="chat__message mine">Such SVG, much Javascript, very CSS!</div>
+			        <div class="chat__message mine">欢迎来到Bored</div>
 			      </div>
 			      <div class="chat__msgRow">
-			        <div class="chat__message notMine">Wow!</div>
-			      </div>
-			      <div class="chat__msgRow">
-			        <div class="chat__message notMine">Very elastic! Such easings!</div>
+			        <div class="chat__message notMine">Good!</div>
 				  </div>
-				  <div class="chat__msgRow">
-			        <div class="chat__message notMine">Very elastic! Such easings!</div>
-			      </div>   <div class="chat__msgRow">
-			        <div class="chat__message notMine">Very elastic! Such easings!</div>
-			      </div>   <div class="chat__msgRow">
-			        <div class="chat__message notMine">Very elastic! Such easings!</div>
-			      </div>   <div class="chat__msgRow">
-			        <div class="chat__message notMine">Very elastic! Such easings!</div>
-			      </div>   <div class="chat__msgRow">
-			        <div class="chat__message notMine">Very elastic! Such easings!</div>
-			      </div>   <div class="chat__msgRow">
-			        <div class="chat__message notMine">Very elastic! Such easings!</div>
-			      </div>   <div class="chat__msgRow">
-			        <div class="chat__message notMine">Very elastic! Such easings!</div>
-			      </div>   <div class="chat__msgRow">
-			        <div class="chat__message notMine">Very elastic! Such easings!</div>
-			      </div>   <div class="chat__msgRow">
-			        <div class="chat__message notMine">Very elastic! Such easings!</div>
-			      </div>   <div class="chat__msgRow">
-			        <div class="chat__message notMine">Very elastic! Such easings!</div>
-			      </div>   <div class="chat__msgRow">
-			        <div class="chat__message notMine">Very elastic! Such easings!</div>
-			      </div>   <div class="chat__msgRow">
-			        <div class="chat__message notMine">Very elastic! Such easings!</div>
-			      </div>   <div class="chat__msgRow">
-			        <div class="chat__message notMine">Very elastic! Such easings!</div>
-			      </div>
+
 			      <div class="chat__msgRow">
 			        <div class="chat__message mine">
-
 			        </div>
 			      </div>
 			    </div>
-			    <input type="text" class="chat__input" placeholder="Your message" />
+			    <input type="text" class="chat__input" placeholder="想说点什么" />
 			  </div>
 			</div>
 
@@ -111,27 +63,59 @@
 <script type="text/javascript">
 
 	var  a=localStorage.getItem('BORED');
-var b=JSON.parse(a);
+	var b=JSON.parse(a);
+	if(b==null){
+		location.href="index";
+	}
+	 $.ajax({
+	 	type : "GET", //请求类型
+	 	url : "http://127.0.0.1:9000/api/pal/GetuserPal", //请求的url
+	 	data : {
+	 		bored:b.token
+	 	},
+	 	dataType : "json", //ajax接口（请求url）返回的数据类型
+	 	success : function(data) { //data：返回数据（json对象）
+	 		if (data.message!=null) {
+	 			alert("用户还没有登陆");
+				location.href="index";
+	 		}else if(data.data[0]!=null){
+	 			var item=data.data;
+				var html="";
+				for (let i = 0; i <item.length; i++) {
 
-	// $.ajax({
-	// 	type : "POST", //请求类型
-	// 	url : "http://127.0.0.1:9000/api/reg/useradd", //请求的url
-	// 	data : {
-	// 		nicename:regname,password:regpwd,phone:regphone,sex:2
-	// 	},
-	// 	dataType : "json", //ajax接口（请求url）返回的数据类型
-	// 	success : function(data) { //data：返回数据（json对象）
-	// 		if (data.code==401) {
-	// 			$("#info-reg").html(data.message);
-	// 		} else { //账号可用，正确提示
-	// 			$("#info-reg").html("注册成功  牢记你的账号"+data.data);
-	// 		}
-	// 	},
-	// 	error : function(data) {//当访问时候，404，500 等非200的错误状态码
-	// 		$("#info-reg").html("注册失败 出现了我无法预知的错误");
-	// 		alert("注册失败 出现了我无法预知的错误");
-	// 	}
-	// })
+                  //  alert(JSON.stringify(item[i]));
+                   // alert(item[i].friendNicename)
+				}
+	 			for(let i=0;i<item.length;i++){
+	 			    let friendNicename= item[i].friendNicename;
+	 			    let friendUserId=item[i].friendUserId;
+                    if(friendNicename!=null){
+                    	html+="<div class=\"contact\">" +
+                    			"<img src='img/1.png' alt=''class='contact__photo' />" +
+                    			"<span class='contact__name'>"+friendNicename+"</span>" +
+                    			"<span class=\"contact__status online\"></span>"+
+                    			"</div>";
+                    }else{
+						html+="<div class=\"contact\">" +
+								"<img src=\"img/6.png\" alt=\"\" class=\"contact__photo\" />" +
+								"<span class=\"contact__name\">"+friendUserId+"</span>" +
+								"<span class=\"contact__status online\"></span>"+
+								"</div>";
+					}
+				}
+	 			html+="    <div class=\"search\">\n" +
+                    " <img src=\"img/t8TeL1S.png\" alt=\"\" class=\"search__img\" />" +
+                    " <input type=\"text\" class=\"search__input\" placeholder=\"Search\" />" +
+                    " </div>";
+					$("#dingyao").html(html);
+			} else {
+                $("#dingyao").html("    <div class=\"search\">"+"你还没有好友"+"</div>");
+	 		}
+	 	},
+	 	error : function(data) {//当访问时候，404，500 等非200的错误状态码
+	 		alert("获取好友列表失败 出现了我无法预知的错误");
+	 	}
+	 })
 
 
 </script>

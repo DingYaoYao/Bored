@@ -28,7 +28,7 @@ public class PalController extends AbstractBaseController {
         User user = ConsumerConstant.getUser(request);
         if(user==null)return userError();
         List<Friends> friends= palConsumerService.GetuserPal(user.getId());
-        return friends==null?error("用户没有好友，或执行失败"):success(friends);
+        return friends==null?success("用户没有好友，或执行失败"):success(friends);
     }
     //执行双向添加
     @PostMapping("/addPal")
