@@ -50,7 +50,7 @@ public abstract class AbstractBaseController<T extends AbstractBaseDomain> {
         return error(message,null);
   }
     public DtoResult<T> error(String message,T dto){
-        return init(response,HttpStatus.UNAUTHORIZED.value()).build(message,dto,HttpStatus.UNAUTHORIZED.value());
+        return init(response).build(message,dto,HttpStatus.UNAUTHORIZED.value());
     }
 //成功
     public DtoResult<T> success(){
@@ -63,11 +63,11 @@ public abstract class AbstractBaseController<T extends AbstractBaseDomain> {
         return success(null,dto);
     }
     public DtoResult<T> success(String message,T dto){
-        return init(response,HttpStatus.OK.value()).build(message,dto,HttpStatus.OK.value());
+        return init(response).build(message,dto,HttpStatus.OK.value());
     }
 
-    public BaseResultFactory init(HttpServletResponse response,Integer code){
-        response.setStatus(code);
+    public BaseResultFactory init(HttpServletResponse response){
+
         return BaseResultFactory.getInstance(response);
     }
 }
