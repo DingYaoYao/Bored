@@ -9,72 +9,151 @@
 </head>
 
 <body>
-	<div class="lowin">
-		<div class="lowin-brand">
-			<img src="img/kodinger.jpg" alt="logo">
-		</div>
-		<div class="lowin-wrapper">
-			<div class="lowin-box lowin-login">
-				<div class="lowin-box-inner">
-					<form>
-						<p>会员登录</p>
-						<div class="lowin-group">
-							<label>邮箱 <a href="#" class="login-back-link">登录</a></label>
-							<input type="email" autocomplete="email" name="email" value="" class="lowin-input">
-						</div>
-						<div class="lowin-group password-group">
-							<label>密码 <a href="#" class="forgot-link">忘记密码?</a></label>
-							<input type="password" name="password" autocomplete="current-password" class="lowin-input">
-						</div>
-						<button class="lowin-btn login-btn">
-							登录
-						</button>
-
-						<div class="text-foot">
-							没有帐户? <a href="" class="register-link">注册</a>
-						</div>
-					</form>
-				</div>
-			</div>
-
-			<div class="lowin-box lowin-register">
-				<div class="lowin-box-inner">
-					<form>
-						<p>让我们创建您的帐户</p>
-						<div class="lowin-group">
-							<label>姓名</label>
-							<input type="text" name="name" autocomplete="name" class="lowin-input">
-						</div>
-						<div class="lowin-group">
-							<label>邮箱</label>
-							<input type="email" autocomplete="email" name="email" class="lowin-input">
-						</div>
-						<div class="lowin-group">
-							<label>密码</label>
-							<input type="password" name="password" autocomplete="current-password" class="lowin-input">
-						</div>
-						<button class="lowin-btn">
-							登录
-						</button>
-
-						<div class="text-foot">
-							已经有账户了? <a href="" class="login-link">登录</a>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-		<footer class="lowin-footer">
-
-		</footer>
+<div class="lowin">
+	<div class="lowin-brand">
+		<img src="img/kodinger.jpg" alt="logo">
 	</div>
+	<div class="lowin-wrapper">
+		<div class="lowin-box lowin-login">
+			<div class="lowin-box-inner">
+				<form>
+					<p id="info-login">会员登录</p>
+					<div class="lowin-group">
+						<label>帐号 <a href="#" class="login-back-link">登录</a></label>
+						<input type="email" id="loginid" autocomplete="email" name="email" value="" class="lowin-input">
+					</div>
+					<div class="lowin-group password-group">
+						<label>密码 <a href="#" class="forgot-link">忘记密码?</a></label>
+						<input type="password" id="loginpwd" name="password" autocomplete="current-password" class="lowin-input">
+					</div>
+			<!--		<button class="lowin-btn login-btn">
+						登录
+					</button>-->
+					<div id="Ding" class="lowin-btn" style="text-align: center">
+						登陆
+					</div>
+					<div class="text-foot">
+						没有帐户? <a href="" class="register-link">注册</a>
+					</div>
+				</form>
+			</div>
+		</div>
 
-	<script src="js/auth.js"></script>
-	<script>
-		Auth.init({
-			login_url: '#login',
-			forgot_url: '#forgot'
-		});
-	</script>
+		<div class="lowin-box lowin-register">
+			<div class="lowin-box-inner">
+				<form>
+					<p id="info-reg">让我们创建您的帐户</p>
+					<div class="lowin-group">
+						<label>昵称</label>
+						<input type="text" id="regname" name="name" autocomplete="name" class="lowin-input">
+					</div>
+					<div class="lowin-group">
+						<label>手机号</label>
+						<input type="text" id="regphone" autocomplete="phone" name="phone" class="lowin-input">
+					</div>
+					<div class="lowin-group">
+						<label>密码</label>
+						<input type="password" id="regpwd" name="password" autocomplete="current-password" class="lowin-input">
+					</div>
+<!--					<button class="lowin-btn" id="reg" >-->
+<!--						注册-->
+<!--					</button>-->
+<div id="hang" class="lowin-btn" style="text-align: center">
+	注册
+</div>
+					<div class="text-foot">
+						已经有账户了? <a href="" class="login-link">登录</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<footer class="lowin-footer">
+
+	</footer>
+</div>
+
+<script src="js/auth.js"></script>
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script>
+	Auth.init({
+		login_url: '#login',
+		forgot_url: '#forgot'
+	});
+
+	var  reg=$("#Ding");
+	reg.on("click",function(){
+		var loginid = $("#regname").val();
+		var loginpwd = $("#regpwd").val();
+		$.ajax({
+			type : "POST", //请求类型
+			url : "http://127.0.0.1:9000/api/login/login     ?id=753081624&password=qwdasd", //请求的url
+			data : {
+				nicename:regname,password:regpwd,phone:regphone,sex:2
+			},
+			dataType : "json", //ajax接口（请求url）返回的数据类型
+			success : function(data) { //data：返回数据（json对象）
+				if (data.title!=null) {
+					$("#info-reg").html(data.title);
+				} else { //账号可用，正确提示
+					$("#info-reg").html("注册成功  牢记你的账号"+data.data[0].attributes.id);
+				}
+			},
+			error : function(data) {//当访问时候，404，500 等非200的错误状态码
+				$("#info-reg").html("注册失败 出现了我无法预知的错误");
+				alert("注册失败 出现了我无法预知的错误");
+			}
+		})
+
+	})
+
+
+
+
+	var  reg=$("#hang");
+	reg.on("click",function(){
+		var regname = $("#regname").val();
+		var regpwd = $("#regpwd").val();
+		var regphone = $("#regphone").val();
+		$.ajax({
+			type : "POST", //请求类型
+			url : "http://127.0.0.1:9000/api/reg/useradd", //请求的url
+			data : {
+				nicename:regname,password:regpwd,phone:regphone,sex:2
+			},
+			dataType : "json", //ajax接口（请求url）返回的数据类型
+			success : function(data) { //data：返回数据（json对象）
+				if (data.title!=null) {
+					$("#info-reg").html(data.title);
+				} else { //账号可用，正确提示
+					$("#info-reg").html("注册成功  牢记你的账号"+data.data[0].attributes.id);
+				}
+			},
+			error : function(data) {//当访问时候，404，500 等非200的错误状态码
+				$("#info-reg").html("注册失败 出现了我无法预知的错误");
+			alert("注册失败 出现了我无法预知的错误");
+			}
+		})
+	})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
 </body>
 </html>

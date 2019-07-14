@@ -30,11 +30,12 @@ public class LoginServiceImpl extends BaseServiceImpl<User, UserMapper> implemen
         user = userMapper.userlogin(id, DigestUtils.md5DigestAsHex(password.getBytes()));
         if(!StringUtils.isEmpty(user)){
             Integer stat = userMapper.LoginStat(id);
-            if(stat !=1 ){
+            if(stat ==null||stat==1 ){
                 user.setLoginstat(1);
                 user.setLatelyLoginDate(new Date());
                 int datastat = userMapper.updateLoginStat(user);
                 if(datastat >= 1){
+                    user.setPassword("DingDingDingDing");
                     return user;
                 }
             }
