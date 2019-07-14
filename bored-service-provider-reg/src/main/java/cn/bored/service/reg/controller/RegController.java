@@ -1,6 +1,7 @@
 package cn.bored.service.reg.controller;
 
-import cn.bored.common.dto.AbstractBaseResult;
+
+import cn.bored.common.dto.DtoResult;
 import cn.bored.common.service.TbUserService;
 import cn.bored.common.validator.BeanValidator;
 import cn.bored.common.web.AbstractBaseController;
@@ -26,15 +27,15 @@ public class RegController extends AbstractBaseController<User> {
     private RegService regService;
 
     @PostMapping(value ="/useradd")
-    public AbstractBaseResult reg(@RequestBody User tbUser) {
+    public DtoResult<User> reg(@RequestBody User tbUser) {
         // 数据校验
         String message = BeanValidator.validator(tbUser);
         if (StringUtils.isNotBlank(message)) {
-            return error(message, null);
+            return success(message);
         }
         // 验手机号是否重复
         if (!tbUserService.unique("phone", tbUser.getPhone())) {
-            return error("手机号重复，请重试", null);
+            return success("手机号重复，请重试");
         }
         //验证手机号验证码
         // 注册用户
@@ -45,10 +46,9 @@ public class RegController extends AbstractBaseController<User> {
         User user = regService.save(tbUser);
         if (user != null) {
             user.setPassword("null");
-            response.setStatus(HttpStatus.OK.value());
-            return success(request.getRequestURI(), user);
+            return success(user);
         }
         // 注册失败
-        return error("注册失败，请重试", null);
+        return success("注册失败，请重试");
     }
 }

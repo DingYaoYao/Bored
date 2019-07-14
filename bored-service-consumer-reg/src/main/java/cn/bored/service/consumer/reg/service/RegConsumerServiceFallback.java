@@ -1,6 +1,7 @@
 package cn.bored.service.consumer.reg.service;
 
-import cn.bored.common.dto.AbstractBaseResult;
+
+import cn.bored.common.dto.DtoResult;
 import cn.bored.common.web.AbstractBaseController;
 import cn.bored.domain.User;
 import org.springframework.stereotype.Component;
@@ -13,7 +14,7 @@ public class RegConsumerServiceFallback extends AbstractBaseController implement
     }
 
     @Override
-    public String regz(User tbUser) {
-       return "回滚";
+    public DtoResult<User> regz(User tbUser) {
+       return null;
     }
 }
