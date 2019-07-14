@@ -14,6 +14,8 @@ import java.util.List;
 @SuppressWarnings("all")
 public class BaseResultFactory<T extends AbstractBaseDomain> {
 
+
+
     /**
      * 设置日志级别，用于限制发生错误时，是否显示调试信息(detail)
      *
@@ -43,54 +45,22 @@ public class BaseResultFactory<T extends AbstractBaseDomain> {
         baseResultFactory.initResponse();
         return baseResultFactory;
     }
-
-    /**
-     * 构建单笔数据结果集
-     *
-     * @param self 当前请求路径
-     * @return
-     */
-    public AbstractBaseResult build(String self, T attributes) {
-        return new SuccessResult(self, attributes);
+    public DtoResult<T> build(String message){
+        return build(message,null,null);
     }
-
-    /**
-     * 构建多笔数据结果集
-     *
-     * @param self 当前请求路径
-     * @param next 下一页的页码
-     * @param last 最后一页的页码
-     * @return
-     */
-    public AbstractBaseResult build(String self, int next, int last, List<T> attributes) {
-        return new SuccessResult(self, next, last, attributes);
+    public DtoResult<T> build(Integer code){
+        return build(null,null,code);
     }
-    public AbstractBaseResult build(){
-        return new SuccessResult();
+    public DtoResult<T> build(String message,Integer code){
+        return build(message,null,code);
     }
-
-    /**
-     * 构建请求错误的响应结构
-     *
-     * @param code   HTTP 状态码
-     * @param title  错误信息
-     * @param detail 调试信息
-     * @param level  日志级别，只有 DEBUG 时才显示详情
-     * @return
-     */
-    public AbstractBaseResult build(int code, String title, String detail, String level) {
-        // 设置请求失败的响应码
-        response.setStatus(code);
-
-        if (LOGGER_LEVEL_DEBUG.equals(level)) {
-            return new ErrorResult(code, title, detail);
-        } else {
-            return new ErrorResult(code, title, null);
-        }
-    }
-    public AbstractBaseResult build(String detail) {
-     return  new ErrorResult(detail);
-    }
+   public DtoResult<T> build(String message,T dto ,Integer code){
+       DtoResult<T> tDtoResult = new DtoResult<>();
+       tDtoResult.setCode(code);
+       tDtoResult.setData(dto);
+       tDtoResult.setMessage(message);
+       return tDtoResult;
+   }
 
     /**
      * 初始化 HttpServletResponse

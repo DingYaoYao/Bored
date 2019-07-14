@@ -1,8 +1,9 @@
 package cn.bored.common.web;
 
 import cn.bored.common.dto.AbstractBaseDomain;
-import cn.bored.common.dto.AbstractBaseResult;
+
 import cn.bored.common.dto.BaseResultFactory;
+import cn.bored.common.dto.DtoResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.http.HttpStatus;
@@ -32,6 +33,7 @@ public abstract class AbstractBaseController<T extends AbstractBaseDomain> {
     @Resource
     protected HttpServletResponse response;
 
+
     @Autowired
     private ConfigurableApplicationContext applicationContext;
 
@@ -40,76 +42,32 @@ public abstract class AbstractBaseController<T extends AbstractBaseDomain> {
         this.request = request;
         this.response = response;
     }
-
-    /**
-     * 请求成功
-     * @param self
-     * @param attribute
-     * @return
-     */
-    protected AbstractBaseResult success(String self, T attribute) {
-        return BaseResultFactory.getInstance(response).build(self, attribute);
+//失败
+    public DtoResult<T> error(){
+        return error(null,null);
+    }
+  public DtoResult<T> error(String message){
+        return error(message,null);
+  }
+    public DtoResult<T> error(String message,T dto){
+        return init(response,HttpStatus.UNAUTHORIZED.value()).build(message,dto,HttpStatus.UNAUTHORIZED.value());
+    }
+//成功
+    public DtoResult<T> success(){
+        return success(null,null);
+    }
+    public DtoResult<T> success(String message){
+        return success(message,null);
+    }
+    public DtoResult<T> success(T dto){
+        return success(null,dto);
+    }
+    public DtoResult<T> success(String message,T dto){
+        return init(response,HttpStatus.OK.value()).build(message,dto,HttpStatus.OK.value());
     }
 
-    /**
-     * 请求成功
-     * @param self
-     * @param next
-     * @param last
-     * @param attributes
-     * @return
-     */
-    protected AbstractBaseResult success(String self, int next, int last, List<T> attributes) {
-        return BaseResultFactory.getInstance(response).build(self, next, last, attributes);
-    }
-    //用户只返回集合
-    protected AbstractBaseResult success(List<T> attributes) {
-        return BaseResultFactory.getInstance(response).build("", 0, 0, attributes);
-    }
-    //成功只返回状态
-    protected AbstractBaseResult success() {
-        return BaseResultFactory.getInstance(response).build();
-    }
-    /**
-     * 请求失败
-     * @param title
-     * @param detail
-     * @return
-     */
-    protected AbstractBaseResult error(String title, String detail) {
-        // return error(HttpStatus.UNAUTHORIZED.value(), title, detail);
-       return error(HttpStatus.OK.value(), title, detail);
-    }
-    //执行失败，状态码为203
-    protected AbstractBaseResult error(String detail) {
-        // return error(HttpStatus.UNAUTHORIZED.value(), title, detail);
-        return BaseResultFactory.getInstance(response).build(detail);
-    }
-    /**
-     * 请求失败
-     * @return
-     */
-    protected AbstractBaseResult userError() {
-        // return error(HttpStatus.UNAUTHORIZED.value(), title, detail);
-        return error(201, "用户没登陆", "");
-    }
-
-    /**
-     * 请求失败
-     * @return
-     */
-    protected AbstractBaseResult sentinelError() {
-        // return error(HttpStatus.UNAUTHORIZED.value(), title, detail);
-        return error(202, "熔断异常，请刷新重试", "");
-    }
-    /**
-     * 请求失败
-     * @param code
-     * @param title
-     * @param detail
-     * @return
-     */
-    protected AbstractBaseResult error(int code, String title, String detail) {
-        return BaseResultFactory.getInstance(response).build(code, title, detail, applicationContext.getEnvironment().getProperty(ENVIRONMENT_LOGGING_LEVEL_MY_SHOP));
+    public BaseResultFactory init(HttpServletResponse response,Integer code){
+        response.setStatus(code);
+        return BaseResultFactory.getInstance(response);
     }
 }

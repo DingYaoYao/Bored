@@ -2,7 +2,7 @@
 <html lang="zh">
 <head>
 	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
 	<title>超炫HTML5 SVG聊天框拖拽弹性摇摆动画特效</title>
 	<link rel="stylesheet" type="text/css" href="css/normalize.css" />
@@ -13,9 +13,15 @@
 		<script src="http://libs.useso.com/js/html5shiv/3.7/html5shiv.min.js"></script>
 	<![endif]-->
 </head>
+<style type="text/css">
+	/*#hang{*/
+		/*width:1000px;*/
+		/*height: 2000px;*/
+	/*}*/
+</style>
 <body>
-	
-	<div class="demo">
+
+	<div class="demo" id="hang">
 			  <svg class="sidebar" viewBox="0 0 300 500">
 			    <path class="s-path" fill="#fff" d="M0,0 50,0 a0,250 0 1,1 0,500 L0,500" />
 			  </svg>
@@ -124,15 +130,15 @@
 			      </div>
 			      <div class="chat__msgRow">
 			        <div class="chat__message mine">
-			          
+
 			        </div>
 			      </div>
 			    </div>
 			    <input type="text" class="chat__input" placeholder="Your message" />
 			  </div>
 			</div>
-		
-	
+
+
 	<script type="text/javascript" src='js/stopExecutionOnTimeout.js?t=1'></script>
 	<script type="text/javascript" src='js/jquery.min.js'></script>
 	<script type="text/javascript" src="js/main.js"></script>

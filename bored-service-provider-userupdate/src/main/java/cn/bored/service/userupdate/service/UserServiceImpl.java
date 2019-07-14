@@ -1,5 +1,4 @@
 package cn.bored.service.userupdate.service;
-
 import cn.bored.common.dto.AbstractBaseDomain;
 import cn.bored.common.mapper.UserMapper;
 import cn.bored.common.service.impl.BaseServiceImpl;
