@@ -75,6 +75,12 @@
 <script src="js/auth.js"></script>
 <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
 <script>
+
+	var  a=localStorage.getItem('BORED');
+	var b=JSON.parse(a);
+	if(b!=null){
+		location.href="home";
+	}
 	Auth.init({
 		login_url: '#login',
 		forgot_url: '#forgot'
@@ -97,6 +103,20 @@
 				}
 				if (data.message==null&&data.data!=null) {
 					$("#info-login").html("欢迎回来    "+data.data.nicename);
+					var da=JSON.stringify(data.data);
+					localStorage.setItem('BORED',da);
+					function jump(count) {
+						window.setTimeout(function(){
+							count--;
+							if(count > 0) {
+								$('#num').attr('innerHTML', count);
+								jump(count);
+							} else {
+								location.href="home";
+							}
+						}, 1000);
+					}
+					jump(1);
 				}
 			},
 			error : function(data) {//当访问时候，404，500 等非200的错误状态码
@@ -125,7 +145,7 @@
 				if (data.code==401) {
 					$("#info-reg").html(data.message);
 				} else { //账号可用，正确提示
-					$("#info-reg").html("注册成功  牢记你的账号"+data.message);
+					$("#info-reg").html("注册成功  牢记你的账号"+data.data);
 				}
 			},
 			error : function(data) {//当访问时候，404，500 等非200的错误状态码
