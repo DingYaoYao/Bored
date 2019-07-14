@@ -10,6 +10,7 @@ import org.springframework.util.DigestUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
@@ -23,7 +24,7 @@ public class LoginServiceImpl extends BaseServiceImpl<User, UserMapper> implemen
     @Autowired
     private UserMapper userMapper;
 
-    @GetMapping(value = "/login")
+    @PostMapping(value = "/login")
     @Override
     public User loginl(Long id, String password) {
         User user;

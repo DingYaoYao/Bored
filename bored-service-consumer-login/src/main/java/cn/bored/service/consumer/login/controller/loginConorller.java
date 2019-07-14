@@ -27,7 +27,7 @@ public class loginConorller extends AbstractBaseController<User> {
     @Autowired
     private RedisService redisService;
 
-    @GetMapping(value = "/login")
+    @PostMapping(value = "/login")
     public DtoResult<User> loginl(test test) {
         User login = loginService.loginl(Long.valueOf(test.id),test.password);
         if(login == null){
