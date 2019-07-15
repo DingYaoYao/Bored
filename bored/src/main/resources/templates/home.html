@@ -185,7 +185,7 @@
 		console.log('收到离线消息', obj.msgs[0].text);
 		pushMsg(obj.msgs);
 		htmlmassage+="<div class=\"chat__msgRow\">"+
-				"<div class=\"chat__message mine\">"+obj.msgs[0].text+"</div>"+
+				"<div class=\"chat__message mine\">"+obj.msg[0].text+"</div>"+
 				"</div>";
 		$("#aaa").html(htmlmassage);
 	}
