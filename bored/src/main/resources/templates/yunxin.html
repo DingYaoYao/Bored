@@ -1,0 +1,154 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<h1>云信 Web SDK Online Test</h1>
+<div>
+
+    <p>
+        <span>ACCOUNT:</span>
+        <input type="text" id="account" value="ad206">
+    </p>
+    <p>
+        <span>TOKEN:</span>
+        <input type="text" id="token" value="7a3b793a14312e236ea860256559c0e9">
+    </p>
+    <p>
+        <button id="connect-sdk">连接SDK</button>
+    </p>
+    <div>
+        <input type="text" id="text1">
+        <button id="fa1">发信息1</button>
+    </div>
+
+    ad206
+    {"code":200,"info":{"token":"7a3b793a14312e236ea860256559c0e9","accid":"ad206","name":"xuang0"}}
+    19-7-14 下午6:49------
+    <br>
+    57ee6
+    {"code":200,"info":{"token":"8ec6b194f6e33e5039c910f758e3e873","accid":"57ee6","name":"xuang1"}}
+    19-7-14 下午6:49------
+    <br>
+    617cc
+    {"code":200,"info":{"token":"bd465295d34d8a588f4915c1669d7587","accid":"617cc","name":"xuang2"}}
+    19-7-14 下午6:49------
+</div>
+
+<script src="http://yx-web.nos.netease.com/official/websdk/NIM_Web_SDK_v4.8.0.js"></script>
+<script type="text/javascript">
+    var nim;
+    var data=null;
+
+    function connectSDK () {
+        var account = document.getElementById('account').value
+        var token = document.getElementById('token').value
+         nim = SDK.NIM.getInstance({
+            appKey: '53d4384297427bff1eb901be42f2e18a',
+            account: account,
+            token: token,
+            onroamingmsgs: onRoamingMsgs,
+            onofflinemsgs: onOfflineMsgs,
+            onmsg: onMsg,
+            onconnect:onconnect,
+             ondisconnect: ondisconnect,
+             onerror: onerror
+        })
+    }
+
+
+
+    function onconnect () {
+        alert('SDK 连接成功')
+    }
+    function  ondisconnect(obj) {
+        alert('SDK 连接断开')
+    }
+    function  onerror (error) {
+        alert('SDK 连接失败')
+    }
+
+    function onRoamingMsgs(obj) {
+        alert('  收到漫游消息')
+        console.log('收到漫游消息', obj);
+        pushMsg(obj.msgs);
+    }
+    function onOfflineMsgs(obj) {
+        alert('  收到离线消息')
+        console.log('收到离线消息', obj);
+        pushMsg(obj.msgs);
+    }
+    function onMsg(msg) {
+        alert('  收到消息'+msg)
+        console.log('收到消息', msg.scene, msg.type, msg);
+        pushMsg(msg);
+        switch (msg.type) {
+            case 'custom':
+                onCustomMsg(msg);
+                break;
+            case 'notification':
+                // 处理群通知消息
+                onTeamNotificationMsg(msg);
+                break;
+            // 其它case
+            default:
+                break;
+        }
+    }
+    function pushMsg(msgs) {
+        // if (!Array.isArray(msgs)) { msgs = [msgs]; }
+        // var sessionId = msg[0].scene + '-' + msgs[0].account;
+        // data.msgs = data.msgs || {};
+        // data.msgs[sessionId] = nim.mergeMsgs(data.msgs[sessionId], msgs);
+    }
+    function onCustomMsg(msg) {
+        // 处理自定义消息
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //点击链接时事件
+    document.getElementById('connect-sdk').addEventListener('click', function () {
+        connectSDK()
+    })
+
+    document.getElementById('fa1').addEventListener('click', function () {
+        var massage=  document.getElementById('text1').value;
+        // 回调通知示例
+        nim.sendText({
+            scene: 'p2p',//单  群
+            to: '57ee6',//
+            text: massage,
+            done: function sendMsgDone (error, msg) {
+                // 此处为回调消息事件，仅仅通知开发者，消息是否发送成功
+               if(error!=null){
+                   alert("消息失败"+msg)
+               }{
+                    alert("发售那个成功")
+                }
+
+            }
+        })
+    })
+
+</script>
+</body>
+</html>

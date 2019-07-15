@@ -30,7 +30,7 @@ public class RequestImService {
 
     public static void main(String[] args) {
         for (int i = 0; i <3 ; i++) {
-            ImServiceDTO xuang = createACCID("xuang2");
+            ImServiceDTO xuang = createACCID("xuang"+i);
             System.out.println(xuang);
         }
 
@@ -45,7 +45,7 @@ public class RequestImService {
     }
 
     //text file path
-    private static final String  filePath="C:\\Users\\DELL\\Desktop\\";
+    private static final String  filePath="C:\\Users\\35584\\Desktop\\";
     private static final String create=filePath+"create.txt";
     private static final String refresh=filePath+"refresh.txt";
     private static final String block=filePath+"block.txt";

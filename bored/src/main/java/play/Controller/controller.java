@@ -29,4 +29,8 @@ public class controller {
     public String pal(){
         return "pal";
     }
+    @RequestMapping(value = {"/yunxin"}, method = RequestMethod.GET)
+    public String yunxin(){
+        return "yunxin";
+    }
 }
