@@ -1,5 +1,6 @@
 package cn.bored.service.api.apply;
 
+import cn.bored.common.dto.DtoResult;
 import cn.bored.domain.Apply;
 
 
@@ -14,6 +15,7 @@ import java.util.List;
  **/
 @Component
 public class ApplyServiceFallback implements ApplyService {
+
     @Override
     public List<Apply> getApplydDecided(long id) {
         return null;
@@ -25,17 +27,17 @@ public class ApplyServiceFallback implements ApplyService {
     }
 
     @Override
-    public Integer adds(Apply apply) {
+    public DtoResult adds(Apply apply) {
         return null;
     }
 
     @Override
-    public Integer del(long id) {
+    public DtoResult del(long from, long to) {
         return null;
     }
 
     @Override
-    public Integer update(long id) {
+    public DtoResult update(long id) {
         return null;
     }
 }

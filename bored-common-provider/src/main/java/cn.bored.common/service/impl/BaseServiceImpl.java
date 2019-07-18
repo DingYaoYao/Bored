@@ -1,6 +1,7 @@
 package cn.bored.common.service.impl;
 
 import cn.bored.common.service.BaseService;
+import cn.bored.common.web.AbstractBaseController;
 import cn.bored.domain.BaseEntity;
 import mapper.MyMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,9 @@ import java.util.List;
  **/
 
 public class BaseServiceImpl<T extends  BaseEntity,D extends MyMapper> implements BaseService<T> {
+
+    @Autowired
+    protected AbstractBaseController abstractBaseController;
 
    @Autowired
     protected  D dao;

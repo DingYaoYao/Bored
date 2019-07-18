@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Param;
 public interface UserMapper extends MyMapper<User> {
 
 
-    User getUserByToken(String token);
+    User getUserByTokenOrId(String token,Long id);
 
     //用户登录
     User userlogin(@Param("id") Long id,

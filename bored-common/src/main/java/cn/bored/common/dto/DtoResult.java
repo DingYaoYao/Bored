@@ -1,5 +1,6 @@
 package cn.bored.common.dto;
 
+import cn.bored.common.utils.ConstantParams;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -16,7 +17,7 @@ public class DtoResult<T extends Object>  implements Serializable {
 
     private String message;
     private T data;
-    private Integer code=200;
+    private Integer code= ConstantParams.CODE_OK;
 
 
 

@@ -1,11 +1,15 @@
 package cn.bored.service.consumer.apply.controller;
 
-import cn.bored.common.dto.AbstractBaseResult;
+
+import cn.bored.service.api.pal.PalService;
+import cn.bored.common.dto.DtoResult;
+
 import cn.bored.common.utils.ConsumerConstant;
 import cn.bored.common.web.AbstractBaseController;
 import cn.bored.domain.Apply;
 import cn.bored.domain.User;
 import cn.bored.service.api.apply.ApplyService;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,80 +24,62 @@ import java.util.List;
  **/
 @RestController
 @RequestMapping("/apply")
-public class ApplyController extends AbstractBaseController<Apply> {
+public class ApplyController extends AbstractBaseController {
 
     @Autowired
     private ApplyService applyService;
+    @Autowired
+    private PalService palService;
 
     //查询带申请
     @GetMapping("/decided")
-    AbstractBaseResult getApplydDecided(HttpServletRequest request, HttpServletResponse response){
-
-
+    DtoResult<Apply> getApplydDecided(HttpServletRequest request, HttpServletResponse response){
         User user = ConsumerConstant.getUser(request);
-        if(user==null)return userError();
         List<Apply> applydDecided = applyService.getApplydDecided(user.getId());
-        return  applydDecided==null?sentinelError():success(applydDecided);
+        return  applydDecided==null?error():success(applydDecided);
     }
 
     //查询被拒绝的，默认只查询五条
     @GetMapping("/defeated")
-    AbstractBaseResult getApplyDefeated(){
+    DtoResult<List<Apply>> getApplyDefeated(){
         User user = ConsumerConstant.getUser(request);
-        if(user==null)return userError();
         List<Apply> applyDefeated = applyService.getApplyDefeated(user.getId());
-        return  applyDefeated==null?sentinelError():success(applyDefeated);
+        return  applyDefeated==null?error():success(applyDefeated);
     }
 
+
+    /***添加好友请求
+     * Ding
+     * 一定注意申请人和被申请人不能申请两次   不然会在好友表出现两次，好友列表加载出来，申请列表加载出来全是一个人的
+     * 中间要进女性判断两个人是否申请过
+     */
     @PostMapping("/add")
-    public AbstractBaseResult add(Apply apply){
+    public DtoResult<Apply> add(Apply apply){
         User user = ConsumerConstant.getUser(request);
-        if(user==null)return userError();
         apply.setFromUser(user.getId());
-        /***
-         *
-         *
-         * Ding
-         * s
-         *select touser-di from apply where from-User=1  and status=1 and to-dromuser=2
-         * 一定注意申请人和被申请人不能申请两次   不然会在好友表出现两次，好友列表加载出来，申请列表加载出来全是一个人的
-         * 中间要进女性判断两个人是否申请过
-         *
-         *
-         *
-         *
-         *
-         */
-        Integer add = applyService.adds(apply);
-        return add==null?error("申请好友失败"):success();
+        DtoResult add = applyService.adds(apply);
+          return templete(add);
     }
-    @GetMapping("/del/{id}")
-    public AbstractBaseResult del(@PathVariable long id){
-        Integer del = applyService.del(id);
+    /**同意添加好友
+     *Ding
+     * 当点击了同意  去操作Friends表  让两人成为好友后 在申请表中删除这条数据
+     */
+    @GetMapping("/consent/{to}")
+    public DtoResult<Apply> del(@PathVariable long to){
+        User user = ConsumerConstant.getUser(request);
+        DtoResult friendsadd = palService.Friendsadd(user.getId(), to);
+        //执行添加好友操作
+        if(!isSuccess(friendsadd))return error("双向添加失败");
 
-        /****
-         *
-         *
-         *
-         *
-         *Ding
-         *
-         * 当点击了同意  去操作Friends表  让两人成为好友后 在申请表中删除这条数据
-         *
-         *
-         *
-         *
-         *
-         */
-        //此操作会在好友同意添加为好友（节省数据库资源删除数据）
-        return del==null?error("添加好友失败！"):success();
+        //此操作会在好友同意添加为好友（节省数据库资源删除好友申请数据）
+        DtoResult del = applyService.del(user.getId(), to);
+        return templete(del);
     }
     //拒绝添加好友
-    @GetMapping("/update/{id}")
-    public AbstractBaseResult update(@PathVariable  long id){
+    @GetMapping("/dowmApply/{id}")
+    public DtoResult<Apply> update(@PathVariable  long id){
         User user = ConsumerConstant.getUser(request);
-        if(user==null)return userError();
-        Integer update = applyService.update(id);
-        return update==null?error("拒绝好友失败！"):success();
+        DtoResult update = applyService.update(id);
+        return templete(update);
     }
 }

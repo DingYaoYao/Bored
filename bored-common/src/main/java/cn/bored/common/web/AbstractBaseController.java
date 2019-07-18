@@ -4,9 +4,12 @@ import cn.bored.common.dto.AbstractBaseDomain;
 
 import cn.bored.common.dto.BaseResultFactory;
 import cn.bored.common.dto.DtoResult;
+import cn.bored.common.utils.ConstantParams;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import javax.annotation.Resource;
@@ -23,7 +26,8 @@ import java.util.List;
  * @version 1.0.0
  * @date 2019/1/25 11:11
  */
-public abstract class AbstractBaseController<T extends Object> {
+@Component
+public class AbstractBaseController<T extends Object> {
 
     // 用于动态获取配置文件的属性值
     private static final String ENVIRONMENT_LOGGING_LEVEL_MY_SHOP = "日志文件的路径在哪里？？？";
@@ -42,35 +46,70 @@ public abstract class AbstractBaseController<T extends Object> {
         this.request = request;
         this.response = response;
     }
+
     //权限
-    public  DtoResult<T> userError(){
-        return init(response).build("用户没登陆",201);
-    }
-//失败
-    public DtoResult<T> error(){
-        return error(null,null);
-    }
-  public DtoResult<T> error(String message){
-        return error(message,null);
-  }
-    public DtoResult<T> error(String message,T dto){
-        return init(response).build(message,dto,HttpStatus.UNAUTHORIZED.value());
-    }
-//成功
-    public DtoResult<T> success(){
-        return success(null,null);
-    }
-    public DtoResult<T> success(String message){
-        return success(message,null);
-    }
-    public DtoResult<T> success(T dto){
-        return success(null,dto);
-    }
-    public DtoResult<T> success(String message,T dto){
-        return init(response).build(message,dto,HttpStatus.OK.value());
+    public DtoResult<T> userError() {
+        return init(response).build("用户没登陆", 201);
     }
 
-    public BaseResultFactory init(HttpServletResponse response){
+    //失败
+    public DtoResult<T> error() {
+        return error("\"网络异常，请重试\"", null);
+    }
+
+    public DtoResult<T> error(String message) {
+        return error(message, null);
+    }
+
+    public DtoResult<T> error(String message, T dto) {
+        return init(response).build(message, dto, ConstantParams.CODE_ERROR);
+    }
+
+    //成功
+    public DtoResult<T> success() {
+        return success(null, null);
+    }
+
+    public DtoResult<T> success(String message) {
+        return success(message, null);
+    }
+
+    public DtoResult<T> success(T dto) {
+        return success(null, dto);
+    }
+
+    public DtoResult<T> success(String message, T dto) {
+        return init(response).build(message, dto, ConstantParams.CODE_OK);
+    }
+
+
+    //使用模板结果
+    public DtoResult<T> templete(DtoResult<T> dto){
+        //熔断
+        if (StringUtils.isEmpty(dto)) {
+            return error();
+        }
+        //成功
+        if(dto.getCode() == ConstantParams.CODE_OK){
+            return success();
+            //失败
+        }else{
+            return error(dto.getMessage());
+        }
+
+    }
+
+    //判断方法是否执行成功
+    public Boolean isSuccess(DtoResult<T> dto) {
+        if (!StringUtils.isEmpty(dto)) {
+            if (dto.getCode() == ConstantParams.CODE_OK) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public BaseResultFactory init(HttpServletResponse response) {
 
         return BaseResultFactory.getInstance(response);
     }

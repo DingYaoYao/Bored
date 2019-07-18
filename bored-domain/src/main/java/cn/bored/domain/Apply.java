@@ -10,7 +10,6 @@ import java.util.Date;
 
 @Data
 @Table(name = "apply")
-@EqualsAndHashCode(callSuper=false)
 public class Apply extends BaseEntity implements  Serializable{
 
     private static final long serialVersionUID = 2174158115699351071L;

@@ -27,7 +27,10 @@
   </resultMap>
 
   <select id="userlogin" resultMap="BaseResultMap">
-    SELECT * FROM user WHERE id=#{id} AND password=#{password}
+    SELECT * FROM user WHERE id=#{id}
+    <if test="password!=null and password!=''">
+      AND password=#{password}
+    </if>
   </select>
 
   <update id="updateLoginStat">
@@ -35,8 +38,17 @@
   </update>
 
 
-  <select id="getUserByToken" resultMap="BaseResultMap">
-    SELECT * FROM USER WHERE token=#{token}
+  <select id="getUserByTokenOrId" resultMap="BaseResultMap">
+    SELECT * FROM USER
+    <where>
+      <if test="token!=null and  token !=''">
+        token=#{token}
+      </if>
+      <if test="id!=null">
+        id=#{id}
+      </if>
+    </where>
+
   </select>
 
   <select id="LoginStat" resultType="int">

@@ -4,11 +4,12 @@ import cn.bored.common.dto.AbstractBaseDomain;
 import cn.bored.common.service.BaseCrudService;
 import mapper.MyMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import tk.mybatis.mapper.entity.Example;
 
 import java.lang.reflect.ParameterizedType;
 import java.util.Date;
-
+@Component
 public class BaseCrudServiceImpl<T extends AbstractBaseDomain, M extends MyMapper<T>> implements BaseCrudService<T> {
 
     @Autowired

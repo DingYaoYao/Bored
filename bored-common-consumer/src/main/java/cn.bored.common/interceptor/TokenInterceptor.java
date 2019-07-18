@@ -1,7 +1,8 @@
 package cn.bored.common.interceptor;
 
+import cn.bored.service.api.user.UserService;
 import cn.bored.api.redis.RedisService;
-import cn.bored.common.service.UserConsumerService;
+import cn.bored.common.dto.DtoResult;
 import cn.bored.common.utils.ConsumerConstant;
 import cn.bored.common.utils.JsonUtils;
 import cn.bored.common.web.AbstractBaseController;
@@ -20,45 +21,48 @@ import javax.servlet.http.HttpSession;
  */
 public class TokenInterceptor implements HandlerInterceptor {
     @Autowired
-    private UserConsumerService userConsumerService;
+    private UserService userService;
     @Autowired
     private RedisService redisService;
-
+    @Autowired
+private AbstractBaseController abstractBaseController;
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-         //获得请求头保存的用户标识
-        String token = request.getParameter("bored");
+        //获得请求头保存的用户标识
+        String token = request.getHeader("bored");
         HttpSession session = request.getSession();
+        boolean flag = false;
 
         //标识不能为空
-        if(!StringUtils.isEmpty(token)){
-
+        if (!StringUtils.isEmpty(token)) {
             String userString = redisService.get(token);
-            User user=null;
-
+            User user = null;
             //判断缓存没有用户
-            if(StringUtils.isEmpty(userString)){
-
-                //从数据库查询得到用户，
-                 user=userConsumerService.getUserByToken(token);
-                 if(StringUtils.isEmpty(user)){
-                     response.setCharacterEncoding("utf-8");
-                       response.getWriter().write("{code:200,message:用户没登陆}");
-                     return false;
-                 }
-                redisService.set2(token,JsonUtils.objectToJson(user));
-                session.setAttribute(ConsumerConstant.SESSION_USER,user);
-                return true;
+            if (StringUtils.isEmpty(userString)) {
+                DtoResult<User> userByToken = userService.getUserByToken(token);
+                if(abstractBaseController.isSuccess(userByToken)){
+                    user=userByToken.getData();
+                    //数据库存在
+                    if (!StringUtils.isEmpty(user)) {
+                        redisService.set2(token, JsonUtils.objectToJson(user));
+                        session.setAttribute(ConsumerConstant.SESSION_USER, user);
+                        flag = true;
+                    }
+                }
+                //缓存有值
+            } else {
+                user = JsonUtils.jsonToPojo(userString, User.class);
+                session.setAttribute(ConsumerConstant.SESSION_USER, user);
+                flag = true;
             }
-            //缓存有值
-            user = JsonUtils.jsonToPojo(userString, User.class);
-            session.setAttribute(ConsumerConstant.SESSION_USER,user);
-            return true;
-        }
-        //重定向登录页
-        response.getWriter().write("{code:201,detail:请登录}");
 
-        return false;
+        }
+        //标识为空
+        if(!flag){
+            response.setCharacterEncoding("utf-8");
+            response.getWriter().write(JsonUtils.objectToJson(abstractBaseController.userError()));
+        }
+        return flag;
     }
 
     @Override

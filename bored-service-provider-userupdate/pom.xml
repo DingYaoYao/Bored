@@ -30,6 +30,12 @@
             <artifactId>bored-common-provider</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
+        <dependency>
+            <groupId>cn.bored</groupId>
+            <artifactId>bored-service-api-user</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
         <!-- Projects End -->
     </dependencies>
     <build>

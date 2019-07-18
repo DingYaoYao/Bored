@@ -4,7 +4,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import tk.mybatis.spring.annotation.MapperScan;
 
-@SpringBootApplication(scanBasePackages = {"cn.bored.service.userupdate","cn.bored.common"})
+@SpringBootApplication(scanBasePackages = {"cn.bored"})
 @EnableDiscoveryClient
 @MapperScan(basePackages = "cn.bored.common.mapper")
 public class BoredServiceProviderUserUpdateApplication {

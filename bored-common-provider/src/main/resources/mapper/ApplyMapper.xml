@@ -1,33 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.bored.common.mapper.ApplyMapper">
-  <resultMap id="BaseResultMap" type="cn.bored.domain.Apply">
-    <!--
-      WARNING - @mbg.generated
-    -->
-    <result column="id" jdbcType="INTEGER" property="id" />
-    <result column="from_user" jdbcType="BIGINT" property="fromUser" />
-    <result column="to_user" jdbcType="BIGINT" property="toUser" />
-    <result column="message" jdbcType="VARCHAR" property="message" />
-    <result column="status" jdbcType="INTEGER" property="status" />
-    <result column="apply_date" jdbcType="TIMESTAMP" property="applyDate" />
-  </resultMap>
+    <resultMap id="BaseResultMap" type="cn.bored.domain.Apply">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <result column="id" jdbcType="INTEGER" property="id"/>
+        <result column="from_user" jdbcType="BIGINT" property="fromUser"/>
+        <result column="to_user" jdbcType="BIGINT" property="toUser"/>
+        <result column="message" jdbcType="VARCHAR" property="message"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="apply_date" jdbcType="TIMESTAMP" property="applyDate"/>
+    </resultMap>
 
-  <!--总结  首先别人发给我的，我发送给别人的，-->
-  <select id="getApplydDecided" resultType="cn.bored.domain.Apply">
+    <!--总结  首先别人发给我的，我发送给别人的，-->
+    <select id="getApplydDecided" resultMap="BaseResultMap">
     (SELECT * FROM apply
-    WHERE to_user=#{id} AND STATUS=1
+    WHERE to_user=#{from} AND STATUS=#{status}
     ORDER BY apply_date DESC)
     UNION
    ( SELECT * FROM apply
-    WHERE from_user=#{id} AND STATUS=1
+    WHERE from_user=#{from} AND STATUS=#{status}
     ORDER BY apply_date DESC)
   </select>
-  <!--查询我被拒绝的-->
-  <select id="getApplyDefeated" resultType="cn.bored.domain.Apply">
-    SELECT * FROM apply
-    WHERE STATUS =2 AND from_user=#{id}
-    ORDER BY apply_date DESC
+
+    <!--查询我被拒绝的-->
+    <select id="getApplyDefeated" resultMap="BaseResultMap">
+ SELECT * FROM apply
+    WHERE STATUS =#{status} AND from_user=#{from}
+    GROUP BY to_user
+     ORDER BY apply_date DESC
     LIMIT 0,5
+
   </select>
+
+    <!--查询用户和指定用户的好友请求数量-->
+    <select id="findUserApplyCount" resultType="int">
+SELECT IF(COUNT(1)=0,0,id) COUNT FROM apply
+WHERE from_user =#{from} AND to_user =#{to}  AND STATUS =#{status}  LIMIT 1
+  </select>
+
+    <!--修改请求状态-->
+    <update id="updateApplystatus">
+    UPDATE  `apply` SET `status`=#{status},apply_date=NOW() WHERE id=#{id}
+  </update>
+
+    <!--//删除用户请求-->
+    <delete id="deleteByuserIdAndFriendId">
+  DELETE FROM `apply`
+  WHERE ((`from_user`=#{from} AND `to_user`=#{to}  )
+        || (`from_user`=#{to} AND `to_user`=#{from} ))
+         AND STATUS=1
+  </delete>
+
 </mapper>

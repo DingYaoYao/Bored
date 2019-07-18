@@ -27,6 +27,12 @@
             <artifactId>bored-common-consumer</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
+        <dependency>
+            <groupId>cn.bored</groupId>
+            <artifactId>bored-service-api-pal</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
         <!-- Projects End -->
     </dependencies>
 

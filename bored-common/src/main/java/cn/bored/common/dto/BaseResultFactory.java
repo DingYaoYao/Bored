@@ -54,13 +54,13 @@ public class BaseResultFactory<T extends Object> {
     public DtoResult<T> build(String message,Integer code){
         return build(message,null,code);
     }
-   public DtoResult<T> build(String message,T dto ,Integer code){
-       DtoResult<T> tDtoResult = new DtoResult<>();
-       tDtoResult.setCode(code);
-       tDtoResult.setData(dto);
-       tDtoResult.setMessage(message);
-       return tDtoResult;
-   }
+    public DtoResult<T> build(String message,T dto ,Integer code){
+        DtoResult<T> tDtoResult = new DtoResult<>();
+        tDtoResult.setCode(code);
+        tDtoResult.setData(dto);
+        tDtoResult.setMessage(message);
+        return tDtoResult;
+    }
 
     /**
      * 初始化 HttpServletResponse

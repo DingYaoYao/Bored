@@ -7,7 +7,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "cn.bored")
 @EnableDiscoveryClient
 @MapperScan(basePackages = "cn.bored.common.mapper")
 public class BoredServicveProviderLoginApplication {

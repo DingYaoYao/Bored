@@ -1,41 +1,58 @@
 package cn.bored.service.provider.pal.service;
 
-import cn.bored.common.mapper.FriendMapper;
+import cn.bored.service.api.pal.PalService;
+import cn.bored.common.dto.DtoResult;
 import cn.bored.common.mapper.FriendsMapper;
 import cn.bored.common.service.impl.BaseServiceImpl;
 import cn.bored.domain.Friends;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
+@RestController
 @Service
-public class PalServiceimpl extends BaseServiceImpl<Friends, FriendsMapper> implements  PalService<Friends>{
+@RequestMapping("/Pal")
+public class PalServiceimpl extends BaseServiceImpl<Friends, FriendsMapper> implements PalService {
 
     @Autowired
     private FriendsMapper friendsMapper;
+
     @Override
-    public List<Friends> getFriendsdDecided(Long id) {
+    @GetMapping("/GetuserPal/{id}")
+    public List<Friends> getFriendsdDecided(@PathVariable  Long id) {
         return friendsMapper.getFriendsDecided(id);
     }
+
     @Override
-    public int Friendsadd(Long id, Long Friendsid) {
-        Friends friends=new Friends();
+    @PostMapping("/addPal")
+    public DtoResult Friendsadd(@RequestParam Long id,@RequestParam  Long friendsId) {
+        Friends friends = new Friends();
         friends.setUserid(id);
-        friends.setFriendUserId(String.valueOf(Friendsid));
-        int resut= friendsMapper.insert(friends);
-        Friends friendsa=new Friends();
-        friendsa.setUserid(Friendsid);
+        friends.setFriendUserId(String.valueOf(friendsId));
+        int resut = friendsMapper.insert(friends);
+        Friends friendsa = new Friends();
+        friendsa.setUserid(friendsId);
         friendsa.setFriendUserId(String.valueOf(id));
-        int resuat= friendsMapper.insert(friendsa);
-        int a=resut+resuat;
-        return a;
+        int resuat = friendsMapper.insert(friendsa);
+        int a = resut + resuat;
+        if(a>=2){
+            return abstractBaseController.success();
+        }
+        return abstractBaseController.error("添加用户失败！");
     }
+
     @Override
-    public int Friendsdel(Long id, Long Friendsid) {
-            int resoulta=friendsMapper.Friendsdel(Friendsid,id);
-        int resoultb=friendsMapper.Friendsdel(id,Friendsid);
-        int a=resoulta+resoultb;
-        return a;
+    @GetMapping("/delPal/{id}/{friendsId}")
+    public DtoResult Friendsdel(@PathVariable Long id, @PathVariable Long friendsId) {
+        int resoulta = friendsMapper.Friendsdel(friendsId, id);
+        int resoultb = friendsMapper.Friendsdel(id, friendsId);
+        int a = resoulta + resoultb;
+        if(a>=2){
+            return abstractBaseController.success();
+        }
+        return abstractBaseController.error("删除用户失败！");
     }
 }

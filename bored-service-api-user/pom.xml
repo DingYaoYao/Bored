@@ -10,26 +10,18 @@
         <relativePath>../bored-dependencies/pom.xml</relativePath>
     </parent>
 
-    <artifactId>bored-common-consumer</artifactId>
+    <artifactId>bored-service-api-user</artifactId>
     <packaging>jar</packaging>
+
+
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>cn.bored</groupId>
-            <artifactId>bored-service-api-redis</artifactId>
-           <version>${project.parent.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>cn.bored</groupId>
-            <artifactId>bored-service-api-user</artifactId>
+            <artifactId>bored-common-api</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
-        <!-- Spring Cloud End -->
     </dependencies>
+
 
 </project>
