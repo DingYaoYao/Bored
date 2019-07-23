@@ -13,10 +13,10 @@ public class UserConsumerControll extends AbstractBaseController{
     @Autowired
     private UserService userService;
 
-//    @PostMapping("/update")
-//    public String update(User tbUser){
-//        return userService.update(tbUser);
-//    }
+       @PostMapping("/update")
+       public   DtoResult<User> update(User tbUser){
+           return userService.update(tbUser);
+       }
 
    //根据用户id获得用户信息
     @GetMapping("/getuser/{userid}")

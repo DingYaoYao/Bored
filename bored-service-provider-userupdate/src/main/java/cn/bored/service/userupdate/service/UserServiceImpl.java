@@ -28,9 +28,9 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserMapper> implement
 
     @Autowired
     private UserMapper userMapper;
-    @Autowired
-     private  BaseCrudService baseCrudService;
 
+    @Autowired
+    private BaseCrudService baseCrudService;
 
     @GetMapping("/token/{token}")
     @Override
@@ -43,6 +43,8 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserMapper> implement
     public  DtoResult<User> getUserById(@PathVariable long id){
         return getUser(null,id);
     }
+
+
     private DtoResult<User> getUser(String token,Long id){
         User user = userMapper.getUserByTokenOrId(token,id);
         if(StringUtils.isEmpty(user)){
@@ -72,10 +74,6 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserMapper> implement
             }
             long b = Integer.parseInt(randomStr);
             domain.setId(b);
-            *
-             * 用于自动回显 ID，领域模型中需要 @ID 注解的支持
-             * {@link AbstractBaseDomain
-            }
 
             result = userMapper.insert(domain);
         }
@@ -97,13 +95,13 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserMapper> implement
      * @return
      */
     @PostMapping(value ="/update")
-    public DtoResult<User> reg(@RequestBody User tbUser) {
+    public   DtoResult<User> update(@RequestBody User tbUser) {
         //查询token是否是这个user的
 
         // 数据校验
         String message = BeanValidator.validator(tbUser);
         if (!StringUtils.isEmpty(message)) {
-            return abstractBaseController.error(message, null);
+            return abstractBaseController.error("数据验证失败");
         }
         // 验证手机号是否和其他的重复
         User usera= new User();
@@ -142,13 +140,12 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserMapper> implement
             User user = save(tbUser);
             if (user != null) {
                 user.setPassword("null");
-                response.setStatus(HttpStatus.OK.value());
-                return success(request.getRequestURI(), user);
-            }
-        }catch (Exception e){
-            System.out.print(     e.getMessage());
-            return error("修改失败，请重试");
+                return abstractBaseController.success(user);
         }
-        return error("修改失败，请重试");
+        }catch (Exception e){
+            System.out.print(e.getMessage());
+            return abstractBaseController.error("修改失败，请重试", null);
+        }
+        return abstractBaseController.error("修改失败，请重试", null);
     }
 }
