@@ -20,4 +20,9 @@ public class UserServiceFallback implements UserService {
     public DtoResult<User> getUserById(long id) {
         return null;
     }
+
+    @Override
+    public DtoResult<User> update(User tbUser) {
+        return null;
+    }
 }
