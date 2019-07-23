@@ -31,11 +31,11 @@ public class RegController extends AbstractBaseController<User> {
         // 数据校验
         String message = BeanValidator.validator(tbUser);
         if (StringUtils.isNotBlank(message)) {
-            return success(message);
+            return error(message);
         }
         // 验手机号是否重复
         if (!tbUserService.unique("phone", tbUser.getPhone())) {
-            return success("手机号重复，请重试");
+            return error("手机号重复，请重试");
         }
         //验证手机号验证码
         // 注册用户
@@ -49,6 +49,6 @@ public class RegController extends AbstractBaseController<User> {
             return success(user);
         }
         // 注册失败
-        return success("注册失败，请重试");
+        return error("注册失败，请重试");
     }
 }

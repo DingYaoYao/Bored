@@ -1,5 +1,6 @@
 package cn.bored.service.provider.friend.service;
 
+import cn.bored.common.dto.DtoResult;
 import cn.bored.common.mapper.FriendMapper;
 import cn.bored.common.service.impl.BaseServiceImpl;
 import cn.bored.domain.Friend;
@@ -19,36 +20,42 @@ public class friendServiceImpl extends BaseServiceImpl<Friend, FriendMapper> imp
     private FriendMapper friendMapper;
 
 
-    @GetMapping(value = "/myfriend")
+    @GetMapping(value = "/myfriend/{userId}")
     @Override
-    public List<Friend> myfriend(long userid) {
-        return friendMapper.MyFriends(userid);
+    public List<Friend> myfriend(@PathVariable long userId) {
+        return friendMapper.MyFriends(userId);
     }
 
-    @GetMapping(value = "/myfriendFriends")
+    @GetMapping(value = "/myfriendFriends/{userId}")
     @Override
-    public List<Friend> myfriendFriends(long userid) {
-        return friendMapper.MyfriendFriends(userid);
+    public List<Friend> myfriendFriends(@PathVariable long userId) {
+        return friendMapper.MyfriendFriends(userId);
     }
 
     @PostMapping(value = "add")
     @Override
-    public int addFriend(@RequestBody Friend friend) {
+    public DtoResult addFriend(@RequestBody Friend friend) {
         friend.setCreatetime(new Date());
-        return friendMapper.addFriend(friend);
+        friend.setLike(0);
+        return result(friendMapper.addFriend(friend), "添加朋友圈失败！");
     }
 
-
-    @GetMapping(value = "/del")
+    @GetMapping(value = "/del/{id}")
     @Override
-    public int del(int id) {
-
-        return friendMapper.delFriend(id);
+    public DtoResult del(@PathVariable int id) {
+        return result(friendMapper.delFriend(id), "删除朋友圈失败！");
     }
 
-    @GetMapping(value = "/updatelike")
+    @GetMapping(value = "/updatelike/{id}")
     @Override
-    public int updatelike(long userid) {
-        return friendMapper.updateFriendlike(userid);
+    public DtoResult updatelike(@PathVariable long id) {
+        return result(friendMapper.updateFriendlike(id), "点赞失败！");
+    }
+
+    public DtoResult result(int result, String message) {
+        if (result <= 0) {
+            return abstractBaseController.error(message);
+        }
+        return abstractBaseController.success();
     }
 }

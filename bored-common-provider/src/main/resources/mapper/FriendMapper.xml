@@ -51,7 +51,7 @@
 		SET
 		`like` = `like`+1
 		WHERE
-		userid = #{userid}
+		id = #{userid}
 	</update>
 
 	<!--添加朋友圈-->

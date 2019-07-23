@@ -38,7 +38,6 @@ public class RegConsumerControll extends AbstractBaseController {
         }else if(StringUtils.isEmpty(regz.getData())){
             return  error(regz.getMessage());
         }else{
-
             return success(regz.getData().getId());
         }
     }

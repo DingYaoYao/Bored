@@ -91,13 +91,15 @@ public class AbstractBaseController<T extends Object> {
         }
         //成功
         if(dto.getCode() == ConstantParams.CODE_OK){
+            if(dto.getData()!=null)return dto;
             return success();
             //失败
         }else{
-            return error(dto.getMessage());
+            return dto;
         }
 
     }
+    //设置参数，集合，单个对象，等
 
     //判断方法是否执行成功
     public Boolean isSuccess(DtoResult<T> dto) {

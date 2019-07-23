@@ -1,9 +1,11 @@
 package cn.bored.service.api.friend;
 
+import cn.bored.common.dto.DtoResult;
 import cn.bored.domain.Friend;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
-
+@Component
 public class friendServiceFallback implements friendService {
 
 
@@ -18,17 +20,17 @@ public class friendServiceFallback implements friendService {
     }
 
     @Override
-    public int addFriend(Friend friend) {
-        return 0;
+    public DtoResult addFriend(Friend friend) {
+        return null;
     }
 
     @Override
-    public int del(int id) {
-        return 0;
+    public DtoResult del(int id) {
+        return null;
     }
 
     @Override
-    public int updatelike(long userid) {
-        return 0;
+    public DtoResult updatelike(long userid) {
+        return null;
     }
 }

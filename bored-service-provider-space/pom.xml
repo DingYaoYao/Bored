@@ -9,22 +9,19 @@
         <relativePath>../bored-dependencies/pom.xml</relativePath>
     </parent>
 
-    <artifactId>bored-service-provider-apply</artifactId>
+    <artifactId>bored-service-provider-space</artifactId>
     <packaging>jar</packaging>
 
 
     <dependencies>
-        <dependency>
-            <groupId>cn.bored</groupId>
-            <artifactId>bored-service-api-apply</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
         <!-- Spring Boot End -->
+
         <!-- Projects Begin -->
         <dependency>
             <groupId>cn.bored</groupId>
@@ -32,10 +29,12 @@
             <version>${project.parent.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
-            <version>2.0.2.RELEASE</version>
+            <groupId>cn.bored</groupId>
+            <artifactId>bored-service-api-space</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+            <scope>compile</scope>
         </dependency>
+
         <!-- Projects End -->
     </dependencies>
     <build>
@@ -44,7 +43,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>cn.bored.service.provider.apply.BoredServicveProviderApplyApplication</mainClass>
+                    <mainClass>cn.bored.service.provider.space.BoredServiceProviderSpaceApplication</mainClass>
                 </configuration>
             </plugin>
         </plugins>

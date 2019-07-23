@@ -1,16 +1,17 @@
 spring:
   application:
-    name: bored-service-consumer-friend
+    name: bored-service-consumer-space
   cloud:
     nacos:
       discovery:
         server-addr: localhost:8848
-feign:
-  sentinel:
-    enabled: true
+
+#feign:
+#  sentinel:
+#    enabled: true
 
 server:
-  port: 9041
+  port: 8602
 
 management:
   endpoints:

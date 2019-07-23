@@ -2,6 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>cn.bored</groupId>
         <artifactId>bored-dependencies</artifactId>
@@ -9,32 +10,31 @@
         <relativePath>../bored-dependencies/pom.xml</relativePath>
     </parent>
 
-    <artifactId>bored-service-provider-apply</artifactId>
+    <artifactId>bored-service-consumer-space</artifactId>
     <packaging>jar</packaging>
 
 
     <dependencies>
-        <dependency>
-            <groupId>cn.bored</groupId>
-            <artifactId>bored-service-api-apply</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
         <!-- Spring Boot End -->
+
         <!-- Projects Begin -->
+
         <dependency>
             <groupId>cn.bored</groupId>
-            <artifactId>bored-common-provider</artifactId>
+            <artifactId>bored-service-api-space</artifactId>
             <version>${project.parent.version}</version>
+
         </dependency>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
-            <version>2.0.2.RELEASE</version>
+            <groupId>cn.bored</groupId>
+            <artifactId>bored-common-consumer</artifactId>
+            <version>${project.parent.version}</version>
         </dependency>
         <!-- Projects End -->
     </dependencies>
@@ -44,10 +44,9 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>cn.bored.service.provider.apply.BoredServicveProviderApplyApplication</mainClass>
+                    <mainClass>cn.bored.service.consumer.space.BoredServiceConsumerSpaceApplication</mainClass>
                 </configuration>
             </plugin>
         </plugins>
     </build>
-
 </project>

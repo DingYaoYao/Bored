@@ -11,4 +11,42 @@
     <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
     <result column="state" jdbcType="INTEGER" property="state" />
   </resultMap>
+  <select id="userspace" resultType="cn.bored.domain.User">
+      SELECT * FROM USER WHERE id=(
+          SELECT `userId` FROM `space`
+          WHERE userId IN(
+              SELECT id FROM USER
+              WHERE sex!=( SELECT sex FROM `user`  WHERE id =#{id}  )
+      AND id IN  (SELECT userid FROM SPACE WHERE titleid=#{titleid} AND  state=1 )
+      )
+      AND  titleid=#{titleid}
+      ORDER BY create_date
+               LIMIT 1
+      )
+  </select>
+
+  <insert id="insertTopic" parameterType="cn.bored.domain.Topic" useGeneratedKeys="true" keyProperty="id">
+    INSERT INTO topic
+    (headline,userid)
+    VALUES ( #{headline},
+             #{userid});
+  </insert>
+
+  <insert id="insertSpace">
+      INSERT INTO `bored`.`space`
+      (
+          `titleid`,
+          `userId`,
+          `create_date`,
+          `state`)
+      VALUES (       (SELECT id FROM topic WHERE headline=#{headline}),
+                     #{userid},
+                     NOW(),
+                     '1');
+
+  </insert>
+
+  <select id="selectTopic" resultType="cn.bored.domain.Topic">
+    SELECT * FROM topic WHERE headline= #{headline}
+  </select>
 </mapper>

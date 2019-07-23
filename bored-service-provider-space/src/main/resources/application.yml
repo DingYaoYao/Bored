@@ -1,6 +1,6 @@
 spring:
   application:
-    name: bored-service-provider-apply
+    name: bored-service-provider-space
   datasource:
     druid:
       url: jdbc:mysql://localhost:3306/bored?useUnicode=true&serverTimezone=GMT&characterEncoding=utf-8&useSSL=false
@@ -15,26 +15,20 @@ spring:
     nacos:
       discovery:
         server-addr: localhost:8848
-  redis:
-    lettuce:
-      pool:
-        max-active: 8
-        max-idle: 8
-        max-wait: -1ms
-        min-idle: 0
-    sentinel:
-      master: mymaster
-      nodes: 129.28.157.98:26379, 129.28.157.98:26380, 129.28.157.98:26381
-    host: 129.28.157.98
+logging:
+  level:
+    cn:
+      bored:
+        common:
+          mapper: debug
+
+
 server:
-  port: 9011
+  port: 8502
 
 mybatis:
-  configuration:
-    cache-enabled: true
   type-aliases-package: cn.bored.domain
   mapper-locations: classpath:mapper/*.xml
-
 
 management:
   endpoints:

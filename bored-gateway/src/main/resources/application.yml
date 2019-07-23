@@ -51,6 +51,18 @@ spring:
             - Path=/api/pal/**
           filters:
             - StripPrefix=1
+        - id: BORED-SERVICE=CONSUMER-FRIDND
+          uri: lb://bored-service-consumer-friend
+          predicates:
+            - Path=/api/friend/**
+          filters:
+            - StripPrefix=1
+        - id: BORED-SERVICE=CONSUMER-SPACE
+          uri: lb://bored-service-consumer-space
+          predicates:
+            - Path=/api/space/**
+          filters:
+            - StripPrefix=1
 server:
   port: 9000
 
