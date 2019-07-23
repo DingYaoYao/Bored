@@ -7,7 +7,7 @@
 	<title>Bored</title>
 	<link rel="stylesheet" type="text/css" href="css/normalize.css" />
 	<link rel="stylesheet" type="text/css" href="css/default.css">
-	<link rel='stylesheet prefetch' href='http://fonts.useso.com/css?family=Open+Sans'>
+<!--	<link rel='stylesheet prefetch' href='http://fonts.useso.com/css?family=Open+Sans'>-->
 	<link rel="stylesheet" type="text/css" href="css/styles.css">
 	<!--[if IE]>
 		<script src="http://libs.useso.com/js/html5shiv/3.7/html5shiv.min.js"></script>
@@ -66,7 +66,7 @@
 
 
 
-	<script type="text/javascript" src='js/stopExecutionOnTimeout.js?t=1'></script>
+	<!--<script type="text/javascript" src='js/stopExecutionOnTimeout.js?t=1'></script>-->
 	<script type="text/javascript" src='js/jquery.min.js'></script>
 	<script type="text/javascript" src="js/main.js"></script>
 	<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
@@ -81,22 +81,18 @@
 	 $.ajax({
 	 	type : "GET", //请求类型
 	 	url : "http://127.0.0.1:9000/api/pal/GetuserPal", //请求的url
-	 	data : {
-	 		bored:b.token
+	 	headers : {
+	 		"bored":b.token
 	 	},
 	 	dataType : "json", //ajax接口（请求url）返回的数据类型
 	 	success : function(data) { //data：返回数据（json对象）
 	 		if (data.message!=null) {
 	 			alert("用户还没有登陆");
+				localStorage.removeItem('BORED');
 				location.href="index";
 	 		}else if(data.data[0]!=null){
 	 			var item=data.data;
 				var html="";
-				for (let i = 0; i <item.length; i++) {
-
-                  //  alert(JSON.stringify(item[i]));
-                   // alert(item[i].friendNicename)
-				}
 	 			for(let i=0;i<item.length;i++){
 	 			    let friendNicename= item[i].friendNicename;
 	 			    let friendUserId=item[i].friendUserId;
