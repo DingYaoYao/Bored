@@ -39,7 +39,7 @@ public class RegController extends AbstractBaseController<User> {
         }
         //验证手机号验证码
         // 注册用户
-        tbUser.setPicturepath("img/1.png");
+
         tbUser.setToken("asdasdas");
         tbUser.setAccid("adad");
         tbUser.setPassword(DigestUtils.md5DigestAsHex(tbUser.getPassword().getBytes()));

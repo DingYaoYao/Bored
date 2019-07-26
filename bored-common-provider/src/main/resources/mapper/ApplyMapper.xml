@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.bored.common.mapper.ApplyMapper">
+
+    <cache type="cn.bored.common.utils.RedisCache">
+        <property name="eviction" value="LRU" />
+        <property name="flushInterval" value="6000000" />
+        <property name="size" value="1024" />
+        <property name="readOnly" value="false" />
+    </cache>
+
     <resultMap id="BaseResultMap" type="cn.bored.domain.Apply">
         <!--
           WARNING - @mbg.generated
@@ -14,7 +22,7 @@
     </resultMap>
 
     <!--总结  首先别人发给我的，我发送给别人的，-->
-    <select id="getApplydDecided" resultMap="BaseResultMap">
+    <select id="getApplydDecided" resultMap="BaseResultMap" useCache="true">
     (SELECT * FROM apply
     WHERE to_user=#{from} AND STATUS=#{status}
     ORDER BY apply_date DESC)
@@ -24,8 +32,8 @@
     ORDER BY apply_date DESC)
   </select>
 
-    <!--查询我被拒绝的-->
-    <select id="getApplyDefeated" resultMap="BaseResultMap">
+
+ <select id="getApplyDefeated" resultMap="BaseResultMap"  useCache="true">
  SELECT * FROM apply
     WHERE STATUS =#{status} AND from_user=#{from}
     GROUP BY to_user

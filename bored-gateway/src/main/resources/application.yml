@@ -5,12 +5,29 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
     default-property-inclusion: non_null
+  redis:
+    lettuce:
+      pool:
+        max-active: 8
+        max-idle: 8
+        max-wait: -1ms
+        min-idle: 0
+    sentinel:
+      master: mymaster
+      nodes: 129.28.157.98:26379, 129.28.157.98:26380, 129.28.157.98:26381
+
   cloud:
     nacos:
       discovery:
         server-addr: localhost:8848
 
     gateway:
+      default-filters:
+        # 熔断降级配置
+        - name: Hystrix
+          args:
+            name: default
+            fallbackUri: 'forward:/defaultfallback'
       discovery:
         locator:
           enabled: true  #表明gateway开启服务注册和发现的功能，并且spring cloud gateway自动根据服务发现为每一个服务创建了一个router，这个router将以服务名开头的请求路径转发到对应的服务。
@@ -33,6 +50,20 @@ spring:
             - Path=/api/apply/**
           filters:
             - StripPrefix=1
+            # 熔断降级配置
+            - name: Hystrix
+              args:
+                name: default
+                fallbackUri: 'forward:/defaultfallback'
+            # redis限流 ， filter名称必须是RequestRateLimiter
+            - name: RequestRateLimiter
+              args:
+                # 使用SpEL名称引用Bean，与上面新建的RateLimiterConfig类中的bean的name相同
+                key-resolver: '#{@remoteAddrKeyResolver}'
+                # 每秒最大访问次数
+                redis-rate-limiter.replenishRate: 800
+                # 令牌桶最大容量
+                redis-rate-limiter.burstCapacity: 800
         - id: BORED-SERVICE=CONSUMER-LOGIN
           uri: lb://bored-service-consumer-login
           predicates:
@@ -63,6 +94,17 @@ spring:
             - Path=/api/space/**
           filters:
             - StripPrefix=1
+# hystrix 信号量隔离，3秒后自动超时
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          strategy: SEMAPHORE
+          thread:
+            timeoutInMilliseconds: 10000
+  shareSecurityContext: true
+
 server:
   port: 9000
 
@@ -80,3 +122,12 @@ management:
 logging:
   level:
     org.springframework.cloud.gateway: debug
+
+#排除用户验证路径
+exclude-paths-list:
+  paths[0]: "/reg/useradd"
+  paths[1]: "/login/login"
+  paths[2]: "hauwei: 4096"
+  paths[3]: "qq: 1024"
+
+

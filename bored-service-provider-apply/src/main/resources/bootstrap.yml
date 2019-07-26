@@ -25,16 +25,21 @@ spring:
     sentinel:
       master: mymaster
       nodes: 129.28.157.98:26379, 129.28.157.98:26380, 129.28.157.98:26381
-    host: 129.28.157.98
+
 server:
-  port: 9011
+  port: 9016
 
 mybatis:
   configuration:
     cache-enabled: true
   type-aliases-package: cn.bored.domain
   mapper-locations: classpath:mapper/*.xml
-
+logging:
+  level:
+    cn:
+      bored:
+        common:
+          mapper: debug
 
 management:
   endpoints:

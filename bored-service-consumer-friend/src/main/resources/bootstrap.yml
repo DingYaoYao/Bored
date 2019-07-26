@@ -10,7 +10,7 @@ feign:
     enabled: true
 
 server:
-  port: 9041
+  port: 9061
 
 management:
   endpoints:

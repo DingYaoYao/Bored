@@ -1,11 +1,15 @@
 package cn.bored.service.provider.apply.service;
 
 import cn.bored.common.dto.DtoResult;
-import cn.bored.common.mapper.ApplyMapper;
-import cn.bored.common.service.impl.BaseServiceImpl;
 
+import cn.bored.common.mapper.ApplyMapper;
+
+
+import cn.bored.common.service.impl.BaseServiceImpl;
 import cn.bored.domain.Apply;
 import cn.bored.service.api.apply.ApplyService;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

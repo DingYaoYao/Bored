@@ -19,7 +19,7 @@ import java.util.Date;
  * @version 1.0.0
  * @date 2019/1/23 15:50
  */
-@Data
+
 public abstract class AbstractBaseDomain implements Serializable {
 
     private static final long serialVersionUID = 1739981318655410197L;
@@ -30,4 +30,11 @@ public abstract class AbstractBaseDomain implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

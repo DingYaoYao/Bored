@@ -15,6 +15,16 @@ spring:
     nacos:
       discovery:
         server-addr: localhost:8848
+  redis:
+    lettuce:
+      pool:
+        max-active: 8
+        max-idle: 8
+        max-wait: -1ms
+        min-idle: 0
+    sentinel:
+      master: mymaster
+      nodes: 129.28.157.98:26379, 129.28.157.98:26380, 129.28.157.98:26381
 
 
 server:
@@ -30,4 +40,9 @@ management:
       exposure:
         include: "*"
 
-
+logging:
+  level:
+    cn:
+      bored:
+        common:
+          mapper: debug

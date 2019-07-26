@@ -11,7 +11,7 @@ feign:
 
 
 server:
-  port: 9021
+  port: 9025
 
 management:
   endpoints:

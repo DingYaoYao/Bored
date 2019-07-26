@@ -56,7 +56,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserMapper> implement
 
 
 
-    public User save(User domain) {
+    private User save(User domain) {
         int result = 0;
         Date currentDate = new Date();
         domain.setUpdate_date(currentDate);

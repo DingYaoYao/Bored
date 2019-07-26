@@ -31,11 +31,6 @@
             <artifactId>bored-common-provider</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
-            <version>2.0.2.RELEASE</version>
-        </dependency>
         <!-- Projects End -->
     </dependencies>
     <build>
@@ -44,7 +39,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>cn.bored.service.provider.apply.BoredServicveProviderApplyApplication</mainClass>
+                    <mainClass>cn.bored.service.provider.apply.BoredServiceProviderApplyApplication</mainClass>
                 </configuration>
             </plugin>
         </plugins>

@@ -24,7 +24,7 @@ logging:
 
 
 server:
-  port: 8502
+  port: 9071
 
 mybatis:
   type-aliases-package: cn.bored.domain

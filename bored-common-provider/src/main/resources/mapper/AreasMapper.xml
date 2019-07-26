@@ -10,4 +10,5 @@
     <result column="area" jdbcType="VARCHAR" property="area" />
     <result column="cityid" jdbcType="CHAR" property="cityid" />
   </resultMap>
+
 </mapper>

@@ -1,9 +1,11 @@
 package cn.bored.common.mapper;
 
 
+
 import cn.bored.domain.User;
 import mapper.MyMapper;
 import org.apache.ibatis.annotations.Param;
+
 
 public interface UserMapper extends MyMapper<User> {
 

@@ -8,4 +8,5 @@
     <result column="userid" jdbcType="BIGINT" property="userid" />
     <result column="fouserid" jdbcType="BIGINT" property="fouserid" />
   </resultMap>
+
 </mapper>

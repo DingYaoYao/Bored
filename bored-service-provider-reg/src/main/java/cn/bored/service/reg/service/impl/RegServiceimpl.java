@@ -7,13 +7,18 @@ import cn.bored.domain.User;
 
 import cn.bored.service.reg.service.RegService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 @Service
 public class RegServiceimpl extends BaseServiceImpl<User, UserMapper> implements RegService<User>{
+
     @Autowired
     private UserMapper userMapper;
+
+    @Value("${reg.default.picturePath}")
+    private String picturePath;
     public User save(User domain) {
         int result = 0;
         Date currentDate = new Date();
@@ -32,6 +37,7 @@ public class RegServiceimpl extends BaseServiceImpl<User, UserMapper> implements
             }
             long b = Integer.parseInt(randomStr);
             domain.setId(b);
+            domain.setPicturepath(picturePath);
             /**
              * 用于自动回显 ID，领域模型中需要 @ID 注解的支持
              * {@link AbstractBaseDomain}
