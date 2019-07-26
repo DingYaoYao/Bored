@@ -25,8 +25,8 @@ if(flag){
     }else{
         flag=false;
         $("#register").css("disable","true")
-        let  path=bored.path+"/reg/useradd";
-        $.post(path,{"nicename":nickname,"password":pwd,"phone":phone},function(result){
+
+        $.post(bored.registerPath,{"nicename":nickname,"password":pwd,"phone":phone},function(result){
             if(bored.isSuccess(result)){
                 console.log("获得注册id==>"+result.data)
                 $("#userNum").val(result.data);

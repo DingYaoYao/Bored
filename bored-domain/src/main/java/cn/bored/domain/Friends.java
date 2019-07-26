@@ -10,6 +10,11 @@ import javax.persistence.*;
 public class Friends extends BaseEntity {
 
 
+    private String picturepath;
+    private String friend_nicename;
+    private String niceName;
+    private String address_id;
+
     /**
      * 用户id
      */

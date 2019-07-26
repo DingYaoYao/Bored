@@ -19,11 +19,18 @@ if(flag){
     }
     else{
         flag=false;
-        let  path=bored.path+"/login/login";
-        $.post(path,{"id":userNum,"password":password},function(result){
+
+        $.post(bored.loginPath,{"id":userNum,"password":password},function(result){
             if(bored.isSuccess(result)){
                 console.log(result.data);
-                sessionStorage.setItem("BORED",result.data)
+
+                //保存用户信息
+                sessionStorage.setItem(bored.sessionUser,JSON.stringify(result.data));
+
+                window.location.href="main";
+
+
+               // window.location.href="main";
             }else if(bored.isError(result)){
                 console.log(result.message);
             }else {

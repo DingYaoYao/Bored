@@ -19,9 +19,6 @@
     <script src="static/assets/js/zepto.min.js"></script>
     <script src="static/assets/js/fontSize.js"></script>
     <script src="static/assets/js/wcPop/wcPop.js"></script>
-    <script type='text/javascript' src='static/assets/js/huanxin/webim.config.js'></script>
-    <script type='text/javascript' src='static/assets/js/huanxin/strophe-1.2.8.js'></script>
-    <script type='text/javascript' src='static/assets/js/huanxin/websdk-1.4.13.js'></script>
 
 </head>
 <body>
@@ -68,7 +65,8 @@
     </div>
 </div>
 
-<script type="text/javascript" src="static/assets/js/service/register.js"></script>
 <script type="text/javascript" src="static/assets/js/service/RequestAjxa.js"></script>
+<script type="text/javascript" src="static/assets/js/service/register.js"></script>
+
 </body>
 </html>

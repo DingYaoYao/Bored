@@ -5,9 +5,10 @@
   Time: 14:44
   To change this template use File | Settings | File Templates.
 --%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
@@ -17,19 +18,21 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-touch-fullscreen" content="yes">
     <meta http-equiv="Access-Control-Allow-Origin" content="*">
-    <link rel="stylesheet" href="static/assets/css/reset.css" />
-    <link rel="stylesheet" href="static/assets/css/animate.css" />
-    <link rel="stylesheet" href="static/assets/css/swiper-3.4.1.min.css" />
-    <link rel="stylesheet" href="static/assets/css/layout.css" />
 
-    <script src="static/assets/js/jquery-1.9.1.min.js"></script>
-    <script src="static/assets/js/zepto.min.js"></script>
-    <script src="static/assets/js/fontSize.js"></script>
-    <script src="static/assets/js/swiper-3.4.1.min.js"></script>
-    <script src="static/assets/js/wcPop/wcPop.js"></script>
-    <script type='text/javascript' src='static/assets/js/huanxin/webim.config.js'></script>
-    <script type='text/javascript' src='static/assets/js/huanxin/strophe-1.2.8.js'></script>
-    <script type='text/javascript' src='static/assets/js/huanxin/websdk-1.4.13.js'></script>
+
+
+    <link rel="stylesheet" href="/static/assets/css/reset.css" />
+    <link rel="stylesheet" href="/static/assets/css/animate.css" />
+    <link rel="stylesheet" href="/static/assets/css/swiper-3.4.1.min.css" />
+    <link rel="stylesheet" href="/static/assets/css/layout.css" />
+
+    <script src="/static/assets/js/jquery-1.9.1.min.js"></script>
+    <script src="/static/assets/js/zepto.min.js"></script>
+    <script src="/static/assets/js/fontSize.js"></script>
+    <script src="/static/assets/js/swiper-3.4.1.min.js"></script>
+    <script src="/static/assets/js/wcPop/wcPop.js"></script>
+
+    <script type="text/javascript" src="/static/assets/js/service/RequestAjxa.js"></script>
 
 </head>
 <body>
@@ -51,9 +54,9 @@
                 <ul class="clearfix" id="J__ucinfoPanel">
                     <li>
                         <div class="item flexbox flex-alignc wc__material-cell">
-                            <img class="uimg" src="static/assets/img/uimg/${haoyou.headPortrait}" />
+                            <img class="uimg" src="" id="friendPic" />
                             <label class="lbl flex1">
-                                <em>${haoyou.remark==null?haoyou.nickname:remark}</em><i class="myfriend">${haoyou.userNum}</i>
+                                <em id="friName"></em><i class="myfriend" id="userId"></i>
                             </label>
                         </div>
                     </li>
@@ -65,7 +68,7 @@
                     <li>
                         <div class="item flexbox flex-alignc wc__material-cell">
                             <label class="lbl">地区</label>
-                            <div class="cnt flex1 c-999">${haoyou.address}</div>
+                            <div class="cnt flex1 c-999"  id="address"></div>
                         </div>
                         <div class="item flexbox flex-alignc wc__material-cell" routeUrl="weiyouquan.html">
                             <label class="lbl">个人相册</label>
@@ -100,7 +103,20 @@
     </div>
 </div>
 
+<script type="text/javascript">
+    let userId="${requestScope.id}";
+    console.log("===>"+userId);
+    if(bored.userFriends.hasOwnProperty(userId)){
+        let user=bored.userFriends[userId];
+        $("#address").html(user.address_id);
+        $("#friName").html("昵称："+(user.friend_nicename!=null?user.friend_nicename:user.niceName));
+        $("#userId").html("账号："+user.friendUserId);
+        $("#friendPic").attr("src",user.picturepath);
 
+    }
+
+
+</script>
 <script type="text/javascript">
     /** __公共函数 */
     $(function(){

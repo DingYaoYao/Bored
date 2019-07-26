@@ -17,11 +17,7 @@
 	<script src="static/assets/js/zepto.min.js"></script>
 	<script src="static/assets/js/fontSize.js"></script>
 	<script src="static/assets/js/wcPop/wcPop.js"></script>
-
-
-	<script type='text/javascript' src='static/assets/js/huanxin/strophe-1.2.8.js'></script>
-	<script type='text/javascript' src='static/assets/js/huanxin/webim.config.js'></script>
-	<script type='text/javascript' src='static/assets/js/huanxin/websdk-1.4.13.js'></script>
+	<script type="text/javascript" src="static/assets/js/service/RequestAjxa.js"></script>
 
 </head>
 <body>
@@ -53,59 +49,7 @@
 		</div>
 	</div>
 
-<script type="text/javascript" src="static/assets/js/service/login.js">
-
-</script>
-	<script type="text/javascript" src="static/assets/js/service/RequestAjxa.js"></script>
-	<script type="text/javascript">
-
-//		/** 环信初始化 */
-//		var conn = null;
-//		$(function(){
-//			//创建连接：开启IM连接
-//			conn = new WebIM.connection({
-//				isMultiLoginSessions: WebIM.config.isMultiLoginSessions,
-//				url: WebIM.config.xmppURL,
-//				heartBeatWait: WebIM.config.heartBeatWait,
-//				autoReconnectNumMax: WebIM.config.autoReconnectNumMax,
-//				autoReconnectInterval: WebIM.config.autoReconnectInterval,
-//				apiUrl: WebIM.config.apiURL,
-//				isAutoLogin: true
-//			});
-//			//回调函数：开启监听（精简过后的代码）
-//			conn.listen({
-//				onOpened: function(message) {
-//					alert('###Listen Success! You can used send###',message);
-//				},
-//				onClosed: function(message) {}, //连接关闭回调
-//				onTextMessage: function(message) {
-//					alert('###收到了文本###',message);
-//				}, //收到文本消息
-//				onError: function(message) {alert('###失败回调###',message);}, //失败回调
-//				onReceivedMessage: function(message) {}, //收到消息送达服务器回执
-//				onDeliveredMessage: function(message) {}, //收到消息送达客户端回执
-//				onReadMessage: function(message) {}, //收到消息已读回执
-//			});
-//		})
-//		// 登录验证
-//		$("#J__btnLogin").on("click", function(){
-//
-//			var userNum = $("#userNum").val();
-//			var password = $("#password").val();
-//			if(userNum == ''){
-//				wcPop({content: '用户名不能为空！', time: 2000});
-//			}else if(password == ''){
-//				wcPop({ content: '密码不能为空！', time: 2000 });
-//			}else{
-//				$("#lgregForms").submit();
-//				sessionStorage.setItem("userNum",userNum);
-//				sessionStorage.setItem("password",password);
-//				alert("登陆成功");
-//			}
-//
-//		});
-
-	</script>
+<script type="text/javascript" src="static/assets/js/service/login.js"></script>
 
 </body>
 </html>

@@ -28,6 +28,8 @@
     <script type='text/javascript' src='static/assets/js/huanxin/webim.config.js'></script>
     <script type='text/javascript' src='static/assets/js/huanxin/strophe-1.2.8.js'></script>
     <script type='text/javascript' src='static/assets/js/huanxin/websdk-1.4.13.js'></script>
+    <script type="text/javascript" src="static/assets/js/service/RequestAjxa.js"></script>
+    <script type="text/javascript" src="static/assets/js/service/main.js"></script>
 
 
 </head>
@@ -39,6 +41,7 @@
         <!-- //顶部 -->
         <div class="wc__headerBar fixed">
             <div class="inner flexbox">
+                <span id="userList"></span>
                 <h2 class="barTit barTitLg flex1">微聊<em class="ff-ar">(12)</em></h2>
                 <a class="barIco sear" href="javascript:;" id="J__topbarSear"></a>
                 <a class="barIco add" href="javascript:;" id="J__topbarAdd"></a>
@@ -107,26 +110,7 @@
                                             <img class="uimg" src="static/assets/img/icon__addrFriend-img03.jpg" /><span class="name flex1">标签</span>
                                         </div>
                                     </li>
-                                    <!--标记 为跳出循环使用-->
-                                    <c:set var="isDoing" value="0"/>
-                                    <c:forEach var="p" items="${pylist}">
-                                        <c:forEach  var="friend" items="${friendMap}">
-                                            <c:set var="string1" value="${p}"/>
-                                            <c:set var="str" value="${fn:substring(string1, 0, 1)}"/>
-                                            <c:if test="${p==friend.initial}">
-                                                <li id="${str}" routeUrl="toDanLiaoPage?friendId=${friend.userId}">
-                                                    <c:if test="${isDoing!=str}">
-                                                        <h2 class="initial wc__borT">${str}</h2>
-                                                        <c:set var="isDoing" value="${str}"/>
-                                                    </c:if>
-                                                    <div class="row flexbox flex-alignc wc__material-cell">
-                                                        <img class="uimg" src="static/assets/img/uimg/${friend.headPortrait}" />
-                                                        <span class="name flex1">${friend.remark==null? friend.nickname:friend.remark}</span>
-                                                    </div>
-                                                </li>
-                                            </c:if>
-                                        </c:forEach>
-                                    </c:forEach>
+
                                 </ul>
                             </div>
                         </div>
@@ -259,6 +243,10 @@
     </div>
 </div>
 
+<script type="text/javascript">
+main.init();
+</script>
+
 <!-- 左右滑屏切换.Start -->
 <script type="text/javascript">
     var Swiper = new Swiper('.swiper-container',{
@@ -303,7 +291,7 @@
             success: function(msg) {
             },
             error: function(msg) {
-                alert('###登录失败###');
+               // alert('###登录失败###');
             }
 
         };
@@ -329,7 +317,7 @@
             },
             onPresence: function (message) {
                 var myDate = new Date().toLocaleString();
-                alert(myDate + JSON.stringify(message));
+             //   alert(myDate + JSON.stringify(message));
                 switch (message.type) {
                     case 'subscribe': // 对方请求添加好友
                         var truthBeTold = window.confirm((message.from + "申请添加您为好友:"));
@@ -340,14 +328,14 @@
                                 message: "[resp:true]"
                             });
 
-                            alert("同意添加好友");
+                           // alert("同意添加好友");
                         } else {
                             // 拒绝对方添加好友
                             conn.unsubscribed({
                                 to: message.from,
                                 message: "rejectAddFriend" // 拒绝添加好友回复信息
                             });
-                            alert("拒绝添加好友");
+                        //    alert("拒绝添加好友");
                         }
                         break;
                     case 'subscribed': // 对方同意添加好友，已方同意添加好友
@@ -357,8 +345,8 @@
                     case 'unsubscribed': // 被拒绝添加好友，或被对方删除好友成功
                         break;
                     case 'memberJoinPublicGroupSuccess': // 成功加入聊天室
-                        alert('join chat room success' + myDate);
-                        alert(new Date().toLocaleString());
+                       // alert('join chat room success' + myDate);
+                   //     alert(new Date().toLocaleString());
                         break;
                     case 'joinChatRoomFaild': // 加入聊天室失败
                         alert('join chat room faild');
@@ -390,9 +378,9 @@
                     type:"get",
                     dataType:"json",
                     success: function (friend){
-                        alert(friend.userNum);
+                       // alert(friend.userNum);
                         var list=<%=session.getAttribute("jsonlist")%>;
-                        alert(list);
+                     //   alert(list);
                         var flag=false;
                         for(var p in list){//遍历json数组时，这么写p为索引，0,1
                             alert(list[p].userNum);
@@ -430,7 +418,9 @@
                 });
 
             }, //收到文本消息
-            onError: function(message) {alert(JSON.stringify(message));}, //失败回调
+            onError: function(message) {
+                //alert(JSON.stringify(message));
+                }, //失败回调
             onReceivedMessage: function(message) {}, //收到消息送达服务器回执
             onDeliveredMessage: function(message) {}, //收到消息送达客户端回执
             onReadMessage: function(message) {}, //收到消息已读回执
