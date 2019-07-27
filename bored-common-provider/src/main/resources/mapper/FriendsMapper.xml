@@ -12,9 +12,9 @@
   </resultMap>
 
   <select id="getFriendsDecided" resultMap="BaseResultMap">
-        SELECT picturepath,f.id,userid,friend_user_id,friend_nicename,niceName,address_id
+        SELECT picturepath,f.id,userid,friend_user_id,friend_nicename,niceName,address_id,token
          FROM friends f ,USER u
-          WHERE userid=#{id} and userid=u.id
+          WHERE userid=#{id} and friend_user_id=u.id
   </select>
   <delete id="Friendsdel" >
 DELETE

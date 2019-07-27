@@ -183,9 +183,9 @@
                                 <ul class="clearfix">
                                     <li>
                                         <div class="item flexbox flex-alignc wc__material-cell" routeUrl="gerenxinxi.html">
-                                            <img class="uimg" src="static/assets/img/uimg/${user.headPortrait}" />
+                                            <img class="uimg" id="userImg" src="" />
                                             <span class="txt flex1">
-													<em>${user.nickname}</em><i>${user.userNum}</i>
+													<em id="userName"></em><i id="userId"></i>
 												</span>
                                             <div class="qrcode wc__arr"><img src="static/assets/img/placeholder/u__qrcode-img.png" /></div>
                                         </div>

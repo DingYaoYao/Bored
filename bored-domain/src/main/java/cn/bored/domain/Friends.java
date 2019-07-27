@@ -14,7 +14,7 @@ public class Friends extends BaseEntity {
     private String friend_nicename;
     private String niceName;
     private String address_id;
-
+    private String token;
     /**
      * 用户id
      */

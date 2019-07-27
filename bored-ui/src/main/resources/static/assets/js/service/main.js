@@ -57,6 +57,7 @@ let  main=function(){
 
     }
 function buildUserItemClick(){
+        console.log("给好友列表绑定事件！")
     $(".userInfo").on("click",function(){
         let userId=$(this).attr("userId");
         console.log("好友id为--》"+userId);
@@ -68,11 +69,21 @@ function buildUserItemClick(){
 
     })
 }
+function initUserInfo(){
+        $("#userId").html(bored.userInfo.id);
+    $("#userName").html(bored.userInfo.niceName);
+    $("#userImg").html(bored.userInfo.picturepath);
+
+}
 
   return {
+
+        //初始化主页面
         init(){
+            if(bored.userInfo==null){ console.log("用户没登陆");return ;}
             getUserFriends();
             buildUserItemClick();
+            initUserInfo();
         },
         getUserFriends
   }
