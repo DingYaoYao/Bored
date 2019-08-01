@@ -23,6 +23,8 @@ public class User extends  BaseEntity implements Serializable {
      * im  用户标识
      */
     private String accid;
+    @Column(name = "backImg")
+    private String backImg;
     /**
      * 身份验证标识
      */

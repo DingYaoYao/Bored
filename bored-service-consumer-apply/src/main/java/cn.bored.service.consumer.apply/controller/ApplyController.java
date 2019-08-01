@@ -67,7 +67,7 @@ public class ApplyController extends AbstractBaseController {
     @GetMapping("/consent/{to}")
     public DtoResult<Apply> del(@PathVariable long to){
         User user = ConsumerConstant.getUser(request);
-        DtoResult friendsadd = palService.Friendsadd(user.getId(), to);
+        DtoResult friendsadd = palService.Friendsadd(user.getId(), to,"");
         //执行添加好友操作
         if(!isSuccess(friendsadd))return error("双向添加失败");
 

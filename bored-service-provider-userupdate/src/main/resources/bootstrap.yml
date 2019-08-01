@@ -32,7 +32,7 @@ server:
 
 mybatis:
   configuration:
-    cache-enabled: true
+    cache-enabled: false
   type-aliases-package: cn.bored.domain
   mapper-locations: classpath:mapper/*.xml
 
@@ -41,3 +41,9 @@ management:
     web:
       exposure:
         include: "*"
+logging:
+  level:
+    cn:
+      bored:
+        common:
+          mapper: debug

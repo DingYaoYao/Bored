@@ -40,7 +40,8 @@ management:
         include: "*"
 reg:
   default:
-    picturePath: '我是默认图片地址'
+    picturePath: 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2943189637,3941537920&fm=26&gp=0.jpg'
+    backImg: 'http://img4.imgtn.bdimg.com/it/u=2170217910,293575024&fm=26&gp=0.jpg'
 logging:
   level:
     cn:

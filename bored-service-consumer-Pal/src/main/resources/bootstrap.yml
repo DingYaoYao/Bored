@@ -12,7 +12,7 @@ spring:
 
 feign:
   sentinel:
-    enabled: true
+    enabled: false
 
 server:
   port: 9041

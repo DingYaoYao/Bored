@@ -3,6 +3,8 @@ package cn.bored.service.reg.service.impl;
 import cn.bored.common.dto.AbstractBaseDomain;
 import cn.bored.common.mapper.UserMapper;
 import cn.bored.common.service.impl.BaseServiceImpl;
+import cn.bored.common.utils.ImServiceDTO;
+import cn.bored.common.utils.RequestImService;
 import cn.bored.domain.User;
 
 import cn.bored.service.reg.service.RegService;
@@ -19,6 +21,8 @@ public class RegServiceimpl extends BaseServiceImpl<User, UserMapper> implements
 
     @Value("${reg.default.picturePath}")
     private String picturePath;
+    @Value("${reg.default.backImg}")
+    private String backImg;
     public User save(User domain) {
         int result = 0;
         Date currentDate = new Date();
@@ -38,6 +42,14 @@ public class RegServiceimpl extends BaseServiceImpl<User, UserMapper> implements
             long b = Integer.parseInt(randomStr);
             domain.setId(b);
             domain.setPicturepath(picturePath);
+            domain.setBackImg(backImg);
+            ImServiceDTO accid = RequestImService.createACCID(domain.getNicename());
+            if(accid==null){
+                System.err.println("\n\n未能从网易云信获得用户标识！\n\n");
+                return null;
+            }
+            domain.setAccid(accid.getInfo().getAccid());
+            domain.setToken(accid.getInfo().getToken());
             /**
              * 用于自动回显 ID，领域模型中需要 @ID 注解的支持
              * {@link AbstractBaseDomain}

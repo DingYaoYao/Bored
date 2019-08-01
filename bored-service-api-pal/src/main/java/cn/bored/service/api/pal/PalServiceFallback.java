@@ -19,7 +19,7 @@ public class PalServiceFallback implements PalService {
     }
 
     @Override
-    public DtoResult Friendsadd(Long id, Long Friendsid) {
+    public DtoResult Friendsadd(Long id, Long Friendsid,String niceName ) {
         return null;
     }
 

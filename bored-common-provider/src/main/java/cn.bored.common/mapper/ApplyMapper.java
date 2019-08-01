@@ -1,14 +1,18 @@
 package cn.bored.common.mapper;
 
 
+import cn.bored.common.utils.RedisCache;
 import cn.bored.domain.Apply;
 import mapper.MyMapper;
+import org.apache.ibatis.annotations.CacheNamespace;
 
 
 import java.util.List;
 
+//@CacheNamespace(implementation = RedisCache.class)
 public interface ApplyMapper extends MyMapper<Apply> {
 
+    int add(Apply apply);
    //查询带申请
    List<Apply> getApplydDecided(long from,int status);
 
@@ -20,7 +24,7 @@ public interface ApplyMapper extends MyMapper<Apply> {
    int findUserApplyCount(long from ,long to,int status);
 
    //修改请求状态
-   int updateApplystatus(long id,int status);
+   int updateApplystatus(Apply apply);
 
      //删除用户请求
    int deleteByuserIdAndFriendId(long from ,long to);

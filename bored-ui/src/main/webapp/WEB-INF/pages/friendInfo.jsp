@@ -32,7 +32,14 @@
     <script src="/static/assets/js/swiper-3.4.1.min.js"></script>
     <script src="/static/assets/js/wcPop/wcPop.js"></script>
 
+
+    <script src="http://yx-web.nos.netease.com/official/websdk/NIM_Web_SDK_v4.8.0.js"></script>
     <script type="text/javascript" src="/static/assets/js/service/RequestAjxa.js"></script>
+    <script type="text/javascript" src="/static/assets/js/service/main.js"></script>
+    <script type="text/javascript" src="/static/assets/js/service/onMsg.js"></script>
+    <script type="text/javascript" src="/static/assets/js/service/yuang.js"></script>
+    <script type="text/javascript" src="/static/assets/js/service/saveChatList.js"></script>
+
 
 </head>
 <body>
@@ -73,19 +80,6 @@
                         <div class="item flexbox flex-alignc wc__material-cell" routeUrl="weiyouquan.html">
                             <label class="lbl">个人相册</label>
                             <div class="cnt flex1">
-                                <c:if test="${sayList!=null}">
-                                    <c:forEach items="${sayList}" var="say">
-                                        <c:if test="${say.image1!=null}">
-                                            <img class="list-img" src="static/assets/img/placeholder/${say.image1}" />
-                                        </c:if>
-                                        <c:if test="${say.image2!=null}">
-                                            <img class="list-img" src="static/assets/img/placeholder/${say.image2}" />
-                                        </c:if>
-                                        <c:if test="${say.image3!=null}">
-                                            <img class="list-img" src="static/assets/img/placeholder/${say.image3}" />
-                                        </c:if>
-                                    </c:forEach>
-                                </c:if>
 
                             </div>
                         </div>
@@ -96,16 +90,20 @@
                 </ul>
             </div>
             <div class="wc__btns-panel">
-                <a class="wc__btn-primary" href="toDanLiaoPage?friendId=${haoyou.userId}">发消息</a>
+                <a class="wc__btn-primary" onclick="onUser()" >发消息</a>
             </div>
         </div>
-
     </div>
 </div>
 
 <script type="text/javascript">
+    yuang.init();
+
     let userId="${requestScope.id}";
     console.log("===>"+userId);
+    function onUser() {
+        window.location.href="/danliao/"+userId;
+    }
     if(bored.userFriends.hasOwnProperty(userId)){
         let user=bored.userFriends[userId];
         $("#address").html(user.address_id);

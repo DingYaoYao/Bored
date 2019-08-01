@@ -24,7 +24,7 @@ logging:
           mapper: debug
 
 server:
-  port: 9051
+  port: 9091
 
 mybatis:
   type-aliases-package: cn.bored.domain

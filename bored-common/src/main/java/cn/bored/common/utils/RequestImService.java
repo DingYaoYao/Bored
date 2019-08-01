@@ -132,26 +132,26 @@ public class RequestImService {
     }
     //将对accid的操作结果写入文件中
     public static void writeFile(String filePath,String...value){
-        try {
-            File file=new File(filePath);
-            if(!file.exists()){
-                try {
-                    file.createNewFile();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            OutputStreamWriter osw = new OutputStreamWriter(new FileOutputStream(
-                    file,true));
-            for (int i = 0; i < value.length; i++) {
-                osw.write(value[i]+"\n");
-            }
-            osw.write(new SimpleDateFormat().format(new Date())+"------\n\n");
-            osw.flush();
-            osw.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("写入文件异常-------这不是重点-----可以不用理会--");
-        }
+//        try {
+//            File file=new File(filePath);
+//            if(!file.exists()){
+//                try {
+//                    file.createNewFile();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//            OutputStreamWriter osw = new OutputStreamWriter(new FileOutputStream(
+//                    file,true));
+//            for (int i = 0; i < value.length; i++) {
+//                osw.write(value[i]+"\n");
+//            }
+//            osw.write(new SimpleDateFormat().format(new Date())+"------\n\n");
+//            osw.flush();
+//            osw.close();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            System.out.println("写入文件异常-------这不是重点-----可以不用理会--");
+//        }
     }
 }

@@ -1,10 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: yangxueming
-  Date: 2019/6/22
-  Time: 16:19
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -17,35 +11,36 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-touch-fullscreen" content="yes">
     <meta http-equiv="Access-Control-Allow-Origin" content="*">
-    <link rel="stylesheet" href="static/assets/css/reset.css" />
-    <link rel="stylesheet" href="static/assets/css/animate.css" />
-    <link rel="stylesheet" href="static/assets/css/swiper-3.4.1.min.css" />
-    <link rel="stylesheet" href="static/assets/css/layout.css" />
-    <link rel="stylesheet" href="static/assets/css/weui.css" />
-    <link rel="stylesheet" href="static/assets/css/yuyin/index.css">
-    <script src="static/assets/js/yuyin/recordmp3.min.js"></script>
+    <link rel="stylesheet" href="/static/assets/css/reset.css" />
+    <link rel="stylesheet" href="/static/assets/css/animate.css" />
+    <link rel="stylesheet" href="/static/assets/css/swiper-3.4.1.min.css" />
+    <link rel="stylesheet" href="/static/assets/css/layout.css" />
+    <link rel="stylesheet" href="/static/assets/css/weui.css" />
 
-    <script src="static/assets/js/jquery-1.12.4.js"></script>
-    <script src="static/assets/js/zepto.min.js"></script>
-    <script src="static/assets/js/fontSize.js"></script>
-    <script src="static/assets/js/swiper-3.4.1.min.js"></script>
-    <script src="static/assets/js/wcPop/wcPop.js"></script>
-    <script src="static/assets/js/weui.min.js"></script>
-    <script type='text/javascript' src='static/assets/js/huanxin/webim.config.js'></script>
-    <script type='text/javascript' src='static/assets/js/huanxin/strophe-1.2.8.js'></script>
-    <script type='text/javascript' src='static/assets/js/huanxin/websdk-1.4.13.js'></script>
+    <script src="/static/assets/js/jquery-1.9.1.min.js"></script>
+    <script src="/static/assets/js/zepto.min.js"></script>
+    <script src="/static/assets/js/fontSize.js"></script>
+    <script src="/static/assets/js/swiper-3.4.1.min.js"></script>
+    <script src="/static/assets/js/wcPop/wcPop.js"></script>
+    <script src="/static/assets/js/weui.min.js"></script>
+
+    <script src="http://yx-web.nos.netease.com/official/websdk/NIM_Web_SDK_v4.8.0.js"></script>
+    <script type="text/javascript" src="/static/assets/js/service/RequestAjxa.js"></script>
+    <script type="text/javascript" src="/static/assets/js/service/main.js"></script>
+    <script type="text/javascript" src="/static/assets/js/service/yuang.js"></script>
+    <script type="text/javascript" src="/static/assets/js/service/saveChatList.js"></script>
 
 </head>
 <body>
-
 <!-- <>微聊主容器 -->
 <div class="wechat__panel clearfix">
+
     <div class="wc__chat-wrapper flexbox flex__direction-column">
         <!-- //顶部 -->
         <div class="wc__headerBar fixed">
             <div class="inner flexbox">
                 <a class="back splitline" href="javascript:;" onClick="history.back(-1);"></a>
-                <h2 class="barTit flex1">${friend.userNum}</h2>
+                <h2 class="barTit flex1" id="friName"></h2>
                 <a class="barIco u-one" href="javascript:;"></a>
             </div>
         </div>
@@ -53,34 +48,10 @@
         <div class="wc__chatMsg-panel flex1">
             <div class="chatMsg-cnt">
                 <ul class="clearfix" id="J__chatMsgList">
-                    <li class="notice"><span>你已经添加了张小龙，现在可以开始聊天了。</span></li>
-                    <li class="time"><span>2017年12月31日 晚上22:30${friend.userNum}</span></li>
-                    <!-- 别人-->
-                    <li class="others">
-                        <a class="avatar" href="toHaoYouXinXi?userNum=${friend.userNum}"><img src="static/assets/img/uimg/${friend.headPortrait}" /></a>
-                        <c:set var="friendId" scope="request" value="${friend.userId}"></c:set>
-                        <div class="content">
-                            <div class="msg">
-                                hello 美女，晚上好，最近过的还好吧！！！ <img class="face" src="static/assets/img/emotion/face01/10.png"><img class="face" src="static/assets/img/emotion/face01/63.png"><img class="face" src="static/assets/img/emotion/face01/75.png">
-                            </div>
-                        </div>
-                    </li>
-                    <!--自己-->
-                    <li class="me">
-                        <div class="content">
-                            <div class="msg">
-                                么么哒，张总发个红包呗！<img class="face" src="static/assets/img/emotion/face01/92.png">
-                            </div>
-                        </div>
-                        <a class="avatar" href="haoyouzhuye.html"><img src="static/assets/img/uimg/${user.headPortrait}" /></a>
-                        <c:set var="userId" scope="request" value="${user.userId}"></c:set>
-                    </li>
+                    <li class="notice"><span>你已经添加了，现在可以开始聊天了。</span></li>
+                    <li class="time"><span>2019年12月31日 晚上22:30</span></li>
+
                 </ul>
-                <!-- 录制语音弹出层 -->
-                <div class="hide-tips-wrap">
-                    <i class="tips-icon"></i>
-                    <span class="tips-txt">松开发送消息</span>
-                </div>
             </div>
         </div>
 
@@ -88,20 +59,10 @@
         <div class="wc__footTool-panel">
             <!-- 输入框模块 -->
             <div class="wc__editor-panel wc__borT flexbox">
-                <!-- 发送语音按钮 -->
-                <i class="my_ivoice"></i>
-                <div class="wrap-editor flex1">
-                    <input type=file id="lyf_audio" style="display: none" />
-                    <button class="yxm_button" style="display: none">按下说话</button>
-                    <div class="editor J__wcEditor" contenteditable="true" style="-webkit-user-select:auto;">
-
-
-                    </div>
-
-                </div>
+                <div class="wrap-editor flex1"><div class="editor J__wcEditor" contenteditable="true" style="-webkit-user-select:auto;" id="text"></div></div>
                 <i class="btn btn-emotion"></i>
                 <i class="btn btn-choose"></i>
-                <button class="btn-submit J__wchatSubmit">发送</button>
+                <button class="btn-submit J__wchatSubmit" id="bao">发送</button>
             </div>
 
             <!-- 表情、选择模块 -->
@@ -117,13 +78,13 @@
                         </div>
                         <div class="emotion__cells-footer" id="J__emotionFootTab">
                             <ul class="clearfix">
-                                <li class="swiperTmpl cur" tmpl="swiper__tmpl-emotion01"><img src="static/assets/img/emotion/face01/face-lbl.png" alt=""></li>
-                                <li class="swiperTmpl" tmpl="swiper__tmpl-emotion02"><img src="static/assets/img/emotion/face02/face-lbl.gif" alt=""></li>
-                                <li class="swiperTmpl" tmpl="swiper__tmpl-emotion03"><img src="static/assets/img/emotion/face03/face-lbl.gif" alt=""></li>
-                                <li class="swiperTmpl" tmpl="swiper__tmpl-emotion04"><img src="static/assets/img/emotion/face04/face-lbl.gif" alt=""></li>
-                                <li class="swiperTmpl" tmpl="swiper__tmpl-emotion05"><img src="static/assets/img/emotion/face05/face-lbl.gif" alt=""></li>
-                                <li class="swiperTmpl" tmpl="swiper__tmpl-emotion06"><img src="static/assets/img/emotion/face06/face-lbl.gif" alt=""></li>
-                                <li class="swiperTmplSet"><img src="static/assets/img/wchat/icon__emotion-set.png" alt=""></li>
+                                <li class="swiperTmpl cur" tmpl="swiper__tmpl-emotion01"><img src="/static/assets/img/emotion/face01/face-lbl.png" alt=""></li>
+                                <li class="swiperTmpl" tmpl="swiper__tmpl-emotion02"><img src="/static/assets/img/emotion/face02/face-lbl.gif" alt=""></li>
+                                <li class="swiperTmpl" tmpl="swiper__tmpl-emotion03"><img src="/static/assets/img/emotion/face03/face-lbl.gif" alt=""></li>
+                                <li class="swiperTmpl" tmpl="swiper__tmpl-emotion04"><img src="/static/assets/img/emotion/face04/face-lbl.gif" alt=""></li>
+                                <li class="swiperTmpl" tmpl="swiper__tmpl-emotion05"><img src="/static/assets/img/emotion/face05/face-lbl.gif" alt=""></li>
+                                <li class="swiperTmpl" tmpl="swiper__tmpl-emotion06"><img src="/static/assets/img/emotion/face06/face-lbl.gif" alt=""></li>
+                                <li class="swiperTmplSet"><img src="/static/assets/img/wchat/icon__emotion-set.png" alt=""></li>
                             </ul>
                         </div>
                     </div>
@@ -132,11 +93,11 @@
                 <div class="wrap-choose" style="display: none;">
                     <div class="choose__cells">
                         <ul class="clearfix">
-                            <li><a class="J__wchatZp" href="javascript:;"><span class="img"><img src="static/assets/img/wchat/icon__choose-zp.png" /><input type="file" accept="image/*" /></span><em>照片</em></a></li>
-                            <li><a class="J__wchatSp" href="javascript:;"><span class="img"><img src="static/assets/img/wchat/icon__choose-sp.png" /><input type="file" accept="video/*" /></span><em>视频</em></a></li>
-                            <li><a class="J__wchatHb" href="javascript:;"><span class="img"><img src="static/assets/img/wchat/icon__choose-hb.png" /></span><em>红包</em></a></li>
-                            <li><a class="J__wchatSc" href="javascript:;"><span class="img"><img src="static/assets/img/wchat/icon__choose-sc.png" /></span><em>我的收藏</em></a></li>
-                            <li><a class="J__wchatWj" href="javascript:;"><span class="img"><img src="static/assets/img/wchat/icon__choose-wj.png" /></span><em>文件</em></a></li>
+                            <li><a class="J__wchatZp" href="javascript:;"><span class="img"><img src="/static/assets/img/wchat/icon__choose-zp.png" /><input type="file" accept="image/*" /></span><em>照片</em></a></li>
+                            <li><a class="J__wchatSp" href="javascript:;"><span class="img"><img src="/static/assets/img/wchat/icon__choose-sp.png" /><input type="file" accept="video/*" /></span><em>视频</em></a></li>
+                            <li><a class="J__wchatHb" href="javascript:;"><span class="img"><img src="/static/assets/img/wchat/icon__choose-hb.png" /></span><em>红包</em></a></li>
+                            <li><a class="J__wchatSc" href="javascript:;"><span class="img"><img src="/static/assets/img/wchat/icon__choose-sc.png" /></span><em>我的收藏</em></a></li>
+                            <li><a class="J__wchatWj" href="javascript:;"><span class="img"><img src="/static/assets/img/wchat/icon__choose-wj.png" /></span><em>文件</em></a></li>
                         </ul>
                     </div>
                 </div>
@@ -154,9 +115,9 @@
     </div>
 </div>
 <script type="text/javascript">
-    var curIndex = 0, imgPreviewSwiper;
+    let curIndex = 0, imgPreviewSwiper;
     $("#J__chatMsgList li").on("click", ".picture", function(){
-        var html = "",  _src = $(this).find("img").attr("src");
+        let html = "",  _src = $(this).find("img").attr("src");
 
         $("#J__chatMsgList li .picture").each(function(i, item){
             html += '<div class="swiper-slide"><div class="swiper-zoom-container">'+ $(this).html() +'</div></div>';
@@ -178,7 +139,7 @@
     });
     // 关闭预览
     $(".wc__popup-imgPreview").on("click", function(e){
-        var that = $(this);
+        let that = $(this);
         imgPreviewSwiper.destroy(true, true);
         $(".J__swiperImgPreview .swiper-wrapper").html('');
         that.hide();
@@ -192,7 +153,7 @@
     <video id="J__videoPreview" width="100%" height="100%" controls="controls" x5-video-player-type="h5" x5-video-player-fullscreen="true" webkit-playsinline preload="auto"></video>
 </div>
 <script type="text/javascript">
-    var video = $("J__videoPreview");
+    let video = document.getElementById("J__videoPreview");
     $("#J__chatMsgList li").on("click", ".video", function(){
         video.src = $(this).find("img").attr("videoUrl");
         $(".wc__popup-videoPreview").show();
@@ -202,7 +163,7 @@
             video.pause();
         }
     });
-    video.on("ended", function(){
+    video.addEventListener("ended", function(){
         video.currentTime = 0;
     }, false);
     // 关闭预览
@@ -213,10 +174,10 @@
     });
 
     // 进入全屏、退出全屏
-    video.on("x5videoenterfullscreen", function(){
-        alert("进入全屏");
+    video.addEventListener("x5videoenterfullscreen", function(){
+        console.log("进入全屏");
     }, false);
-    video.on("x5videoexitfullscreen", function(){
+    video.addEventListener("x5videoexitfullscreen", function(){
         $(".wc__popup-videoPreview .wc__videoClose").trigger("click");
     }, false)
 </script>
@@ -227,137 +188,137 @@
 <div class="swiper__tmpl-emotion01" style="display: none;">
     <div class="swiper-slide">
         <div class="face-list face__sm-list">
-            <span><img class="face" src="static/assets/img/emotion/face01/0.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/1.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/2.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/3.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/4.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/5.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/6.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/0.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/1.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/2.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/3.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/4.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/5.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/6.png" /></span>
 
-            <span><img class="face" src="static/assets/img/emotion/face01/7.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/8.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/9.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/10.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/11.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/12.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/13.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/7.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/8.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/9.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/10.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/11.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/12.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/13.png" /></span>
 
-            <span><img class="face" src="static/assets/img/emotion/face01/14.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/15.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/16.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/17.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/18.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/19.png" /></span>
-            <span><img class="del" src="static/assets/img/wchat/icon__emotion-del.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/14.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/15.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/16.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/17.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/18.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/19.png" /></span>
+            <span><img class="del" src="/static/assets/img/wchat/icon__emotion-del.png" /></span>
         </div>
     </div>
     <div class="swiper-slide">
         <div class="face-list face__sm-list">
-            <span><img class="face" src="static/assets/img/emotion/face01/20.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/21.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/22.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/23.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/24.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/25.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/26.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/20.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/21.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/22.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/23.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/24.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/25.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/26.png" /></span>
 
-            <span><img class="face" src="static/assets/img/emotion/face01/27.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/28.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/29.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/30.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/31.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/32.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/33.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/27.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/28.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/29.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/30.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/31.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/32.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/33.png" /></span>
 
-            <span><img class="face" src="static/assets/img/emotion/face01/34.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/35.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/36.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/37.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/38.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/39.png" /></span>
-            <span><img class="del" src="static/assets/img/wchat/icon__emotion-del.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/34.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/35.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/36.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/37.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/38.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/39.png" /></span>
+            <span><img class="del" src="/static/assets/img/wchat/icon__emotion-del.png" /></span>
         </div>
     </div>
     <div class="swiper-slide">
         <div class="face-list face__sm-list">
-            <span><img class="face" src="static/assets/img/emotion/face01/40.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/41.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/42.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/43.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/44.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/45.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/46.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/40.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/41.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/42.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/43.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/44.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/45.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/46.png" /></span>
 
-            <span><img class="face" src="static/assets/img/emotion/face01/47.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/48.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/49.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/50.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/51.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/52.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/53.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/47.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/48.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/49.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/50.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/51.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/52.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/53.png" /></span>
 
-            <span><img class="face" src="static/assets/img/emotion/face01/54.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/55.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/56.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/57.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/58.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/59.png" /></span>
-            <span><img class="del" src="static/assets/img/wchat/icon__emotion-del.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/54.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/55.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/56.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/57.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/58.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/59.png" /></span>
+            <span><img class="del" src="/static/assets/img/wchat/icon__emotion-del.png" /></span>
         </div>
     </div>
     <div class="swiper-slide">
         <div class="face-list face__sm-list">
-            <span><img class="face" src="static/assets/img/emotion/face01/60.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/61.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/62.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/63.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/64.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/65.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/66.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/60.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/61.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/62.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/63.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/64.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/65.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/66.png" /></span>
 
-            <span><img class="face" src="static/assets/img/emotion/face01/67.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/68.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/69.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/70.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/71.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/72.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/73.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/67.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/68.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/69.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/70.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/71.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/72.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/73.png" /></span>
 
-            <span><img class="face" src="static/assets/img/emotion/face01/74.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/75.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/76.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/77.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/78.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/79.png" /></span>
-            <span><img class="del" src="static/assets/img/wchat/icon__emotion-del.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/74.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/75.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/76.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/77.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/78.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/79.png" /></span>
+            <span><img class="del" src="/static/assets/img/wchat/icon__emotion-del.png" /></span>
         </div>
     </div>
     <div class="swiper-slide">
         <div class="face-list face__sm-list">
-            <span><img class="face" src="static/assets/img/emotion/face01/80.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/81.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/82.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/83.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/84.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/85.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/86.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/80.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/81.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/82.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/83.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/84.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/85.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/86.png" /></span>
 
-            <span><img class="face" src="static/assets/img/emotion/face01/87.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/88.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/89.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/90.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/91.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/92.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/93.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/87.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/88.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/89.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/90.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/91.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/92.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/93.png" /></span>
 
-            <span><img class="face" src="static/assets/img/emotion/face01/94.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/95.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/96.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/97.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/98.png" /></span>
-            <span><img class="face" src="static/assets/img/emotion/face01/99.png" /></span>
-            <span><img class="del" src="static/assets/img/wchat/icon__emotion-del.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/94.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/95.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/96.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/97.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/98.png" /></span>
+            <span><img class="face" src="/static/assets/img/emotion/face01/99.png" /></span>
+            <span><img class="del" src="/static/assets/img/wchat/icon__emotion-del.png" /></span>
         </div>
     </div>
 </div>
@@ -365,28 +326,28 @@
 <div class="swiper__tmpl-emotion02" style="display: none;">
     <div class="swiper-slide">
         <div class="face-list face__lg-list">
-            <span><img class="lg-face" src="static/assets/img/emotion/face02/0.gif" /></span>
-            <span><img class="lg-face" src="static/assets/img/emotion/face02/1.gif" /></span>
-            <span><img class="lg-face" src="static/assets/img/emotion/face02/2.gif" /></span>
-            <span><img class="lg-face" src="static/assets/img/emotion/face02/3.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face02/0.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face02/1.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face02/2.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face02/3.gif" /></span>
 
-            <span><img class="lg-face" src="static/assets/img/emotion/face02/4.gif" /></span>
-            <span><img class="lg-face" src="static/assets/img/emotion/face02/5.gif" /></span>
-            <span><img class="lg-face" src="static/assets/img/emotion/face02/6.gif" /></span>
-            <span><img class="lg-face" src="static/assets/img/emotion/face02/7.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face02/4.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face02/5.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face02/6.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face02/7.gif" /></span>
         </div>
     </div>
     <div class="swiper-slide">
         <div class="face-list face__lg-list">
-            <span><img class="lg-face" src="static/assets/img/emotion/face02/8.gif" /></span>
-            <span><img class="lg-face" src="static/assets/img/emotion/face02/9.gif" /></span>
-            <span><img class="lg-face" src="static/assets/img/emotion/face02/10.gif" /></span>
-            <span><img class="lg-face" src="static/assets/img/emotion/face02/11.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face02/8.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face02/9.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face02/10.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face02/11.gif" /></span>
 
-            <span><img class="lg-face" src="static/assets/img/emotion/face02/12.gif" /></span>
-            <span><img class="lg-face" src="static/assets/img/emotion/face02/13.gif" /></span>
-            <span><img class="lg-face" src="static/assets/img/emotion/face02/14.gif" /></span>
-            <span><img class="lg-face" src="static/assets/img/emotion/face02/15.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face02/12.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face02/13.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face02/14.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face02/15.gif" /></span>
         </div>
     </div>
 </div>
@@ -394,28 +355,28 @@
 <div class="swiper__tmpl-emotion03" style="display: none;">
     <div class="swiper-slide">
         <div class="face-list face__lg-list">
-            <span><img class="lg-face" src="static/assets/img/emotion/face03/0.gif" /></span>
-            <span><img class="lg-face" src="static/assets/img/emotion/face03/1.gif" /></span>
-            <span><img class="lg-face" src="static/assets/img/emotion/face03/2.gif" /></span>
-            <span><img class="lg-face" src="static/assets/img/emotion/face03/3.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face03/0.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face03/1.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face03/2.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face03/3.gif" /></span>
 
-            <span><img class="lg-face" src="static/assets/img/emotion/face03/4.gif" /></span>
-            <span><img class="lg-face" src="static/assets/img/emotion/face03/5.gif" /></span>
-            <span><img class="lg-face" src="static/assets/img/emotion/face03/6.gif" /></span>
-            <span><img class="lg-face" src="static/assets/img/emotion/face03/7.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face03/4.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face03/5.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face03/6.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face03/7.gif" /></span>
         </div>
     </div>
     <div class="swiper-slide">
         <div class="face-list face__lg-list">
-            <span><img class="lg-face" src="static/assets/img/emotion/face03/8.gif" /></span>
-            <span><img class="lg-face" src="static/assets/img/emotion/face03/9.gif" /></span>
-            <span><img class="lg-face" src="static/assets/img/emotion/face03/10.gif" /></span>
-            <span><img class="lg-face" src="static/assets/img/emotion/face03/11.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face03/8.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face03/9.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face03/10.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face03/11.gif" /></span>
 
-            <span><img class="lg-face" src="static/assets/img/emotion/face03/12.gif" /></span>
-            <span><img class="lg-face" src="static/assets/img/emotion/face03/13.gif" /></span>
-            <span><img class="lg-face" src="static/assets/img/emotion/face03/14.gif" /></span>
-            <span><img class="lg-face" src="static/assets/img/emotion/face03/15.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face03/12.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face03/13.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face03/14.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face03/15.gif" /></span>
         </div>
     </div>
 </div>
@@ -423,28 +384,28 @@
 <div class="swiper__tmpl-emotion04" style="display: none;">
     <div class="swiper-slide">
         <div class="face-list face__lg-list">
-            <span><img class="lg-face" src="static/assets/img/emotion/face04/0.gif" /></span>
-            <span><img class="lg-face" src="static/assets/img/emotion/face04/1.gif" /></span>
-            <span><img class="lg-face" src="static/assets/img/emotion/face04/2.gif" /></span>
-            <span><img class="lg-face" src="static/assets/img/emotion/face04/3.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face04/0.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face04/1.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face04/2.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face04/3.gif" /></span>
 
-            <span><img class="lg-face" src="static/assets/img/emotion/face04/4.gif" /></span>
-            <span><img class="lg-face" src="static/assets/img/emotion/face04/5.gif" /></span>
-            <span><img class="lg-face" src="static/assets/img/emotion/face04/6.gif" /></span>
-            <span><img class="lg-face" src="static/assets/img/emotion/face04/7.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face04/4.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face04/5.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face04/6.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face04/7.gif" /></span>
         </div>
     </div>
     <div class="swiper-slide">
         <div class="face-list face__lg-list">
-            <span><img class="lg-face" src="static/assets/img/emotion/face04/8.gif" /></span>
-            <span><img class="lg-face" src="static/assets/img/emotion/face04/9.gif" /></span>
-            <span><img class="lg-face" src="static/assets/img/emotion/face04/10.gif" /></span>
-            <span><img class="lg-face" src="static/assets/img/emotion/face04/11.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face04/8.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face04/9.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face04/10.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face04/11.gif" /></span>
 
-            <span><img class="lg-face" src="static/assets/img/emotion/face04/12.gif" /></span>
-            <span><img class="lg-face" src="static/assets/img/emotion/face04/13.gif" /></span>
-            <span><img class="lg-face" src="static/assets/img/emotion/face04/14.gif" /></span>
-            <span><img class="lg-face" src="static/assets/img/emotion/face04/15.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face04/12.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face04/13.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face04/14.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face04/15.gif" /></span>
         </div>
     </div>
 </div>
@@ -452,28 +413,28 @@
 <div class="swiper__tmpl-emotion05" style="display: none;">
     <div class="swiper-slide">
         <div class="face-list face__lg-list">
-            <span><img class="lg-face" src="static/assets/img/emotion/face05/0.gif" /></span>
-            <span><img class="lg-face" src="static/assets/img/emotion/face05/1.gif" /></span>
-            <span><img class="lg-face" src="static/assets/img/emotion/face05/2.gif" /></span>
-            <span><img class="lg-face" src="static/assets/img/emotion/face05/3.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face05/0.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face05/1.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face05/2.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face05/3.gif" /></span>
 
-            <span><img class="lg-face" src="static/assets/img/emotion/face05/4.gif" /></span>
-            <span><img class="lg-face" src="static/assets/img/emotion/face05/5.gif" /></span>
-            <span><img class="lg-face" src="static/assets/img/emotion/face05/6.gif" /></span>
-            <span><img class="lg-face" src="static/assets/img/emotion/face05/7.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face05/4.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face05/5.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face05/6.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face05/7.gif" /></span>
         </div>
     </div>
     <div class="swiper-slide">
         <div class="face-list face__lg-list">
-            <span><img class="lg-face" src="static/assets/img/emotion/face05/8.gif" /></span>
-            <span><img class="lg-face" src="static/assets/img/emotion/face05/9.gif" /></span>
-            <span><img class="lg-face" src="static/assets/img/emotion/face05/10.gif" /></span>
-            <span><img class="lg-face" src="static/assets/img/emotion/face05/11.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face05/8.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face05/9.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face05/10.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face05/11.gif" /></span>
 
-            <span><img class="lg-face" src="static/assets/img/emotion/face05/12.gif" /></span>
-            <span><img class="lg-face" src="static/assets/img/emotion/face05/13.gif" /></span>
-            <span><img class="lg-face" src="static/assets/img/emotion/face05/14.gif" /></span>
-            <span><img class="lg-face" src="static/assets/img/emotion/face05/15.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face05/12.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face05/13.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face05/14.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face05/15.gif" /></span>
         </div>
     </div>
 </div>
@@ -481,35 +442,35 @@
 <div class="swiper__tmpl-emotion06" style="display: none;">
     <div class="swiper-slide">
         <div class="face-list face__lg-list">
-            <span><img class="lg-face" src="static/assets/img/emotion/face06/0.gif" /></span>
-            <span><img class="lg-face" src="static/assets/img/emotion/face06/1.gif" /></span>
-            <span><img class="lg-face" src="static/assets/img/emotion/face06/2.gif" /></span>
-            <span><img class="lg-face" src="static/assets/img/emotion/face06/3.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face06/0.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face06/1.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face06/2.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face06/3.gif" /></span>
 
-            <span><img class="lg-face" src="static/assets/img/emotion/face06/4.gif" /></span>
-            <span><img class="lg-face" src="static/assets/img/emotion/face06/5.gif" /></span>
-            <span><img class="lg-face" src="static/assets/img/emotion/face06/6.gif" /></span>
-            <span><img class="lg-face" src="static/assets/img/emotion/face06/7.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face06/4.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face06/5.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face06/6.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face06/7.gif" /></span>
         </div>
     </div>
     <div class="swiper-slide">
         <div class="face-list face__lg-list">
-            <span><img class="lg-face" src="static/assets/img/emotion/face06/8.gif" /></span>
-            <span><img class="lg-face" src="static/assets/img/emotion/face06/9.gif" /></span>
-            <span><img class="lg-face" src="static/assets/img/emotion/face06/10.gif" /></span>
-            <span><img class="lg-face" src="static/assets/img/emotion/face06/11.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face06/8.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face06/9.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face06/10.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face06/11.gif" /></span>
 
-            <span><img class="lg-face" src="static/assets/img/emotion/face06/12.gif" /></span>
-            <span><img class="lg-face" src="static/assets/img/emotion/face06/13.gif" /></span>
-            <span><img class="lg-face" src="static/assets/img/emotion/face06/14.gif" /></span>
-            <span><img class="lg-face" src="static/assets/img/emotion/face06/15.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face06/12.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face06/13.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face06/14.gif" /></span>
+            <span><img class="lg-face" src="/static/assets/img/emotion/face06/15.gif" /></span>
         </div>
     </div>
 </div>
 <script type="text/javascript">
-    var emotionSwiper;
+    let emotionSwiper;
     function setEmotionSwiper(tmpl){
-        var _tmpl = tmpl ? tmpl : $("#J__emotionFootTab ul li.cur").attr("tmpl");
+        let _tmpl = tmpl ? tmpl : $("#J__emotionFootTab ul li.cur").attr("tmpl");
         $("#J__swiperEmotion .swiper-container").attr("id", _tmpl);
         $("#J__swiperEmotion .swiper-wrapper").html($("." + _tmpl).html());
 
@@ -522,7 +483,7 @@
     $("#J__emotionFootTab").on("click", "ul li.swiperTmpl", function(){
         // 先销毁swiper
         emotionSwiper && emotionSwiper.destroy(true, true);
-        var _tmpl = $(this).attr("tmpl");
+        let _tmpl = $(this).attr("tmpl");
         $(this).addClass("cur").siblings().removeClass("cur");
 
         setEmotionSwiper(_tmpl);
@@ -556,7 +517,7 @@
 <script type="text/javascript">
     /* ...红包事件.start */
     $(".J__wchatHb").on("click", function(){
-        var bpidx = wcPop({
+        let bpidx = wcPop({
             skin: 'ios',
             content: $("#J__popupTmpl-Hongbao").html(),
             style: 'background-color: #f3f3f3; max-width: 320px; width: 90%;',
@@ -583,76 +544,18 @@
 </script>
 <!-- …… 红包弹窗模板.End -->
 
+
 <script type="text/javascript">
-
     /** __公共函数 */
-    var conn = null;
-    var options = {
-        apiUrl: WebIM.config.apiURL,
-        user: sessionStorage.getItem("userNum"),
-        pwd: sessionStorage.getItem("password"),
-        appKey: WebIM.config.appkey,
-        success: function(msg) {
-        },
-        error: function(msg) {
-            alert('###连接失败，请检查网络设置###');
-        }
-
-    };
     $(function(){
         // 禁止长按弹出系统菜单
         $(".wechat__panel").on("contextmenu", function(e){
             e.preventDefault();
         });
-            /** 环信集成*/
-            //创建连接：开启IM连接
-            conn = new WebIM.connection({
-                isMultiLoginSessions: WebIM.config.isMultiLoginSessions,
-                url: WebIM.config.xmppURL,
-                heartBeatWait: WebIM.config.heartBeatWait,
-                autoReconnectNumMax: WebIM.config.autoReconnectNumMax,
-                autoReconnectInterval: WebIM.config.autoReconnectInterval,
-                apiUrl: WebIM.config.apiURL,
-                isAutoLogin: true
-            });
-            conn.open(options);
-            //该设置为手动上线
-            //conn.setPresence();
-            //回调函数：开启监听（精简过后的代码）
-            conn.listen({
-                onOpened: function(message) {
-                },
-                onClosed: function(message) {}, //连接关闭回调
-                /*收到文本消息*/
-                onTextMessage: function(message) {
-                        var $chatMsgList = $("#J__chatMsgList");
-                        var html = message.sourceMsg;
-                        var reg = /(http:\/\/|https:\/\/)((\w|=|\?|\.|\/|&|-)+)/g;
-                        html = html.replace(reg, "<a href='$1$2'>$1$2</a>");
-                        var msgTpl = [
-                            '<li class="others" id="${friend.userNum}">\
-                            <a class="avatar" href="微聊(好友主页).html"><img src="static/assets/img/uimg/${friend.headPortrait}" /></a>\
-                        <div class="content">\
-                        <div class="msg" id="${friend.userNum}">' + html + '</div>\
-					</div>\
-					</li>'
-                        ].join("");
-                        $chatMsgList.append(msgTpl);
-                },
-                //收到文本消息
-                onError: function(message) {
-                    alert("连接失败,请检查网络设置");
-                }, //失败回调
-                onReceivedMessage: function(message) {}, //收到消息送达服务器回执
-                onDeliveredMessage: function(message) {}, //收到消息送达客户端回执
-                onReadMessage: function(message) {}, //收到消息已读回执
-            });
     });
 
     /** __自定函数 */
     $(function(){
-        var friendNum= '<%= request.getAttribute("friendNum")%>';
-
         // ...滚动聊天区底部
         function wchat_ToBottom(){
             $(".wc__chatMsg-panel").animate({scrollTop: $("#J__chatMsgList").height()}, 0);
@@ -660,7 +563,7 @@
 
         // ...点击聊天面板区域
         $(document).on("click", ".wc__chatMsg-panel", function(e){
-            var _tapMenu = $(".wc__chatTapMenu");
+            let _tapMenu = $(".wc__chatTapMenu");
             if(_tapMenu.length && e.target != _tapMenu && !$.contains(_tapMenu[0], e.target)){
                 // 关闭长按菜单
                 _tapMenu.hide();
@@ -671,7 +574,7 @@
 
         // ...表情、选择区切换
         $(".wc__editor-panel").on("click", ".btn", function(){
-            var that = $(this);
+            let that = $(this);
             $(".wc__choose-panel").show();
             if (that.hasClass("btn-emotion")) {
                 $(".wc__choose-panel .wrap-emotion").show();
@@ -686,26 +589,26 @@
         });
 
         // ...处理编辑器信息
-        var $editor = $(".J__wcEditor"), _editor = $editor[0];
+        let $editor = $(".J__wcEditor"), _editor = $editor[0];
         function surrounds(){
             setTimeout(function () { //chrome
-                var sel = window.getSelection();
-                var anchorNode = sel.anchorNode;
+                let sel = window.getSelection();
+                let anchorNode = sel.anchorNode;
                 if (!anchorNode) return;
                 if (sel.anchorNode === _editor ||
                     (sel.anchorNode.nodeType === 3 && sel.anchorNode.parentNode === _editor)) {
 
-                    var range = sel.getRangeAt(0);
-                    var p = document.createElement("p");
+                    let range = sel.getRangeAt(0);
+                    let p = document.createElement("p");
                     range.surroundContents(p);
                     range.selectNodeContents(p);
                     range.insertNode(document.createElement("br")); //chrome
                     sel.collapse(p, 0);
 
                     (function clearBr() {
-                        var elems = [].slice.call(_editor.children);
-                        for (var i = 0, len = elems.length; i < len; i++) {
-                            var el = elems[i];
+                        let elems = [].slice.call(_editor.children);
+                        for (let i = 0, len = elems.length; i < len; i++) {
+                            let el = elems[i];
                             if (el.tagName.toLowerCase() == "br") {
                                 _editor.removeChild(el);
                             }
@@ -727,10 +630,10 @@
         }, false);
         // 点击表情
         $("#J__swiperEmotion").on("click", ".face-list span img", function(){
-            var that = $(this), range;
+            let that = $(this), range;
 
             if(that.hasClass("face")){ //小表情
-                var img = that[0].cloneNode(true);
+                let img = that[0].cloneNode(true);
                 _editor.focus();
                 _editor.blur(); //输入表情时禁止输入法
 
@@ -742,7 +645,7 @@
                         range.insertNode(img);
                         range.collapse(false);
 
-                        var sel = window.getSelection();
+                        let sel = window.getSelection();
                         sel.removeAllRanges();
                         sel.addRange(range);
                     }
@@ -755,14 +658,14 @@
                     range = window.getSelection().getRangeAt(0);
                     range.collapse(false);
 
-                    var sel = window.getSelection();
+                    let sel = window.getSelection();
                     sel.removeAllRanges();
                     sel.addRange(range);
                     document.execCommand("delete");
                 }, 10);
             } else if(that.hasClass("lg-face")){ //大表情
-                var _img = that.parent().html();
-                var _tpl = [
+                let _img = that.parent().html();
+                let _tpl = [
                     '<li class="me">\
                         <div class="content">\
                             <div class="msg lgface">'+ _img + '</div>\
@@ -771,274 +674,79 @@
 						</li>'
                 ].join("");
                 $chatMsgList.append(_tpl);
+
                 wchat_ToBottom();
             }
         });
-        // 发送文本信息
-        var $chatMsgList = $("#J__chatMsgList");
-        function isEmpty(){
-            var html = $editor.html();
-            html = html.replace(/<br[\s\/]{0,2}>/ig, "\r\n");
-            html = html.replace(/<[^img].*?>/ig, "");
-            html = html.replace(/&nbsp;/ig, "");
-            return html.replace(/\r\n|\n|\r/, "").replace(/(?:^[ \t\n\r]+)|(?:[ \t\n\r]+$)/g, "") == "";
+
+
+        // 清空聊天框并获取焦点（处理输入法和表情 - 聚焦）
+        if(!$(".wc__choose-panel").is(":hidden")){
+            $editor.html("");
+        }else{
+            $editor.html("").focus().trigger("click");
         }
-        $(".J__wchatSubmit").on("click", function(){
-            // 判断内容是否为空
-            if(isEmpty()) return;
-            var html = $editor.html();
-            var reg = /(http:\/\/|https:\/\/)((\w|=|\?|\.|\/|&|-)+)/g;
-            html = html.replace(reg, "<a href='$1$2'>$1$2</a>");
-            var msgTpl = [
-                '<li class="me">\
-                    <div class="content">\
-                        <div class="msg">'+ html +'</div>\
-					</div>\
-						<a class="avatar" href="#"><img src="static/assets/img/uimg/${user.headPortrait}" /></a>\
-					</li>'
-            ].join("");
-            //环信集成
-            var id = conn.getUniqueId();                 // 生成本地消息id
-            var msg = new WebIM.message('txt', id);      // 创建文本消息
-            var myDate = new Date().toLocaleString();
-            msg.set({
-                ext: {
-                    'time': myDate
-                },
-                msg: html,             // 消息内容
-                to: friendNum,     // 接收消息对象（用户id）
-                roomType: false,
-                success: function (id, serverMsgId) {
-                    var friendId= <%= request.getAttribute("friendId")%>;
-                    var userId= <%= request.getAttribute("userId")%>;
-                    var typeId=1;
-                    //var startindex=html.indexOf("<p>");
-                    var endindex=html.indexOf("</p>");
-                    var content=html.substring(3,endindex);
-                    $.ajax({
-                      url: "addMessage",
-                      type:"post",
-                      data:{"userId":userId,"receiver":friendId,"typeId":typeId,"content":content} ,
-                      dataType:"json",
-                      success: function (data) {
-                         alert(data);
-                      },
-                      error:function (e) {
-                            //返回500错误 或者其他 http状态码错误时 需要在error 回调函数中处理了 并且返回的数据还不能直接alert，需要使用
-                            //$.parseJSON 进行转译    res.msg 是自己组装的错误信息通用变量
-                            var res = JSON.stringify(e);
-                            alert(res);
-                        }
-                  });
-                },
-                fail: function(e){
-                    alert('###消息发送失败###');
-                }
+        wchat_ToBottom();
+    });
+
+    // ...长按弹出菜单
+    $("#J__chatMsgList").on("longTap", "li .msg", function(e){
+        let that = $(this), menuTpl, menuNode = $("<div class='wc__chatTapMenu animated anim-fadeIn'></div>");
+        that.addClass("taped");
+        that.parents("li").siblings().find(".msg").removeClass("taped");
+        let isRevoke = that.parents("li").hasClass("me");
+        let _revoke = isRevoke ? "<a href='#'><i class='ico i4'></i>撤回</a>" : "";
+
+        if(that.hasClass("picture")){
+            console.log("图片长按");
+            menuTpl = "<div class='menu menu-picture'><a href='#'><i class='ico i1'></i>复制</a><a href='#'><i class='ico i2'></i>收藏</a><a href='#'><i class='ico i3'></i>另存为</a>"+ _revoke +"<a href='#'><i class='ico i5'></i>删除</a></div>";
+        }else if(that.hasClass("video")){
+            console.log("视频长按");
+            menuTpl = "<div class='menu menu-video'><a href='#'><i class='ico i3'></i>另存为</a>" + _revoke +"<a href='#'><i class='ico i5'></i>删除</a></div>";
+        }else{
+            console.log("文字长按");
+            menuTpl = "<div class='menu menu-text'><a href='#'><i class='ico i1'></i>复制</a><a href='#'><i class='ico i2'></i>收藏</a>" + _revoke +"<a href='#'><i class='ico i5'></i>删除</a></div>";
+        }
+
+        if(!$(".wc__chatTapMenu").length){
+            $(".wc__chatMsg-panel").append(menuNode.html(menuTpl));
+            autoPos();
+        }else{
+            $(".wc__chatTapMenu").hide().html(menuTpl).fadeIn(250);
+            autoPos();
+        }
+
+        function autoPos(){
+            console.log(that.position().top)
+            let _other = that.parents("li").hasClass("others");
+            $(".wc__chatTapMenu").css({
+                position: "absolute",
+                left: that.position().left + parseInt(that.css("marginLeft")) + (_other ? 0 : that.outerWidth() - $(".wc__chatTapMenu").outerWidth()),
+                top: that.position().top - $(".wc__chatTapMenu").outerHeight() - 8
             });
-            msg.body.chatType = 'singleChat';
-            conn.send(msg.body);
-            $chatMsgList.append(msgTpl);
-            // 清空聊天框并获取焦点（处理输入法和表情 - 聚焦）
-            if(!$(".wc__choose-panel").is(":hidden")){
-                $editor.html("");
-            }else{
-                $editor.html("").focus().trigger("click");
-            }
-            wchat_ToBottom();
-        });
-        //发送语音消息
-        $(".my_ivoice").on("click", function(){
-            // 单聊发送音频消息
-            var sendPrivateAudio = function () {
-
-            };
-            // 禁止浏览器鼠标右键功能
-            document.oncontextmenu = function () {
-                return false;
-            }
-            // 创建一个录音对象
-            let recorder = new MP3Recorder({
-                funCancel: function (msg) {
-                    console.log(msg);
-                    recorder = null;
-                }
-            });
-            let mp3Blob;
-            let myBtn = $(".yxm_button");
-            let oHideTips = $(".hide-tips-wrap");
-            let oMarkIcon = $('.tips-icon');
-            let oTipsTxt = $('.tips-txt');
-            myBtn.toggle();
-            myBtn.on('touchstart', function () {
-                recorder.start();
-                oHideTips.show();
-            });
-            myBtn.on('touchmove', function (e) {
-                e.preventDefault();
-            });
-            myBtn.on('touchend', function () {
-                recorder.stop();
-              recorder.getMp3Blob(function (blob) {
-                    mp3Blob = blob;
-                    var url = URL.createObjectURL(mp3Blob);
-                    //得到ul对象
-                    oWrap = document.querySelector('#J__chatMsgList');
-                    // 创建li
-                    oLi = document.createElement('li');
-                    //创建存放用户头像的a标签
-                    ouser=document.createElement('a');
-                    ouser.className="avatar";
-                    ouser.href="haoyouzhuye.jsp";
-                    // 创建头像img
-                    oImg = new Image();
-                    // 给图片添加路径
-                    oImg.src = 'static/assets/img/uimg/${user.headPortrait}';
-                    oImg.className='my_yuyin_img'
-                    //创建存放消息内容信息的div
-                    ocontent=document.createElement('div');
-                    ocontent.className="content";
-
-
-                    // 创建audio标签
-                    oAudio = document.createElement('audio');
-                    // 创建a标签
-                    oHref = document.createElement('a');
-                    // 创建播放语音显示按钮
-                    oSpanPlay = document.createElement('span');
-                    oSpanPlay.className = 'play-wrap';
-                    // 创建播放语音总时间
-                    oNumberBox = document.createElement('i');
-                    oNumberBox.className = 'num-box';
-                    // 给audio标签添加媒体链接
-                    oAudio.src = url;
-                    // 给a标签添加下载链接
-                    oHref.href = url;
-                    oHref.download = new Date().toISOString() + '.mp3';
-                    oHref.innerHTML = oHref.download;
-                    setTimeout(function () {
-                        var nDuration = conversionTime(oAudio.duration);
-                        // 判断时间是否少于一秒
-                        if (isNaN(nDuration) || nDuration == 0) {
-                            oMarkIcon.css("background","url(static/assets/img/yuyin/mark.png) no-repeat 0 0");
-                            oTipsTxt.innerText = '说话时间太短';
-                            // 关闭提示层
-                            setTimeout(function () {
-                                oHideTips.hide();
-                                oMarkIcon.css("background","url(static/assets/img/yuyin/voice.png) no-repeat 0 0");
-                                oTipsTxt.innerText = '松开发送消息';
-                            }, 500);
-                        } else {
-
-                            <!-- 别人-->
-                            oNumberBox.innerText = nDuration + '″';
-                            // 将创建好的对象放入li标签
-                           /* oLi.appendChild(oHref);*/
-                            //添加语音时长到li第一个子元素
-
-
-                            oSpanPlay.appendChild(oNumberBox);
-                            oSpanPlay.appendChild(oAudio);
-                            //添加语音信息到信息conetent中
-                            ocontent.appendChild(oSpanPlay);
-                            //添加语音信息到content容器中
-                            //添加content容器到li
-                            oLi.appendChild(ocontent);
-                            //添加用户头像
-                            ouser.appendChild(oImg);
-                            oLi.appendChild(ouser);
-                            oLi.className = 'me';
-                            oWrap.appendChild(oLi);
-                            // 获取播放语音按钮总的宽度
-                            var nSpanTotalWidth = parseFloat(getStyle(oLi, 'width')) * 0.7 - oSpanPlay.offsetWidth;
-                            // 当前播放按钮宽度  当前距离 = 当前时间 / 总时间 * 总距离 + 初始距离
-                            oSpanPlay.style.width = oSpanPlay.style.width = nDuration / 60 * nSpanTotalWidth + oSpanPlay.offsetWidth - 2 + 'px';
-                            var bMark = true;
-                            // 播放语音
-                            oSpanPlay.onclick = function () {
-                                if (bMark) {
-                                    alert("开始播放");
-                                    $(oSpanPlay).css("background-image","url(static/assets/img/yuyin/voiceplayerzuo.gif)");
-                                    oAudio.play();
-                                    oAudio.addEventListener('timeupdate', function () {
-                                        if (this.ended) {
-                                            alert("播放完毕");
-                                            $(oSpanPlay).css("background-image","url(static/assets/img/yuyin/voice1.png)");
-                                        }
-                                    });
-                                } else {
-                                    alert("这是啥？");
-                                    $(oSpanPlay).css("background-image","url(static/assets/img/yuyin/voice1.png)");
-                                    oAudio.pause();
-                                }
-                                bMark = !bMark;
-                            }
-                            // 关闭提示层
-                            setTimeout(function () {
-                                oHideTips.hide();
-                            }, 500);
-
-                        }
-
-                    }, 100);
-                });
-            });
-
-// 转换毫秒时间为秒
-            function conversionTime(t) {
-                var s = Math.floor(t % 60);
-                return s;
-            }
-// 获取样式
-            function getStyle(obj, attr) {
-                return window.getComputedStyle(obj, null)[attr]
-            }
-        });
-
-        // ...长按弹出菜单
-        $("#J__chatMsgList").on("longTap", "li .msg", function(e){
-            var that = $(this), menuTpl, menuNode = $("<div class='wc__chatTapMenu animated anim-fadeIn'></div>");
-            that.addClass("taped");
-            that.parents("li").siblings().find(".msg").removeClass("taped");
-            var isRevoke = that.parents("li").hasClass("me");
-            var _revoke = isRevoke ? "<a href='#'><i class='ico i4'></i>撤回</a>" : "";
-
-            if(that.hasClass("picture")){
-                console.log("图片长按");
-                menuTpl = "<div class='menu menu-picture'><a href='#'><i class='ico i1'></i>复制</a><a href='#'><i class='ico i2'></i>收藏</a><a href='#'><i class='ico i3'></i>另存为</a>"+ _revoke +"<a href='#'><i class='ico i5'></i>删除</a></div>";
-            }else if(that.hasClass("video")){
-                console.log("视频长按");
-                menuTpl = "<div class='menu menu-video'><a href='#'><i class='ico i3'></i>另存为</a>" + _revoke +"<a href='#'><i class='ico i5'></i>删除</a></div>";
-            }else{
-                console.log("文字长按");
-                menuTpl = "<div class='menu menu-text'><a href='#'><i class='ico i1'></i>复制</a><a href='#'><i class='ico i2'></i>收藏</a>" + _revoke +"<a href='#'><i class='ico i5'></i>删除</a></div>";
-            }
-
-            if(!$(".wc__chatTapMenu").length){
-                $(".wc__chatMsg-panel").append(menuNode.html(menuTpl));
-                autoPos();
-            }else{
-                $(".wc__chatTapMenu").hide().html(menuTpl).fadeIn(250);
-                autoPos();
-            }
-
-            function autoPos(){
-                console.log(that.position().top)
-                var _other = that.parents("li").hasClass("others");
-                $(".wc__chatTapMenu").css({
-                    position: "absolute",
-                    left: that.position().left + parseInt(that.css("marginLeft")) + (_other ? 0 : that.outerWidth() - $(".wc__chatTapMenu").outerWidth()),
-                    top: that.position().top - $(".wc__chatTapMenu").outerHeight() - 8
-                });
-            }
-        });
-        // ...销毁长按弹窗
-        $(".wc__chatMsg-panel").on("scroll", function(){
-            $(".wc__chatTapMenu").hide();
-            $(this).find("li .msg").removeClass("taped");
-        });
+        }
+    });
+    // ...销毁长按弹窗
+    $(".wc__chatMsg-panel").on("scroll", function(){
+        $(".wc__chatTapMenu").hide();
+        $(this).find("li .msg").removeClass("taped");
     });
 </script>
+<script type="text/javascript">
+    let userId="${requestScope.userId}";
+    console.log("userId==>"+userId)
+    let user=bored.userFriends[userId];
+    console.log("user==>"+user);
+    let userName=user.friendNicename!=null?user.friendNicename:user.niceName;
+    if(bored.userFriends.hasOwnProperty(userId)){
+        $("#friName").html("昵称："+(userName));
+    }
+</script >
+<script type="text/javascript" src="/static/assets/js/service/danliao.js"></script>
+<script  type="text/javascript">
+    yuang.init();
+    showChatinit();
 
+</script>
 </body>
 </html>
-

@@ -11,10 +11,11 @@ public class Friends extends BaseEntity {
 
 
     private String picturepath;
-    private String friend_nicename;
     private String niceName;
     private String address_id;
     private String token;
+    private String backImg;
+    private String accid;
     /**
      * 用户id
      */

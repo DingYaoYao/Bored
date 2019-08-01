@@ -39,9 +39,6 @@ public class RegController extends AbstractBaseController<User> {
         }
         //验证手机号验证码
         // 注册用户
-
-        tbUser.setToken("asdasdas");
-        tbUser.setAccid("adad");
         tbUser.setPassword(DigestUtils.md5DigestAsHex(tbUser.getPassword().getBytes()));
         User user = regService.save(tbUser);
         if (user != null) {

@@ -8,7 +8,6 @@
         <property name="size" value="1024" />
         <property name="readOnly" value="false" />
     </cache>
-
     <resultMap id="BaseResultMap" type="cn.bored.domain.Apply">
         <!--
           WARNING - @mbg.generated
@@ -21,15 +20,25 @@
         <result column="apply_date" jdbcType="TIMESTAMP" property="applyDate"/>
     </resultMap>
 
+    <insert id="add">
+   INSERT INTO `apply` (
+  `from_user`,`to_user`,`message`,`status`,`apply_date`,remark)
+    VALUES(
+   #{fromUser},#{toUser}, #{message}, #{status}, #{applyDate},#{remark}) ;
+    </insert>
     <!--总结  首先别人发给我的，我发送给别人的，-->
     <select id="getApplydDecided" resultMap="BaseResultMap" useCache="true">
-    (SELECT * FROM apply
-    WHERE to_user=#{from} AND STATUS=#{status}
-    ORDER BY apply_date DESC)
+     (SELECT a.from_user,a.to_user,a.message,a.apply_date,
+     u.picturepath ,u.niceName AS nicename,a.remark
+     FROM apply a,USER u
+    WHERE a.to_user=#{from} AND STATUS=#{status} AND a.from_user=u.id
+    ORDER BY a.apply_date DESC)
     UNION
-   ( SELECT * FROM apply
-    WHERE from_user=#{from} AND STATUS=#{status}
-    ORDER BY apply_date DESC)
+   ( SELECT a.from_user,a.to_user,a.message,a.apply_date,
+   u.picturepath,u.niceName AS nicename,a.remark
+    FROM apply a,USER u
+    WHERE a.from_user=#{from} AND STATUS=#{status} AND a.to_user=u.id
+    ORDER BY a.apply_date DESC)
   </select>
 
 
@@ -43,14 +52,15 @@
   </select>
 
     <!--查询用户和指定用户的好友请求数量-->
-    <select id="findUserApplyCount" resultType="int">
+    <select id="findUserApplyCount" resultType="int" useCache="false">
 SELECT IF(COUNT(1)=0,0,id) COUNT FROM apply
 WHERE from_user =#{from} AND to_user =#{to}  AND STATUS =#{status}  LIMIT 1
   </select>
 
     <!--修改请求状态-->
     <update id="updateApplystatus">
-    UPDATE  `apply` SET `status`=#{status},apply_date=NOW() WHERE id=#{id}
+      UPDATE  `apply` SET `status`=#{status},apply_date=#{applyDate},remark=#{remark}
+     WHERE id=#{id}
   </update>
 
     <!--//删除用户请求-->

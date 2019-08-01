@@ -1,7 +1,4 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
@@ -25,15 +22,17 @@
     <script src="static/assets/js/wcPop/wcPop.js"></script>
 
 
-    <script type='text/javascript' src='static/assets/js/huanxin/webim.config.js'></script>
-    <script type='text/javascript' src='static/assets/js/huanxin/strophe-1.2.8.js'></script>
-    <script type='text/javascript' src='static/assets/js/huanxin/websdk-1.4.13.js'></script>
-    <script type="text/javascript" src="static/assets/js/service/RequestAjxa.js"></script>
-    <script type="text/javascript" src="static/assets/js/service/main.js"></script>
+    <script src="http://yx-web.nos.netease.com/official/websdk/NIM_Web_SDK_v4.8.0.js"></script>
+    <script type="text/javascript" src="/static/assets/js/service/RequestAjxa.js"></script>
+    <script type="text/javascript" src="/static/assets/js/service/main.js"></script>
+    <script type="text/javascript" src="/static/assets/js/service/onMsg.js"></script>
+    <script type="text/javascript" src="/static/assets/js/service/yuang.js"></script>
+    <script type="text/javascript" src="/static/assets/js/service/saveChatList.js"></script>
+
 
 
 </head>
-<body>
+<body onUnload="myClose()">
 
 <!-- <>微聊主容器 -->
 <div class="wechat__panel clearfix">
@@ -58,38 +57,14 @@
                             <!-- //聊天记录信息 -->
                             <div class="wc__recordChat-list" id="J__recordChatList">
                                 <ul id="my_ul" class="clearfix">
-                                    <c:forEach var="message" items="${chatMessages}">
-                                        <c:forEach var="users" items="${userList}">
-                                           <!--如果信息的接收人是当前登陆用户，并且根据信息表里查到的用户的id等于信息表的发送人id就得到了发送人的信息-->
-                                            <c:if test="${message.receiver==user.userId&&users.userId==message.sendId}">
-                                                <li id="my_li" class="flexbox wc__material-cell" routeUrl="toDanLiaoPage?friendId=${users.userId}">
-                                                    <c:set var="str" value="static/assets/img/uimg/${users.headPortrait}"/>
-                                                    <a href="toHaoYouXinXi?userNum=${users.userNum}"><div class="img"><img  src="${str}"/></div></a>
-                                                    <div class="info flex1">
-                                                        <h2 class="title">
-                                                                ${users.remark==null?users.nickname:users.remark}
-                                                        </h2>
-                                                            <p class="desc clamp1" id="str${users.userNum}">${message.content}</p>
-                                                    </div>
-
-                                                    <label class="time" id="time${users.userNum}"><fmt:formatDate value="${message.messageDate}" pattern="yyyy-MM-dd HH:mm:ss"></fmt:formatDate></label>
-                                                </li>
-                                            </c:if>
-                                            <c:if test="${message.sendId==user.userId&&users.userId==message.receiver}">
-                                                <li id="my_li" class="flexbox wc__material-cell" routeUrl="toDanLiaoPage?friendId=${users.userId}">
-                                                    <c:set var="str" value="static/assets/img/uimg/${users.headPortrait}"/>
-                                                    <a href="toHaoYouXinXi?userNum=${users.userNum}"> <div class="img"><img src="${str}"/></div></a>
-                                                    <div class="info flex1">
-                                                        <h2 class="title">
-                                                                ${users.remark==null?users.nickname:users.remark}
-                                                        </h2>
-                                                        <p class="desc clamp1" id="str${users.userNum}">${message.content}</p>
-                                                    </div>
-                                                    <label class="time" id="time${users.userNum}"><fmt:formatDate value="${message.messageDate}" pattern="yyyy-MM-dd HH:mm:ss"></fmt:formatDate></label>
-                                                </li>
-                                            </c:if>
-                                        </c:forEach>
-                                    </c:forEach>
+                                    <li class="flexbox wc__material-cell" routeUrl="login.html">
+                                        <div class="img"><img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1564997023&di=7b89f986389d6c32a4d8f4566f2bb8aa&imgtype=jpg&er=1&src=http%3A%2F%2Fbpic.588ku.com%2Felement_origin_min_pic%2F16%2F11%2F08%2F457975867e32809e7493eea1a77287ab.jpg"/></div>
+                                        <div class="info flex1">
+                                            <h2 class="title">bored</h2>
+                                            <p class="desc clamp1">`````欢迎来到bored`````~</p>
+                                        </div>
+                                        <label class="time">14:42</label>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -100,9 +75,9 @@
                             <div class="wc__addrFriend-list" id="J__addrFriendList">
                                 <ul class="clearfix" id="my_txl">
                                     <li>
-                                        <div class="row flexbox flex-alignc wc__material-cell">
-                                            <img class="uimg" src="static/assets/img/icon__addrFriend-img01.jpg" /><span class="name flex1">新的朋友</span>
-                                        </div>
+                                        <div class="row flexbox flex-alignc wc__material-cell" routeUrl="xin">
+                                                <img class="uimg" src="static/assets/img/icon__addrFriend-img01.jpg" /><span class="name flex1">新的朋友</span>
+                                                 </div>
                                         <div class="row flexbox flex-alignc wc__material-cell">
                                             <img class="uimg" src="static/assets/img/icon__addrFriend-img02.jpg" /><span class="name flex1">群聊</span>
                                         </div>
@@ -110,7 +85,7 @@
                                             <img class="uimg" src="static/assets/img/icon__addrFriend-img03.jpg" /><span class="name flex1">标签</span>
                                         </div>
                                     </li>
-
+                                  <li id="li" ></li>
                                 </ul>
                             </div>
                         </div>
@@ -152,7 +127,7 @@
                             <div class="wc__explore-list" id="J__exploreList">
                                 <ul class="clearfix">
                                     <li>
-                                        <div class="item flexbox flex-alignc wc__material-cell" routeUrl="toweiyouquan">
+                                        <div class="item flexbox flex-alignc wc__material-cell" routeUrl="circle">
                                             <img class="icon" src="static/assets/img/icon__explore-img01.png" /><span class="txt flex1">朋友圈</span><div class="notice wc__arr"><img src="static/assets/img/uimg/u__chat-img14.jpg" /><em class="wc__badge wc__badge-dot"></em></div>
                                         </div>
                                     </li>
@@ -182,7 +157,7 @@
                             <div class="wc__ucenter-list" id="J__ucenterList">
                                 <ul class="clearfix">
                                     <li>
-                                        <div class="item flexbox flex-alignc wc__material-cell" routeUrl="gerenxinxi.html">
+                                        <div class="item flexbox flex-alignc wc__material-cell" routeUrl="userInfo">
                                             <img class="uimg" id="userImg" src="" />
                                             <span class="txt flex1">
 													<em id="userName"></em><i id="userId"></i>
@@ -237,14 +212,15 @@
     <div class="wrap__topbar-menu">
         <ul class="clearfix animated anim-zoomInDownSmall">
             <li class="wc__material-cell"><i class="ico i1"></i><span>发起群聊</span></li>
-            <li class="wc__material-cell"><a href="toTianJiaPengYouPage"><i class="ico i2"></i><span>添加朋友</span></a></li>
+            <li class="wc__material-cell"><a href="addUserFriends"><i class="ico i2"></i><span>添加朋友</span></a></li>
             <li class="wc__material-cell"><i class="ico i3"></i><span>帮助与反馈</span></li>
         </ul>
     </div>
 </div>
 
 <script type="text/javascript">
-main.init();
+    boredmain.init();   //初始化用户数据
+    yuang.init();  //初始化sdk
 </script>
 
 <!-- 左右滑屏切换.Start -->
@@ -279,155 +255,6 @@ main.init();
 </script>
 <!-- 左右滑屏切换 end -->
 <script type="text/javascript">
-
-    $(function(){
-        /** __公共函数 */
-        var conn = null;
-        var options = {
-            apiUrl: WebIM.config.apiURL,
-            user: sessionStorage.getItem("userNum"),
-            pwd: sessionStorage.getItem("password"),
-            appKey: WebIM.config.appkey,
-            success: function(msg) {
-            },
-            error: function(msg) {
-               // alert('###登录失败###');
-            }
-
-        };
-
-        /** 环信集成*/
-        //创建连接：开启IM连接
-        conn = new WebIM.connection({
-            isMultiLoginSessions: WebIM.config.isMultiLoginSessions,
-            url: WebIM.config.xmppURL,
-            heartBeatWait: WebIM.config.heartBeatWait,
-            autoReconnectNumMax: WebIM.config.autoReconnectNumMax,
-            autoReconnectInterval: WebIM.config.autoReconnectInterval,
-            apiUrl: WebIM.config.apiURL,
-            isAutoLogin: true
-        });
-        conn.open(options);
-        //该设置为手动上线
-        //conn.setPresence();
-        //回调函数：开启监听（精简过后的代码）
-        sessionStorage.setItem("conn",JSON.stringify(conn));
-        conn.listen({
-            onOpened: function(message) {
-            },
-            onPresence: function (message) {
-                var myDate = new Date().toLocaleString();
-             //   alert(myDate + JSON.stringify(message));
-                switch (message.type) {
-                    case 'subscribe': // 对方请求添加好友
-                        var truthBeTold = window.confirm((message.from + "申请添加您为好友:"));
-                        if (truthBeTold) {
-                            // 同意对方添加好友
-                            conn.subscribed({
-                                to: message.from,
-                                message: "[resp:true]"
-                            });
-
-                           // alert("同意添加好友");
-                        } else {
-                            // 拒绝对方添加好友
-                            conn.unsubscribed({
-                                to: message.from,
-                                message: "rejectAddFriend" // 拒绝添加好友回复信息
-                            });
-                        //    alert("拒绝添加好友");
-                        }
-                        break;
-                    case 'subscribed': // 对方同意添加好友，已方同意添加好友
-                        break;
-                    case 'unsubscribe': // 对方删除好友
-                        break;
-                    case 'unsubscribed': // 被拒绝添加好友，或被对方删除好友成功
-                        break;
-                    case 'memberJoinPublicGroupSuccess': // 成功加入聊天室
-                       // alert('join chat room success' + myDate);
-                   //     alert(new Date().toLocaleString());
-                        break;
-                    case 'joinChatRoomFaild': // 加入聊天室失败
-                        alert('join chat room faild');
-                        break;
-                    case 'joinPublicGroupSuccess': // 意义待查
-                        alert('join public group success', message.from);
-                        break;
-                    case 'createGroupACK':
-                        conn.createGroupAsync({
-                            from: message.from,
-                            success: function (option){
-                                alert('Create Group Succeed');
-                            }
-                        });
-                        break;
-                }
-            },
-            onClosed: function(message) {
-                alert("关闭")
-            }, //连接关闭回调
-            //收到文本消息的回调
-            onTextMessage: function(message) {
-                alert(message.sourceMsg);
-                var friendId=message.from;
-                var messagestr=message.sourceMsg;
-                $.ajax({
-                    url: "findUserById",
-                    data: {"userNum":friendId},
-                    type:"get",
-                    dataType:"json",
-                    success: function (friend){
-                       // alert(friend.userNum);
-                        var list=<%=session.getAttribute("jsonlist")%>;
-                     //   alert(list);
-                        var flag=false;
-                        for(var p in list){//遍历json数组时，这么写p为索引，0,1
-                            alert(list[p].userNum);
-                            if (list[p].userNum==friendId){
-                                flag=true;
-                            };
-                        };
-                        if (flag){
-                            var $chatMsgList = $("#J__chatMsgList");
-                            var html=messagestr.replace('<p>','');
-                            var htmlstr=html.replace('</p>','');
-                            htmlstr=htmlstr.trim();
-                            $("#time"+friendId).replaceWith("<label class='time' id='time${friend.userNum}'>"+message.delay+"</label>");
-                            $("#str"+friendId).replaceWith('<p class="desc clamp1 id='+friend.userNum+'">'+htmlstr+'</p>');
-                        }else{
-                            var ul=$("#my_ul");//得到ul
-                            var str="static/assets/img/uimg/"+friend.headPortrait+"";//头像路径
-                            var name=friend.remark==null?friend.nickname:friend.remark;
-                            var html=[
-                                '<li class="flexbox wc__material-cell" routeUrl="toDanLiaoPage?friendId='+friend.userNum+'">\
-                             <div class="img"><img src="'+str+'"/></div>\
-                             <div class="info flex1">\
-                             <h2 class="title"> '+name+'</h2>\
-                            <p class="desc clamp1 "id="str'+friend.userNum+'">'+messagestr+'</p>\
-                             </div>\
-                              <label class="time" id="time${users.userNum}">'+message.delay+'</label>\
-                          </li>'].join("");
-                            ul.append(html);
-                        }
-
-
-
-                    }, error: function (jqXHR, textStatus, errorThrown) {
-                    }
-                });
-
-            }, //收到文本消息
-            onError: function(message) {
-                //alert(JSON.stringify(message));
-                }, //失败回调
-            onReceivedMessage: function(message) {}, //收到消息送达服务器回执
-            onDeliveredMessage: function(message) {}, //收到消息送达客户端回执
-            onReadMessage: function(message) {}, //收到消息已读回执
-        });
-        //easemobwebim-sdk中收到联系人订阅请求的处理方法，具体的type值所对应的值请参考xmpp协议规范
-    });
-
 
     /** __自定函数 */
         // 顶部添加按钮

@@ -20,7 +20,7 @@ public interface PalService  {
     List<Friends> getFriendsdDecided(@PathVariable  Long id);
     //双向添加
     @PostMapping("/Pal/addPal")
-    DtoResult Friendsadd(@RequestParam  Long id,@RequestParam  Long friendsId);
+    DtoResult Friendsadd(@RequestParam  Long id,@RequestParam  Long friendsId,@RequestParam String niceName );
     //双向删除
     @GetMapping("/Pal/delPal/{id}/{friendsId}")
     DtoResult Friendsdel(@PathVariable Long id,@PathVariable Long friendsId);

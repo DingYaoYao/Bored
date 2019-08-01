@@ -1,0 +1,166 @@
+* {
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+
+li {
+  list-style: none;
+}
+
+.wrap {
+  width: 5.8rem;
+  margin: 0;
+}
+
+/*.clearfix::after {
+  content: "";
+  display: block;
+  height: 0;
+  clear: both;
+}*/
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+/*.content-wrap {
+  overflow: scroll;
+  width: 100%;
+  height: 84%;
+}*/
+
+/* 头部 */
+.header-wrap {
+  height: 50px;
+  background: rgba(93, 93, 93, 0.8);
+  font-size: 20px;
+  text-align: center;
+  line-height: 50px;
+  color: #fff;
+}
+
+/* 主体内容区 */
+.content-wrap .content {
+  width: 95%;
+  margin: 0 auto;
+}
+
+.content-wrap .content li {
+  margin-top: 20px;
+}
+
+.content-wrap .content audio,
+.content-wrap .content a {
+  display: none;
+}
+
+.content-wrap .content img {
+  float: left;
+  width: 60px;
+}
+
+/* 语音总时间 */
+.content-wrap .content .num-box {
+  float: left;
+  margin: 18px 0 0 5px;
+  font-style: normal;
+}
+
+/* 播放按钮容器 */
+.play-wrap {
+  float: left;
+  position: relative;
+  width: 17%;
+  height: 40px;
+  margin: 0 10px;
+  border: 1px solid #57e23b;
+  border-radius: 5px;
+  background: #57e23b url(../../img/yuyin/voice1.png) no-repeat 5px 4px;
+  float: right;
+}
+
+
+/* 播放按钮容器箭头 */
+/*.play-wrap::before {
+  content: "";
+  position: absolute;
+  top: 14px;
+  left: -12px;
+  border-width: 7px;
+  border-style: solid;
+  border-color: transparent #57e23b transparent transparent;
+}*/
+
+.play-wrap::after {
+  display: inline-block;
+  border-style: solid;
+  content: '';
+  height: .2rem;
+  width: .2rem;
+  position: absolute;
+  right: -.11rem;
+  top: .3rem;
+  background: #57e23b;
+  border-color: #57e23b;
+  transform: translate(0, -50%) rotate(45deg);
+}
+
+/* 录制提示信息 */
+.hide-tips-wrap {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 150px;
+  height: 150px;
+  margin: -75px 0 0 -75px;
+  border-radius: 10px;
+  background: rgba(189, 189, 189, 0.56);
+  text-align: center;
+}
+
+.hide-tips-wrap .tips-icon {
+  display: block;
+  width: 48px;
+  height: 48px;
+  margin: 30px auto;
+  background: url(../../img/yuyin/voice.png);
+}
+
+.hide-tips-wrap .tips-txt {
+  display: block;
+  color: #8a8a8a;
+}
+
+/* 录制语音按钮 */
+.inp-wrap {
+  position: fixed;
+  bottom: 0;
+  margin: 0;
+  padding: 0;
+  left: 0;
+  text-align: center;
+}
+.yxm_button {
+  margin: 0;
+  padding: 0;
+  position: fixed;
+  left: 60px;
+  width: 2.65rem;
+  height: 0.5rem;
+  border: 1px solid #ccc;
+  outline: 0;
+  border-radius:.05rem;
+  background: #ededed;
+  font-size: 0.28rem;
+  color: #000;
+}
+.my_yuyin_img{
+  margin: 0;
+  padding: 0;
+  width: 40px;
+  height: 40px;
+}

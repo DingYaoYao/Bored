@@ -13,6 +13,10 @@ import java.util.Date;
 public class Apply extends BaseEntity implements  Serializable{
 
     private static final long serialVersionUID = 2174158115699351071L;
+    private String picturepath;
+    private String nicename;
+    private String remark;
+
     /**
      * 该注解需要保留，用于 tk.mybatis 回显 ID
      */
@@ -96,5 +100,32 @@ public class Apply extends BaseEntity implements  Serializable{
 
     public void setApplyDate(Date applyDate) {
         this.applyDate = applyDate;
+    }
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public String getPicturepath() {
+        return picturepath;
+    }
+
+    public void setPicturepath(String picturepath) {
+        this.picturepath = picturepath;
+    }
+
+    public String getNicename() {
+        return nicename;
+    }
+
+    public void setNicename(String nicename) {
+        this.nicename = nicename;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 }

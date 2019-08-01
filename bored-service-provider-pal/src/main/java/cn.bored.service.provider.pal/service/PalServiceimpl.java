@@ -28,15 +28,20 @@ public class PalServiceimpl extends BaseServiceImpl<Friends, FriendsMapper> impl
 
     @Override
     @PostMapping("/addPal")
-    public DtoResult Friendsadd(@RequestParam Long id,@RequestParam  Long friendsId) {
+    public DtoResult Friendsadd(@RequestParam Long id,@RequestParam  Long friendsId,String niceName ) {
+
         Friends friends = new Friends();
         friends.setUserid(id);
         friends.setFriendUserId(String.valueOf(friendsId));
-        int resut = friendsMapper.insert(friends);
+        int resut = friendsMapper.add(friends);
+
+        //只有别人才设置了备注，还有一种情况（详情页添加时两个人都有，暂不处理），
         Friends friendsa = new Friends();
         friendsa.setUserid(friendsId);
+        friendsa.setFriendNicename(niceName);
         friendsa.setFriendUserId(String.valueOf(id));
-        int resuat = friendsMapper.insert(friendsa);
+        int resuat = friendsMapper.add(friendsa);
+
         int a = resut + resuat;
         if(a>=2){
             return abstractBaseController.success();

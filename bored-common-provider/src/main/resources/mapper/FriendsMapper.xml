@@ -11,8 +11,14 @@
     <result column="friend_nicename" jdbcType="VARCHAR" property="friendNicename" />
   </resultMap>
 
+    <insert id="add">
+        INSERT INTO `friends` (
+      `userid`, `friend_user_id`,`friend_nicename`)
+      VALUES
+      (  #{userid}, #{friendUserId}, #{friendNicename} ) ;
+    </insert>
   <select id="getFriendsDecided" resultMap="BaseResultMap">
-        SELECT picturepath,f.id,userid,friend_user_id,friend_nicename,niceName,address_id,token
+        SELECT picturepath,f.id,userid,friend_user_id,friend_nicename,niceName,address_id,token,backImg,accid
          FROM friends f ,USER u
           WHERE userid=#{id} and friend_user_id=u.id
   </select>

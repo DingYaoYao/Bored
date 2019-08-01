@@ -12,6 +12,9 @@ import java.util.Date;
 public class Friend extends BaseEntity {
 
 
+    private String niceName;
+    private String friend_nicename;
+    private String picturepath;
     /**
      * 用户id
      */

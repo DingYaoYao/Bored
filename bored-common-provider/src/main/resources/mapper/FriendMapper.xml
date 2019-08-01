@@ -34,15 +34,19 @@
 
   <!--查询自己朋友的朋友圈信息,根据时间降序-->
   <select id="MyfriendFriends" resultType="cn.bored.domain.Friend" resultMap="BaseResultMap">
-    SELECT userid,
-	context,
-	imagepath,
-	createtime,
-	videopath,
-	`like`
+     SELECT f.userid,
+	f.context,
+	f.imagepath,
+	f.createtime,
+	f.videopath,
+	f.`like`,
+	f.`id`,
+	u.`picturepath`,
+	u.`niceName`,
+	fs.`friend_nicename`
 	FROM
-	friend
-	WHERE userid IN
+	friend f,USER u,friends fs
+	WHERE   f.`userid`=u.`id`  AND fs.`friend_user_id`=u.id   AND f.userid IN
 	(SELECT friend_user_id
 	FROM friends
 	WHERE userid=#{userid} AND friend_user_id NOT IN (

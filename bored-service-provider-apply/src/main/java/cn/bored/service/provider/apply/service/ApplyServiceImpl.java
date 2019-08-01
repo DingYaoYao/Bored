@@ -47,20 +47,16 @@ public class ApplyServiceImpl extends BaseServiceImpl<Apply, ApplyMapper> implem
     @PostMapping("/add")
     @Override
     public DtoResult adds(@RequestBody Apply apply) {
+        //这是只是limit抽离出来一个，应删除多余的
         int count = applyMapper.findUserApplyCount(apply.getFromUser(), apply.getToUser(), 1);
         //执行修改用户状态,
         if (count > 0) {
-            apply.setApplyDate(new Date());
-            int update = applyMapper.updateApplystatus(count,STATUS);
-            if (update > 0) {
-                return abstractBaseController.success();
-
-            }
+            DtoResult update = update(count, STATUS);
+            if(update!=null)return update;
             //执行添加用户请求
         } else {
-
             apply.setStatus(STATUS);
-            int insert = applyMapper.insert(apply);
+            int insert = applyMapper.add(apply);
             if (insert > 0) {
                 return abstractBaseController.success();
             }
@@ -88,11 +84,20 @@ public class ApplyServiceImpl extends BaseServiceImpl<Apply, ApplyMapper> implem
     @GetMapping("/update/{applyId}")
     @Override
     public DtoResult update(@PathVariable long applyId) {
-        int update = applyMapper.updateApplystatus(applyId, UNSTATUS);
+        DtoResult update = update(applyId, UNSTATUS);
+        if(update!=null)return update;
+        return abstractBaseController.error("操作失败！");
+    }
+    private DtoResult update(long id,int status){
+        Apply apply = new Apply();
+        apply.setId(id);
+        apply.setStatus(status);
+        apply.setApplyDate(new Date());
+        int update = applyMapper.updateApplystatus(apply);
         if(update>0){
             return abstractBaseController.success();
         }
-        return abstractBaseController.error("操作失败！");
+        return null;
     }
 
 
